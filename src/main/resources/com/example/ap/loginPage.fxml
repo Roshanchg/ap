@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+<StackPane xmlns="http://javafx.com/javafx/11.0.1"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.ap.LoginController"
+           fx:id="root"
+           styleClass="login-root">
+
+    <!-- Dark translucent overlay -->
+    <Rectangle fx:id="overlay" fill="rgba(0,0,0,0.5)" StackPane.alignment="CENTER" />
+
+    <!-- Login form container -->
+    <VBox alignment="CENTER" spacing="15" styleClass="auth-container" maxWidth="350" maxHeight="500"
+          StackPane.alignment="CENTER">
+        <padding>
+            <Insets top="30" right="40" bottom="30" left="40" />
+        </padding>
+
+        <!-- Logo Image -->
+        <ImageView fx:id="logoImage" fitHeight="60" fitWidth="60" pickOnBounds="true" preserveRatio="true">
+            <Image url="@images/logo.png"/>
+
+        </ImageView>
+
+        <Label text="Login" styleClass="auth-title"/>
+
+        <ComboBox fx:id="userTypeComboBox" promptText="Select User Type" maxWidth="300" />
+
+
+
+
+        <TextField fx:id="usernameField" promptText="Username" maxWidth="300" style="-fx-pref-height: 40;"/>
+        <PasswordField fx:id="passwordField" promptText="Password" maxWidth="300" style="-fx-pref-height: 40;" />
+
+        <Button fx:id="loginBtn" text="Login" styleClass="auth-button" maxWidth="300" onAction="#onLoginButtonClicked" />
+
+        <Label text="Don't have an account? Register here." styleClass="auth-subtext"
+               onMouseClicked="#onRegisterLinkClicked" />
+    </VBox>
+</StackPane>

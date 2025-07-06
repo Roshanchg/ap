@@ -1,0 +1,68 @@
+.login-root {
+    -fx-background-image: url("../images/login.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+.text-field, .password-field {
+    -fx-pref-height: 40px;
+}
+.logo-text {
+    -fx-text-fill: white;
+    -fx-font-size: 28px;
+    -fx-font-weight: 700;
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 3, 0, 0, 2);
+}
+
+.auth-button-alt {
+    -fx-background-color: #74b9ff;
+    -fx-text-fill: #0D1B2A;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+
+.auth-container {
+    -fx-background-color: rgba(13, 27, 42, 0.85);
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 20, 0, 0, 6);
+}
+
+.auth-title {
+    -fx-text-fill: #4DA8DA;
+    -fx-font-size: 34px;
+    -fx-font-weight: 700;
+    -fx-font-family: 'Segoe UI Black', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.auth-button {
+    -fx-background-color: #4DA8DA;
+    -fx-text-fill: #0D1B2A;
+    -fx-font-size: 18px;
+    -fx-font-weight: 700;
+    -fx-padding: 12 40;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(77,168,218,0.6), 6, 0, 0, 3);
+    -fx-transition: all 0.3s ease;
+}
+
+.auth-button:hover {
+    -fx-background-color: #74B9F8;
+}
+
+.auth-button:pressed {
+    -fx-background-color: #2C80B4;
+}
+
+.auth-subtext {
+    -fx-text-fill: #A9CCE3;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -fx-cursor: hand;
+    -fx-underline: true;
+}

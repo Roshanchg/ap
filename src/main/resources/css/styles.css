@@ -1,0 +1,182 @@
+/* === Background and Overlay === */
+.background-container {
+    -fx-background-image: url("../images/background.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+
+.overlay-layer {
+    -fx-background-color: rgba(0, 0, 0, 0.8); /* semi-transparent dark overlay */
+    -fx-top: 0;
+    -fx-bottom: 0;
+    -fx-left: 0;
+    -fx-right: 0;
+    -fx-position: absolute;
+}
+
+/* === Header === */
+.header {
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-background-radius: 0 0 10 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 6, 0, 0, 2);
+}
+
+/* === Navigation === */
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #F0F6FF;
+    -fx-font-size: 16px;
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-padding: 10 15;
+    -fx-border-radius: 5;
+    -fx-font-weight: 500;
+}
+
+.nav-button:hover {
+    -fx-text-fill: #4DA8DA;
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-cursor: hand;
+}
+
+/* === Hero Section === */
+.hero-wrapper {
+    -fx-padding: 40 80 40 80;
+}
+
+.hero-content {
+    -fx-alignment: center-left;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 4, 0.3, 2, 2);
+}
+
+.hero-title {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 48px;
+    -fx-font-weight: 700;
+    -fx-font-family: 'Segoe UI Semibold', sans-serif;
+}
+
+.hero-title-accent {
+    -fx-text-fill: #4DA8DA;
+    -fx-font-size: 48px;
+    -fx-font-weight: 700;
+    -fx-font-family: 'Segoe UI Semibold', sans-serif;
+}
+
+.hero-subtitle {
+    -fx-text-fill: #D6E6F2;
+    -fx-font-size: 18px;
+    -fx-line-spacing: 4px;
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-padding: 10 0 0 0;
+}
+
+/* === Book Now Button === */
+.book-now-button {
+    -fx-background-color: #4DA8DA;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-padding: 12 36;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(77, 168, 218, 0.5), 4, 0, 0, 2);
+}
+
+.book-now-button:hover {
+    -fx-background-color: #6EC6FF;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(110, 198, 255, 0.7), 6, 0, 0, 4);
+}
+
+.book-now-button:pressed {
+    -fx-background-color: #3B9DD6;
+}
+
+/* === Login/Register Box === */
+.auth-title {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+    -fx-font-family: 'Segoe UI', sans-serif;
+}
+
+.auth-box {
+    -fx-background-color: rgba(0, 0, 0, 0.6); /* semi-transparent dark background */
+    -fx-background-radius: 12;
+    -fx-padding: 30 40;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 4);
+    -fx-min-width: 220px;
+}
+
+.auth-title {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+    -fx-font-family: 'Segoe UI', sans-serif;
+}
+
+.auth-button {
+    -fx-background-color: #4DA8DA; /* bright blue */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+    -fx-padding: 10 40;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(77, 168, 218, 0.4), 4, 0, 0, 2);
+}
+
+.auth-button:hover {
+    -fx-background-color: #6EC6FF;
+}
+
+.auth-button-outline {
+    -fx-background-color: transparent;
+    -fx-border-color: #D6E6F2; /* very light blue */
+    -fx-text-fill: #D6E6F2;    /* very light blue */
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+    -fx-padding: 10 40;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-cursor: hand;
+}
+
+.auth-button-outline:hover {
+    -fx-background-color: rgba(214, 231, 242, 0.2); /* subtle light blue highlight */
+}
+
+.logo-text {
+    -fx-text-fill: #4DA8DA; /* bright blue */
+    -fx-font-size: 28px;
+    -fx-font-weight: 700;
+    -fx-font-family: 'Segoe UI Black', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -fx-effect: dropshadow(gaussian, rgba(77, 168, 218, 0.7), 3, 0, 0, 1);
+    -fx-alignment: CENTER_LEFT;
+}
+.dashboard-welcome {
+    -fx-font-size: 26px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.dashboard-subtext {
+    -fx-font-size: 18px;
+    -fx-text-fill: #A9CCE3;
+}
+
+.auth-button-alt {
+    -fx-background-color: #E74C3C;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+    -fx-padding: 12 30;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+}
+
