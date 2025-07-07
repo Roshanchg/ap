@@ -1,13 +1,25 @@
 package com.example.ap;
 
+import com.example.ap.classes.Guide;
+import com.example.ap.classes.Tourist;
+import com.example.ap.classes.enums.LANGUAGES;
+import com.example.ap.classes.enums.USERTYPE;
+import com.example.ap.handlers.FileHandling;
+import com.example.ap.handlers.SessionHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class RegisterController implements Initializable {
@@ -21,37 +33,42 @@ public class RegisterController implements Initializable {
     @FXML private TextField emergencyContactField;
     @FXML private TextField phoneField;
     @FXML private TextField emailField;
-    @FXML private TextField addressField;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
 
-    @FXML private TextField guideLanguagesField;
+    @FXML private ComboBox<LANGUAGES> LanguagesField;
+
+
+
     @FXML private TextField guideExperienceField;
-    @FXML private TextField guideContactField;
 
     @FXML private ImageView logoImage;
 
-    private String selectedRole = ""; // "Tourist" or "Guide"
+    private USERTYPE selectedRole;
+
+    @FXML private Label loginButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        logoImage.setImage(new Image(getClass().getResourceAsStream("/images/logo.png")));
+        logoImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/logo.png"))));
+        LanguagesField.getItems().addAll(LANGUAGES.values());
     }
 
     @FXML
     private void onTouristSelected() {
-        selectedRole = "Tourist";
+        selectedRole =USERTYPE.Tourist;
         roleSelectionBox.setVisible(false);
         roleSelectionBox.setManaged(false);
         formContainer.setVisible(true);
         formContainer.setManaged(true);
         guideFieldsContainer.setVisible(false);
         guideFieldsContainer.setManaged(false);
+
     }
 
     @FXML
     private void onGuideSelected() {
-        selectedRole = "Guide";
+        selectedRole = USERTYPE.Guide;
         roleSelectionBox.setVisible(false);
         roleSelectionBox.setManaged(false);
         formContainer.setVisible(true);
@@ -62,7 +79,7 @@ public class RegisterController implements Initializable {
 
     @FXML
     private void onRegisterButtonClicked() {
-        if (selectedRole.isEmpty()) {
+        if (selectedRole==null) {
             showAlert("Please select a role first.");
             return;
         }
@@ -78,20 +95,70 @@ public class RegisterController implements Initializable {
             return;
         }
 
-        if ("Guide".equals(selectedRole)) {
-            if (guideLanguagesField.getText().isEmpty() || guideExperienceField.getText().isEmpty() || guideContactField.getText().isEmpty()) {
+        if (selectedRole==USERTYPE.Guide) {
+            if (LanguagesField==null || guideExperienceField.getText().isEmpty()) {
                 showAlert("Please complete guide-specific fields.");
                 return;
             }
+
         }
 
-        System.out.println("Registered as " + selectedRole + ": " + nameField.getText());
-        // Proceed to dashboard or save user info
+        if(!FileHandling.isEmail(emailField.getText())){
+            showAlert("Invalid Email address!!");
+            return;
+        }
+
+        if(!phoneField.getText().matches("\\d+") || !(phoneField.getText().length()==10)){
+            showAlert("Insert a proper phone number");
+            return;
+        }
+
+        switch(selectedRole){
+            case USERTYPE.Tourist -> {
+                String fullName=nameField.getText();
+                String nationality=nationalityField.getText();
+                String emergencyContact=emergencyContactField.getText();
+                if(!emergencyContact.matches("\\d+") || !(emergencyContact.length()==10)){
+                    showAlert("Invalid Emergency Number!!");
+                    break;
+                }
+                String phoneNumber=phoneField.getText();
+                String email=emailField.getText();
+                String password=passwordField.getText();
+                LANGUAGES languagePref= (LanguagesField.getValue()==null)?LANGUAGES.English:LanguagesField.getValue();
+
+                Tourist tourist=new Tourist(FileHandling.getSize(FileHandling.TouristFile),fullName,
+                        email,phoneNumber,password, languagePref,nationality,emergencyContact);
+                FileHandling.WriteUser(USERTYPE.Tourist,tourist);
+                SessionHandler.getInstance().startSession(tourist.getId(),tourist.getName(),USERTYPE.Tourist);
+            }
+            case USERTYPE.Guide -> {
+                String fullName=nameField.getText();
+                String phoneNumber=phoneField.getText();
+                String email=emailField.getText();
+                String password=passwordField.getText();
+                LANGUAGES languagePref= (LanguagesField.getValue()==null)?LANGUAGES.English:LanguagesField.getValue();
+                String yearsOfExperience=guideExperienceField.getText();
+                Guide guide=new Guide(FileHandling.getSize(FileHandling.TouristFile),fullName,
+                        email,phoneNumber,password ,languagePref,Integer.parseInt(yearsOfExperience));
+                FileHandling.WriteUser(USERTYPE.Guide,guide);
+                SessionHandler.getInstance().startSession(guide.getId(),guide.getName(),USERTYPE.Guide);
+            }
+            default -> System.out.println("BRUH MATE HOW DID YOU CHOOSE OTHER USERTYPE? bombaclatt");
+        }
+
     }
 
     @FXML
-    private void onLoginLinkClicked() {
-        System.out.println("Redirect to Login page...");
+    private void onLoginLinkClicked() throws IOException {
+//        System.out.println("Redirect to Login page...");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("loginPage.fxml"));
+        Stage stage=(Stage) loginButton.getScene().getWindow();
+        Parent root= loader.load();
+        Scene scene =new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Login Page");
+        stage.show();
     }
 
     private void showAlert(String msg) {

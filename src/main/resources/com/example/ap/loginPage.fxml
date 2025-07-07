@@ -17,6 +17,7 @@
            xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="com.example.ap.LoginController"
            fx:id="root"
+           stylesheets="@css/auth.css"
            styleClass="login-root">
 
     <!-- Dark translucent overlay -->
@@ -38,11 +39,7 @@
         <Label text="Login" styleClass="auth-title"/>
 
         <ComboBox fx:id="userTypeComboBox" promptText="Select User Type" maxWidth="300" />
-
-
-
-
-        <TextField fx:id="usernameField" promptText="Username" maxWidth="300" style="-fx-pref-height: 40;"/>
+        <TextField fx:id="usernameField" promptText="Email or Phone Number" maxWidth="300" style="-fx-pref-height: 40;"/>
         <PasswordField fx:id="passwordField" promptText="Password" maxWidth="300" style="-fx-pref-height: 40;" />
 
         <Button fx:id="loginBtn" text="Login" styleClass="auth-button" maxWidth="300" onAction="#onLoginButtonClicked" />

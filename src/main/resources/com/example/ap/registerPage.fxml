@@ -12,14 +12,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
+<?import javafx.scene.control.ComboBox?>
 <StackPane xmlns="http://javafx.com/javafx/11.0.1"
            xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="com.example.ap.RegisterController"
            fx:id="root"
+           stylesheets="@css/auth.css"
            styleClass="login-root">
 
     <!-- Dark overlay -->
-    <Rectangle fx:id="overlay" fill="rgba(0,0,0,0.5)" StackPane.alignment="CENTER" />
+    <Rectangle fx:id="overlay"  StackPane.alignment="CENTER" />
 
     <VBox alignment="TOP_CENTER" spacing="18" styleClass="auth-container" maxWidth="450" maxHeight="750"
           StackPane.alignment="CENTER">
@@ -45,31 +47,30 @@
         </VBox>
 
         <!-- Form fields (initially hidden) -->
-        <VBox fx:id="formContainer" spacing="10" visible="false" managed="false">
+        <VBox fx:id="formContainer" spacing="10" visible="false" managed="false" alignment="CENTER">
 
             <TextField fx:id="nameField" promptText="Full Name" maxWidth="320" style="-fx-pref-height: 40;" />
             <TextField fx:id="nationalityField" promptText="Nationality" maxWidth="320" style="-fx-pref-height: 40;" />
             <TextField fx:id="emergencyContactField" promptText="Emergency Contact" maxWidth="320" style="-fx-pref-height: 40;" />
             <TextField fx:id="phoneField" promptText="Phone Number" maxWidth="320" style="-fx-pref-height: 40;" />
             <TextField fx:id="emailField" promptText="Email Address" maxWidth="320" style="-fx-pref-height: 40;" />
-            <TextField fx:id="addressField" promptText="Address" maxWidth="320" style="-fx-pref-height: 40;" />
             <PasswordField fx:id="passwordField" promptText="Password" maxWidth="320" style="-fx-pref-height: 40;" />
             <PasswordField fx:id="confirmPasswordField" promptText="Confirm Password" maxWidth="320" style="-fx-pref-height: 40;" />
+            <ComboBox fx:id="LanguagesField" promptText="Languages Preference" maxWidth="320" style="-fx-pref-height: 40;" />
 
             <!-- Guide only -->
-            <VBox fx:id="guideFieldsContainer" spacing="10" visible="false" managed="false">
-                <TextField fx:id="guideLanguagesField" promptText="Languages Spoken" style="-fx-pref-height: 40;" />
-                <TextField fx:id="guideExperienceField" promptText="Experience (years)" style="-fx-pref-height: 40;" />
-                <TextField fx:id="guideContactField" promptText="Guide Contact" style="-fx-pref-height: 40;" />
+            <VBox fx:id="guideFieldsContainer" spacing="10" visible="false" managed="false" alignment="CENTER">
+                <TextField fx:id="guideExperienceField" promptText="Experience (years)" maxWidth="320" style="-fx-pref-height: 40;" />
             </VBox>
 
             <Button fx:id="registerBtn" text="Register" onAction="#onRegisterButtonClicked" styleClass="auth-button" maxWidth="320" />
         </VBox>
 
+
         <!-- Already have an account -->
         <HBox alignment="CENTER" spacing="5" maxWidth="320">
             <Label text="Already have an account?" styleClass="auth-subtext" />
-            <Label text="Login here" styleClass="auth-link" onMouseClicked="#onLoginLinkClicked" />
+            <Label text="Login here" styleClass="auth-link" onMouseClicked="#onLoginLinkClicked" fx:id="loginButton"/>
         </HBox>
     </VBox>
 </StackPane>

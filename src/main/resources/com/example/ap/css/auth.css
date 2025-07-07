@@ -27,7 +27,7 @@
 
 
 .auth-container {
-    -fx-background-color: rgba(13, 27, 42, 0.85);
+    -fx-background-color: rgba(0, 0, 0, 0.55);
     -fx-background-radius: 15;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 20, 0, 0, 6);
 }
@@ -63,6 +63,11 @@
     -fx-text-fill: #A9CCE3;
     -fx-font-size: 14px;
     -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -fx-cursor: hand;
+}
+.auth-link{
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
     -fx-cursor: hand;
     -fx-underline: true;
 }
