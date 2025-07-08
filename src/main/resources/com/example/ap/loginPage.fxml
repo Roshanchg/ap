@@ -44,7 +44,7 @@
 
         <Button fx:id="loginBtn" text="Login" styleClass="auth-button" maxWidth="300" onAction="#onLoginButtonClicked" />
 
-        <Label text="Don't have an account? Register here." styleClass="auth-subtext"
+        <Label fx:id="registerLink" text="Don't have an account? Register here." styleClass="auth-subtext"
                onMouseClicked="#onRegisterLinkClicked" />
     </VBox>
 </StackPane>

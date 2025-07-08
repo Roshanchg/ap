@@ -1,7 +1,9 @@
 package com.example.ap;
 
+import com.example.ap.classes.enums.NAVIGATIONS;
 import com.example.ap.classes.enums.USERTYPE;
 import com.example.ap.handlers.FileHandling;
+import com.example.ap.handlers.Navigator;
 import com.example.ap.handlers.SessionHandler;
 import com.example.ap.handlers.UserHandling;
 import javafx.collections.FXCollections;
@@ -12,7 +14,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -51,7 +55,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void onLoginButtonClicked() {
+    private void onLoginButtonClicked() throws IOException {
         String username = usernameField.getText();
         String password = passwordField.getText();
         USERTYPE userType = userTypeComboBox.getValue();
@@ -82,6 +86,16 @@ public class LoginController implements Initializable {
             int id=UserHandling.getUserId(username,password,userType);
             SessionHandler.getInstance().startSession(id,
                     UserHandling.getName(id,userType),userType);
+            NAVIGATIONS nav=switch(userType){
+                case Admin -> NAVIGATIONS.ADMIN;
+                case Guide -> NAVIGATIONS.GUIDE;
+                case Tourist -> NAVIGATIONS.TOURIST;
+                default -> NAVIGATIONS.REGISTER;
+            };
+//            Go to home page
+            Stage stage=(Stage) loginBtn.getScene().getWindow();
+            Navigator.Navigate(nav,stage);
+
         }
         else{
             Alert loginAlert=new Alert(Alert.AlertType.ERROR);
@@ -89,12 +103,12 @@ public class LoginController implements Initializable {
             loginAlert.setContentText("Invalid login credentials");
             loginAlert.showAndWait();
         }
-
     }
 
     @FXML
-    private void onRegisterLinkClicked() {
-        System.out.println("Register link clicked!");
-        // TODO: Navigate to registration page
+    private void onRegisterLinkClicked() throws IOException {
+//        System.out.println("Register link clicked!");
+        Stage stage= (Stage)registerLink.getScene().getWindow();
+        Navigator.Navigate(NAVIGATIONS.REGISTER,stage);
     }
 }

@@ -3,8 +3,10 @@ package com.example.ap;
 import com.example.ap.classes.Guide;
 import com.example.ap.classes.Tourist;
 import com.example.ap.classes.enums.LANGUAGES;
+import com.example.ap.classes.enums.NAVIGATIONS;
 import com.example.ap.classes.enums.USERTYPE;
 import com.example.ap.handlers.FileHandling;
+import com.example.ap.handlers.Navigator;
 import com.example.ap.handlers.SessionHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,7 +40,7 @@ public class RegisterController implements Initializable {
 
     @FXML private ComboBox<LANGUAGES> LanguagesField;
 
-
+    @FXML private Button registerBtn;
 
     @FXML private TextField guideExperienceField;
 
@@ -78,43 +80,44 @@ public class RegisterController implements Initializable {
     }
 
     @FXML
-    private void onRegisterButtonClicked() {
-        if (selectedRole==null) {
-            showAlert("Please select a role first.");
-            return;
-        }
-
-        if (nameField.getText().isEmpty() || emailField.getText().isEmpty()
-                || passwordField.getText().isEmpty() || confirmPasswordField.getText().isEmpty()) {
-            showAlert("Please fill all required fields.");
-            return;
-        }
-
-        if (!passwordField.getText().equals(confirmPasswordField.getText())) {
-            showAlert("Passwords do not match.");
-            return;
-        }
-
-        if (selectedRole==USERTYPE.Guide) {
-            if (LanguagesField==null || guideExperienceField.getText().isEmpty()) {
-                showAlert("Please complete guide-specific fields.");
-                return;
-            }
-
-        }
-
-        if(!FileHandling.isEmail(emailField.getText())){
-            showAlert("Invalid Email address!!");
-            return;
-        }
-
-        if(!phoneField.getText().matches("\\d+") || !(phoneField.getText().length()==10)){
-            showAlert("Insert a proper phone number");
-            return;
-        }
+    private void onRegisterButtonClicked() throws IOException {
+//        if (selectedRole==null) {
+//            showAlert("Please select a role first.");
+//            return;
+//        }
+//
+//        if (nameField.getText().isEmpty() || emailField.getText().isEmpty()
+//                || passwordField.getText().isEmpty() || confirmPasswordField.getText().isEmpty()) {
+//            showAlert("Please fill all required fields.");
+//            return;
+//        }
+//
+//        if (!passwordField.getText().equals(confirmPasswordField.getText())) {
+//            showAlert("Passwords do not match.");
+//            return;
+//        }
+//
+//        if (selectedRole==USERTYPE.Guide) {
+//            if (LanguagesField==null || guideExperienceField.getText().isEmpty()) {
+//                showAlert("Please complete guide-specific fields.");
+//                return;
+//            }
+//
+//        }
+//
+//        if(!FileHandling.isEmail(emailField.getText())){
+//            showAlert("Invalid Email address!!");
+//            return;
+//        }
+//
+//        if(!phoneField.getText().matches("\\d+") || !(phoneField.getText().length()==10)){
+//            showAlert("Insert a proper phone number");
+//            return;
+//        }
 
         switch(selectedRole){
             case USERTYPE.Tourist -> {
+
                 String fullName=nameField.getText();
                 String nationality=nationalityField.getText();
                 String emergencyContact=emergencyContactField.getText();
@@ -131,6 +134,10 @@ public class RegisterController implements Initializable {
                         email,phoneNumber,password, languagePref,nationality,emergencyContact);
                 FileHandling.WriteUser(USERTYPE.Tourist,tourist);
                 SessionHandler.getInstance().startSession(tourist.getId(),tourist.getName(),USERTYPE.Tourist);
+
+//                Navigate to Tourist home page
+                Stage stage=(Stage) registerBtn.getScene().getWindow();
+                Navigator.Navigate(NAVIGATIONS.TOURIST,stage);
             }
             case USERTYPE.Guide -> {
                 String fullName=nameField.getText();
@@ -143,6 +150,10 @@ public class RegisterController implements Initializable {
                         email,phoneNumber,password ,languagePref,Integer.parseInt(yearsOfExperience));
                 FileHandling.WriteUser(USERTYPE.Guide,guide);
                 SessionHandler.getInstance().startSession(guide.getId(),guide.getName(),USERTYPE.Guide);
+
+//                  Navigate to guide Home page
+                Stage stage=(Stage) registerBtn.getScene().getWindow();
+
             }
             default -> System.out.println("BRUH MATE HOW DID YOU CHOOSE OTHER USERTYPE? bombaclatt");
         }
@@ -152,13 +163,8 @@ public class RegisterController implements Initializable {
     @FXML
     private void onLoginLinkClicked() throws IOException {
 //        System.out.println("Redirect to Login page...");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("loginPage.fxml"));
         Stage stage=(Stage) loginButton.getScene().getWindow();
-        Parent root= loader.load();
-        Scene scene =new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Login Page");
-        stage.show();
+        Navigator.Navigate(NAVIGATIONS.LOGIN,stage);
     }
 
     private void showAlert(String msg) {
