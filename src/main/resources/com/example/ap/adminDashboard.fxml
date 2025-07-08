@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+stylesheets="@css/admin.css">
+    <!-- Left Sidebar remains the same as before -->
+    <left>
+        <VBox styleClass="sidebar" spacing="20" prefWidth="200">
+            <VBox styleClass="sidebar" spacing="20" prefWidth="200">
+                <Label text="Admin" styleClass="sidebar-title"/>
+
+                <VBox styleClass="sidebar-section" spacing="10">
+                    <Label text="Tools" styleClass="sidebar-section-title"/>
+                    <Button text="Dashboard" styleClass="sidebar-button"/>
+                    <Button text="Tourists" styleClass="sidebar-button"/>
+                    <Button text="Bookings" styleClass="sidebar-button"/>
+                    <Button text="Edit Dates" styleClass="sidebar-button"/>
+                    <Button text="Manage Guides" styleClass="sidebar-button"/>
+                    <Button text="Report" styleClass="sidebar-button"/>
+                </VBox>
+
+                <VBox styleClass="sidebar-section" spacing="10">
+                    <Label text="Tourist Data" styleClass="sidebar-section-title"/>
+                    <Button text="Employees" styleClass="sidebar-button"/>
+                </VBox>
+            </VBox>
+        </VBox>
+    </left>
+
+    <center>
+        <GridPane styleClass="content-pane" hgap="20" vgap="20">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50"/>
+                <ColumnConstraints percentWidth="50"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="50"/>
+                <RowConstraints percentHeight="50"/>
+            </rowConstraints>
+
+            <!-- Tourist Data Section (now with pie chart) -->
+            <VBox styleClass="data-card" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <Label text="Total" styleClass="data-card-title"/>
+                <HBox alignment="CENTER" spacing="20">
+                    <PieChart fx:id="touristPieChart" legendVisible="false" styleClass="data-chart"/>
+                </HBox>
+            </VBox>
+
+            <!-- Travel Statistics Section (now with bar chart) -->
+            <VBox styleClass="data-card" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <Label text="Travel Statistics" styleClass="data-card-title"/>
+                <BarChart fx:id="travelBarChart" categoryGap="20" styleClass="data-chart">
+                    <xAxis>
+                        <CategoryAxis label="Companies" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Projects" />
+                    </yAxis>
+                </BarChart>
+            </VBox>
+
+            <!-- Bad Weather Bookings Section -->
+            <VBox styleClass="data-card" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <Label text="Bad Weather Bookings" styleClass="data-card-title"/>
+                <LineChart fx:id="weatherLineChart" styleClass="data-chart" createSymbols="false">
+                    <xAxis>
+                        <CategoryAxis label="Days" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Bookings" />
+                    </yAxis>
+                </LineChart>
+                <Button text="New Bookings" styleClass="action-button"/>
+            </VBox>
+
+            <!-- Mystical Treks Section -->
+            <VBox styleClass="data-card" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <Label text="Mystical Treks" styleClass="data-card-title"/>
+                <Label text="There are no risks assigned." styleClass="info-text"/>
+                <Label text="There are no action items assigned." styleClass="info-text"/>
+            </VBox>
+        </GridPane>
+    </center>
+</BorderPane>

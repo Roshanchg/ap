@@ -1,0 +1,95 @@
+/* Root background image */
+.root {
+    -fx-background-image: url("../images/touristBack.jpg");
+    -fx-background-size: 100% 150%;    /* Zoom in 20% */
+    -fx-background-position: 30% 70%;  /* Focus on bottom-left area */
+    -fx-background-repeat: no-repeat;
+}
+
+/* Container Borders (each with different color for debugging) */
+.top_bar {
+    -fx-border-width: 2px;
+    -fx-padding: 0 40 0 80; /* top right bottom left */
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.clickable_label{
+    -fx-font-weight:bold;
+    -fx-text-fill:white;
+    -fx-font-size:16;
+}
+
+.main_label {
+    -fx-border-width: 2px;
+    -fx-padding: 0 0 0 80;
+
+}
+
+.bottom_bar {
+    -fx-border-width: 2;
+    -fx-pref-width: 800;
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+    -fx-padding:0 50 0 50;
+}
+
+/* Clickable top bar labels */
+.clickable-label {
+    -fx-cursor: hand;
+    -fx-text-fill: white;
+}
+
+/* Main section */
+.main_label Label {
+    -fx-font-size: 60px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-pref-width:400;
+    -fx-padding:0 0 0 90;
+}
+
+.main_label Button {
+    -fx-background-color: #CCFFFF;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-pref-width: 200;
+    -fx-alignment: center;
+    -fx-pref-height: 54;
+    -fx-border-radius: 40;
+    -fx-background-radius: 40;
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+    -fx-border-style: none;
+    -fx-font-size:16;
+    -fx-cursor:hand;
+}
+
+
+/* Bottom bar child VBoxes */
+.bottom_child {
+    -fx-border-width: 1px;
+    -fx-padding:20;
+}
+
+/* Labels inside bottom_child */
+.bottom_child Label {
+    -fx-text-fill: white;
+}
+
+/* First label in each VBox cyan */
+.cyan_ones {
+    -fx-text-fill: "#CCFFFF";
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-padding:0 0 10 0;
+}
+
+/* Second label also bold + sized */
+.mid_ones {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+.bottom_ones{
+-fx-font-size:12px;
+-fx-text-fill:"#7E7E7E";
+-fx-padding:0;
+}

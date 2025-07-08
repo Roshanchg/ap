@@ -1,57 +1,76 @@
 package com.example.ap;
 
+import com.example.ap.handlers.ImportantVariables;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TouristDashboardController implements Initializable {
 
-    @FXML
-    private Label welcomeLabel;
+    @FXML private VBox root;
+    @FXML private HBox topBar;
+    @FXML private Label bookingOption;
+    @FXML private Label attractionOption;
+    @FXML private Label festivalOption;
+    @FXML private Label exploreOption;
+    @FXML private Button mainButton;
+    @FXML private HBox mainLabel;
+    @FXML private HBox bottomBar;
 
     private String touristName;
 
     public void setTouristName(String name) {
         this.touristName = name;
-        welcomeLabel.setText("Welcome, " + touristName + "!");
+//        welcomeLabel.setText("Welcome, " + touristName + "!");
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Default placeholder if name not set
-        welcomeLabel.setText("Welcome, Tourist!");
+        Platform.runLater(() -> {
+            Stage stage = (Stage) bottomBar.getScene().getWindow();
+            bottomBar.prefWidthProperty().bind(stage.widthProperty().multiply(0.8));
+            bottomBar.prefHeightProperty().bind(stage.heightProperty().multiply(0.2));
+
+            topBar.prefWidthProperty().bind(stage.widthProperty().multiply(0.9));
+            topBar.prefHeightProperty().bind(stage.heightProperty().multiply(0.1));
+
+            mainLabel.setPrefWidth(ImportantVariables.screenBounds.getWidth()*0.8);
+            mainLabel.setPrefHeight(ImportantVariables.screenBounds.getHeight()*0.4);
+
+        });
+
     }
 
     @FXML
     private void onViewAttractions() {
         System.out.println("Navigating to Attractions Page...");
-        // TODO: Load Attractions Scene
     }
 
     @FXML
     private void onBookTrip() {
         System.out.println("Navigating to Booking Page...");
-        // TODO: Load Booking Scene
     }
 
     @FXML
     private void onViewBookings() {
         System.out.println("Navigating to My Bookings...");
-        // TODO: Load My Bookings Scene
     }
 
     @FXML
     private void onReportEmergency() {
         System.out.println("Emergency reported!");
-        // TODO: Log and alert emergency
     }
 
     @FXML
     private void onLogout() {
         System.out.println("Logging out...");
-        // TODO: Return to startup/login scene
     }
 }
