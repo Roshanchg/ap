@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 
 import java.io.*;
 import java.nio.Buffer;
+import java.time.LocalDate;
 
 import static com.example.ap.classes.enums.USERTYPE.Guide;
 import static com.example.ap.classes.enums.USERTYPE.Tourist;
@@ -116,8 +117,8 @@ public class ObjectHandler {
             String[] parts;
             int fid;
             String name;
-            String start;
-            String end;
+            LocalDate start;
+            LocalDate end;
             double discount;
             Festival festival;
             while((line=br.readLine())!=null){
@@ -125,8 +126,8 @@ public class ObjectHandler {
                 parts=line.split(",");
                 fid=Integer.parseInt(parts[0]);
                 name=parts[1];
-                start=parts[2];
-                end=parts[3];
+                start= LocalDate.parse(parts[2]);
+                end=LocalDate.parse(parts[3]);
                 discount=Double.parseDouble(parts[4]);
                 if(fid==id){
                     festival=new Festival(fid,name,start,end,discount);
@@ -190,7 +191,7 @@ public class ObjectHandler {
             String date;
             double discount;
             boolean isCancelled;
-
+            int fid;
             Booking booking;
             while((line=br.readLine())!=null){
                 if (line.trim().isEmpty()) continue;
@@ -202,8 +203,9 @@ public class ObjectHandler {
                 date=parts[4];
                 discount=Double.parseDouble(parts[5]);
                 isCancelled=Boolean.parseBoolean(parts[6]);
+                fid=Integer.parseInt(parts[7]);
                 if(id==bid){
-                    booking=new Booking(id,uid,gid,aid,date,discount,isCancelled);
+                    booking=new Booking(id,uid,gid,aid,date,discount,isCancelled,fid);
                     return booking;
                 }
             }
@@ -214,7 +216,54 @@ public class ObjectHandler {
     public static Alerts getAlert(int aid) throws IOException{
         try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.AlertsFile))){
             int id;
-            ALERTRISK
+            ALERTRISK risk;
+            String message;
+            int monthsActive;
+            Alerts alert;
+            String line;
+            String[] parts;
+            while((line=br.readLine())!=null){
+                if (line.trim().isEmpty()) continue;
+                parts=line.split(",");
+                id=Integer.parseInt(parts[0]);
+                if(id==aid){
+                    risk=switch(parts[1]){
+                        case "HEAVY_RAINFALL" -> ALERTRISK.HEAVY_RAINFALL;
+                        default->
+                            throw new IllegalStateException("Unexpected value: " + parts[1]);
+                    };
+                    message=parts[2];
+                    monthsActive=Integer.parseInt(parts[3]);
+                    alert=new Alerts(id,risk,message,monthsActive);
+                    return alert;
+                }
+            }
+        }
+        return null;
+    }
+
+
+
+
+    public static Festival getFestivalForDate(LocalDate currentDate) throws IOException{
+        try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.FestivalsFile))){
+            int id;
+            String line;
+            String[] parts;
+            LocalDate startDate;
+            LocalDate endDate;
+            while((line=br.readLine())!=null){
+                if (line.trim().isEmpty()) continue;
+                parts=line.split(",");
+                startDate=LocalDate.parse(parts[2]);
+                endDate=LocalDate.parse(parts[3]);
+                if((currentDate.equals(endDate)||currentDate.isBefore(endDate))
+                        &&(currentDate.equals(startDate)|| currentDate.isAfter(startDate) )){
+                    id=Integer.parseInt(parts[0]);
+                    return ObjectHandler.getFestive(id);
+                }
+            }
+
         }
         return null;
     }

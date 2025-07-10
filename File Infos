@@ -14,7 +14,7 @@ Festivals.csv
 id,name,start Date, end Date, discount
 
 Bookings.csv
-bid, uid, gid, aid, date, discount = 0 default, cancelled?
+bid, uid, gid, aid, date, discount = 0 default, cancelled?, fid
 
 Alerts.csv
 id, type, message, months active

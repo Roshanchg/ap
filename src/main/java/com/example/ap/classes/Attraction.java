@@ -22,4 +22,8 @@ public class Attraction {
         this.id=id;
     }
 
+    public String getDetails(){
+        return this.id+","+this.name+","+this.location+","+this.type+","+this.difficulty+","+this.altitude+","+this.restrictedMonsoon;
+
+    }
 }

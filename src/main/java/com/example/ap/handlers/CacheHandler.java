@@ -105,6 +105,4 @@ public class CacheHandler {
             return bookings;
         }
     }
-
-
 }

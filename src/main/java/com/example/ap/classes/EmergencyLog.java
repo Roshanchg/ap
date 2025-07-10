@@ -6,4 +6,7 @@ public class EmergencyLog {
         this.time=time;
         this.message=message;
     }
+    public String getDetails(){
+        return this.time+","+this.message;
+    }
 }
