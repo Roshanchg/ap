@@ -1,9 +1,6 @@
 package com.example.ap.handlers;
 
-import com.example.ap.classes.Attraction;
-import com.example.ap.classes.Booking;
-import com.example.ap.classes.Festival;
-import com.example.ap.classes.User;
+import com.example.ap.classes.*;
 import com.example.ap.classes.enums.USERTYPE;
 
 import java.io.*;
@@ -228,6 +225,25 @@ public class FileHandling {
 
     }
     public static void removeFestival(int fid){
+
+    }
+
+    public static void ExportAlert(){
+
+    }
+
+    public static void AddAlerts(Alerts alert){
+
+    }
+    public static void removeAlerts(Alerts alert){
+
+    }
+
+    public static void getReport(){
+
+    }
+
+    public static void getLogs(){
 
     }
 }

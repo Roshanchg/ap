@@ -1,11 +1,8 @@
 package com.example.ap.handlers;
 
-import com.example.ap.classes.Admin;
-import com.example.ap.classes.Guide;
-import com.example.ap.classes.Tourist;
-import com.example.ap.classes.User;
-import com.example.ap.classes.enums.LANGUAGES;
-import com.example.ap.classes.enums.USERTYPE;
+import com.example.ap.classes.*;
+import com.example.ap.classes.enums.*;
+import javafx.scene.control.Alert;
 
 import java.io.*;
 import java.nio.Buffer;
@@ -29,7 +26,7 @@ public class ObjectHandler {
         switch(usertype){
             case Admin -> {
                 Admin admin;
-                try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.GuideFile))) {
+                try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.AdminFile))) {
                     while((line=br.readLine())!=null){
                         if(line.trim().isEmpty()) continue;
                         parts=line.split(",");
@@ -83,7 +80,7 @@ public class ObjectHandler {
                 LANGUAGES language;
                 String nationality;
                 String emergencyNumber;
-                try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.GuideFile))){
+                try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.TouristFile))){
                     while((line=br.readLine())!=null){
                         if(line.trim().isEmpty()) continue;
                         parts=line.split(",");
@@ -110,5 +107,115 @@ public class ObjectHandler {
 
             }
             return null;
+    }
+
+
+    public static Festival getFestive(int id) throws IOException{
+        try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.FestivalsFile))){
+            String line;
+            String[] parts;
+            int fid;
+            String name;
+            String start;
+            String end;
+            double discount;
+            Festival festival;
+            while((line=br.readLine())!=null){
+                if (line.trim().isEmpty()) continue;
+                parts=line.split(",");
+                fid=Integer.parseInt(parts[0]);
+                name=parts[1];
+                start=parts[2];
+                end=parts[3];
+                discount=Double.parseDouble(parts[4]);
+                if(fid==id){
+                    festival=new Festival(fid,name,start,end,discount);
+                    return festival;
+                }
+            }
+        }
+        return null;
+    }
+
+
+    public static Attraction getAttraction(int aid)throws IOException{
+        try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.AttractionsFile))){
+            String line;
+            String[] parts;
+            int id;
+            String name;
+            String location;
+            ATTRACTIONTYPE type;
+            ATTRACTIONDIFFICULTY difficulty;
+            String altitude;
+            boolean restrictedMonsoon;
+            Attraction attraction;
+            while((line=br.readLine())!=null){
+                if (line.trim().isEmpty()) continue;
+                parts=line.split(",");
+                id=Integer.parseInt(parts[0]);
+                name=parts[1];
+                location=parts[2];
+                type=switch(parts[3]){
+                    case "Camping"-> ATTRACTIONTYPE.Camping;
+                    case "Trekking" ->  ATTRACTIONTYPE.Trekking;
+                    case "Rafting"-> ATTRACTIONTYPE.Rafting;
+                    default -> throw new IllegalStateException("Unexpected value: " + parts[3]);
+                };
+                difficulty=switch(parts[4]){
+                    case "HIGH" ->ATTRACTIONDIFFICULTY.HIGH;
+                    case "LOW" -> ATTRACTIONDIFFICULTY.LOW;
+                    default -> throw new IllegalStateException("Unexpected value: " + parts[4]);
+                };
+                altitude=parts[5];
+                restrictedMonsoon=Boolean.parseBoolean(parts[6]);
+                if(id==aid){
+                    attraction=new Attraction(id,name,location,type,difficulty,altitude,restrictedMonsoon);
+                    return attraction;
+                }
+            }
+        }
+        return null;
+    }
+
+
+    public static Booking getBooking(int bid)throws IOException{
+        try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.BookingsFile))){
+            String line;
+            String[] parts;
+            int id;
+            int uid;
+            int gid;
+            int aid;
+            String date;
+            double discount;
+            boolean isCancelled;
+
+            Booking booking;
+            while((line=br.readLine())!=null){
+                if (line.trim().isEmpty()) continue;
+                parts=line.split(",");
+                id=Integer.parseInt(parts[0]);
+                uid=Integer.parseInt(parts[1]);
+                gid=Integer.parseInt(parts[2]);
+                aid=Integer.parseInt(parts[3]);
+                date=parts[4];
+                discount=Double.parseDouble(parts[5]);
+                isCancelled=Boolean.parseBoolean(parts[6]);
+                if(id==bid){
+                    booking=new Booking(id,uid,gid,aid,date,discount,isCancelled);
+                    return booking;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static Alerts getAlert(int aid) throws IOException{
+        try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.AlertsFile))){
+            int id;
+            ALERTRISK
+        }
+        return null;
     }
 }
