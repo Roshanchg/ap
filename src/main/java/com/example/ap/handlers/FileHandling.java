@@ -2,14 +2,12 @@ package com.example.ap.handlers;
 
 import com.example.ap.classes.*;
 import com.example.ap.classes.enums.USERTYPE;
-import org.w3c.dom.Attr;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -87,7 +85,7 @@ public class FileHandling {
                 File originalFile=new File(GuideFile);
                 File tempFile=new File("temp",GuideFile);
                 try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
-                    User user=ObjectHandler.getUser(uid,usertype);
+                    User user= ObjectFinder.getUser(uid,usertype);
                     assert user != null;
                     String userInfo=user.getDetails();
                     String line;
@@ -118,7 +116,7 @@ public class FileHandling {
                 File originalFile=new File(TouristFile);
                 File tempFile=new File("temp",TouristFile);
                 try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
-                    User user=ObjectHandler.getUser(uid,usertype);
+                    User user= ObjectFinder.getUser(uid,usertype);
                     assert user != null;
                     String userInfo=user.getDetails();
                     String line;
@@ -153,7 +151,7 @@ public class FileHandling {
                 File originalFile=new File(GuideFile);
                 File tempFile=new File("temp",GuideFile);
                 try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
-                    User user=ObjectHandler.getUser(uid,usertype);
+                    User user= ObjectFinder.getUser(uid,usertype);
                     assert user != null;
                     String userInfo=user.getDetails();
                     String line;
@@ -183,7 +181,7 @@ public class FileHandling {
                 File originalFile=new File(TouristFile);
                 File tempFile=new File("temp",TouristFile);
                 try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
-                    User user=ObjectHandler.getUser(uid,usertype);
+                    User user= ObjectFinder.getUser(uid,usertype);
                     assert user != null;
                     String userInfo=user.getDetails();
                     String line;
@@ -283,11 +281,11 @@ public class FileHandling {
             bw.newLine();
         }
     }
-    public static void EditBooking(int bid,Booking newBooking)throws IOException{
+    public static void editBooking(int bid,Booking newBooking)throws IOException{
         File originalFile=new File(BookingsFile);
         File tempFile=new File("temp",BookingsFile);
         try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
-            Booking booking=ObjectHandler.getBooking(bid);
+            Booking booking= ObjectFinder.getBooking(bid);
             assert booking != null;
             String bookinginfo=booking.getDetails();
             String line;
@@ -314,7 +312,7 @@ public class FileHandling {
         File originalFile=new File(BookingsFile);
         File tempFile=new File("temp",BookingsFile);
         try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
-            Booking booking=ObjectHandler.getBooking(bid);
+            Booking booking= ObjectFinder.getBooking(bid);
             assert booking != null;
             String bookinginfo=booking.getDetails();
             String line;
@@ -350,7 +348,7 @@ public class FileHandling {
         File originalFile=new File(AttractionsFile);
         File tempFile=new File("temp", AttractionsFile);
         try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
-            Attraction attraction=ObjectHandler.getAttraction(aid);
+            Attraction attraction= ObjectFinder.getAttraction(aid);
             assert attraction != null;
             String attractionInfo=attraction.getDetails();
             String line;
@@ -376,7 +374,7 @@ public class FileHandling {
         File originalFile=new File(AttractionsFile);
         File tempFile=new File("temp", AttractionsFile);
         try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
-            Attraction attraction=ObjectHandler.getAttraction(aid);
+            Attraction attraction= ObjectFinder.getAttraction(aid);
             assert attraction != null;
             String attractionInfo=attraction.getDetails();
             String line;
@@ -410,7 +408,7 @@ public class FileHandling {
         File originalFile=new File(FestivalsFile);
         File tempFile=new File("temp", FestivalsFile);
         try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
-            Festival festival=ObjectHandler.getFestive(fid);
+            Festival festival= ObjectFinder.getFestive(fid);
             assert festival != null;
             String festivalInfo=festival.getDetails();
             String line;
@@ -450,7 +448,7 @@ public class FileHandling {
         File originalFile=new File(AlertsFile);
         File tempFile=new File("temp", AlertsFile);
         try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
-            Alerts alerts=ObjectHandler.getAlert(aid);
+            Alerts alerts= ObjectFinder.getAlert(aid);
             assert alerts != null;
             String alertsInfo=alerts.getDetails();
             String line;

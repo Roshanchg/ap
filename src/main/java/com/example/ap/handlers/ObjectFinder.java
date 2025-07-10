@@ -2,16 +2,11 @@ package com.example.ap.handlers;
 
 import com.example.ap.classes.*;
 import com.example.ap.classes.enums.*;
-import javafx.scene.control.Alert;
 
 import java.io.*;
-import java.nio.Buffer;
 import java.time.LocalDate;
 
-import static com.example.ap.classes.enums.USERTYPE.Guide;
-import static com.example.ap.classes.enums.USERTYPE.Tourist;
-
-public class ObjectHandler {
+public class ObjectFinder {
 
 
 
@@ -188,7 +183,7 @@ public class ObjectHandler {
             int uid;
             int gid;
             int aid;
-            String date;
+            LocalDate date;
             double discount;
             boolean isCancelled;
             int fid;
@@ -200,7 +195,7 @@ public class ObjectHandler {
                 uid=Integer.parseInt(parts[1]);
                 gid=Integer.parseInt(parts[2]);
                 aid=Integer.parseInt(parts[3]);
-                date=parts[4];
+                date=LocalDate.parse(parts[4]);
                 discount=Double.parseDouble(parts[5]);
                 isCancelled=Boolean.parseBoolean(parts[6]);
                 fid=Integer.parseInt(parts[7]);
@@ -260,7 +255,7 @@ public class ObjectHandler {
                 if((currentDate.equals(endDate)||currentDate.isBefore(endDate))
                         &&(currentDate.equals(startDate)|| currentDate.isAfter(startDate) )){
                     id=Integer.parseInt(parts[0]);
-                    return ObjectHandler.getFestive(id);
+                    return ObjectFinder.getFestive(id);
                 }
             }
 

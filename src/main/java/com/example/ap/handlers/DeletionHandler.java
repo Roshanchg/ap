@@ -1,0 +1,66 @@
+package com.example.ap.handlers;
+
+import com.example.ap.classes.Booking;
+import com.example.ap.classes.User;
+import com.example.ap.classes.enums.USERTYPE;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDate;
+
+
+// user index 1, guide 2, attraction 3, festival 7
+public class DeletionHandler {
+    public static void onUserDelete(int uid, USERTYPE usertype) throws IOException {
+//        Replace values in booking with 0
+        if(usertype==USERTYPE.Tourist) {
+            setNUllBookingAtIndex(1, uid);
+        }
+        else if(usertype==USERTYPE.Guide){
+            setNUllBookingAtIndex(2,uid);
+        }
+    }
+
+    public static void onAttractionDelete(int aid) throws IOException {
+//        Replace values in booking with 0
+        setNUllBookingAtIndex(3,aid);
+    }
+
+    public static void onFestivalDeletion(int fid)throws IOException{
+//        Replace fid value in booking with 0;
+        setNUllBookingAtIndex(7,fid);
+    }
+
+    public static void setNUllBookingAtIndex(int index,int filter)throws IOException {
+        try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.BookingsFile))){
+            String line;
+            String[] parts;
+
+            int bid;
+            int uid;
+            int gid;
+            int aid;
+            LocalDate date;
+            double discount;
+            boolean cancelled;
+            int fid;
+            while((line=br.readLine())!=null){
+                parts=line.split(",");
+                if (Integer.parseInt(parts[index])==filter){
+                    parts[index]="0";
+                    bid=Integer.parseInt(parts[0]);
+                    uid=Integer.parseInt(parts[1]);
+                    gid=Integer.parseInt(parts[2]);
+                    aid=Integer.parseInt(parts[3]);
+                    date=LocalDate.parse(parts[4]);
+                    discount=Double.parseDouble(parts[5]);
+                    cancelled=Boolean.parseBoolean(parts[6]);
+                    fid=Integer.parseInt(parts[7]);
+                    Booking booking=new Booking(bid,uid,gid,aid,date,discount,cancelled,fid);
+                    FileHandling.editBooking(bid,booking);
+                }
+            }
+        }
+    }
+}

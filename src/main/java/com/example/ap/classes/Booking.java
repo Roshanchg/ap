@@ -1,8 +1,7 @@
 package com.example.ap.classes;
 
 
-import com.example.ap.handlers.FileHandling;
-import com.example.ap.handlers.ObjectHandler;
+import com.example.ap.handlers.ObjectFinder;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -13,10 +12,10 @@ public class Booking {
     private int guideId;
     private int aid;
     private double discount;
-    private String bookingDate;
+    private LocalDate bookingDate;
     private boolean isCancelled;
     private int fid;
-    public Booking(int bookingId,int userId,int gid,int aid,String bookingDate,double discount,boolean isCancelled,int fid){
+    public Booking(int bookingId,int userId,int gid,int aid,LocalDate bookingDate,double discount,boolean isCancelled,int fid){
         this.guideId=gid;
         this.aid=aid;
         this.bookingId=bookingId;
@@ -33,7 +32,7 @@ public class Booking {
 
     public void applyDiscount() throws IOException {
         LocalDate currentDate=LocalDate.now();
-        Festival festival= ObjectHandler.getFestivalForDate(currentDate);
+        Festival festival= ObjectFinder.getFestivalForDate(currentDate);
         assert festival != null;
         this.discount=festival.getDiscountRate();
     }
