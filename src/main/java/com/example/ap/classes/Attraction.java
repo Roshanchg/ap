@@ -11,8 +11,8 @@ public class Attraction {
     private int altitude;
     private boolean restrictedMonsoon;
     private int id;
-    public Attraction(String name,String location,ATTRACTIONTYPE type,ATTRACTIONDIFFICULTY difficulty,
-                      int altitude,boolean restrictedMonsoon,int id){
+    public Attraction(int id, String name,String location,ATTRACTIONTYPE type,ATTRACTIONDIFFICULTY difficulty,
+                      int altitude,boolean restrictedMonsoo){
         this.name=name;
         this.location=location;
         this.type=type;

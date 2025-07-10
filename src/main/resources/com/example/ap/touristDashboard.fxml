@@ -21,7 +21,7 @@
       <Label fx:id="festivalOption" styleClass="clickable_label" text="Festive Offers" />
       <Label fx:id="exploreOption" styleClass="clickable_label" text="Explore" />
       <Pane HBox.hgrow="ALWAYS" />
-      <ImageView fitHeight="50" fitWidth="50" fx:id="userOption">
+      <ImageView fitHeight="50" fitWidth="50" fx:id="userOption" onMouseClicked="#onLogout">
          <Image url="@images/logo.png" />
       </ImageView>
    </HBox>

@@ -5,5 +5,10 @@ public enum NAVIGATIONS {
     REGISTER,
     ADMIN,
     TOURIST,
-    GUIDE
+    GUIDE,
+
+    booking,
+    attraction,
+    festive,
+    userEdit
 }

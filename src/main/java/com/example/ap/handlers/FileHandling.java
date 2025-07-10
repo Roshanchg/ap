@@ -1,5 +1,8 @@
 package com.example.ap.handlers;
 
+import com.example.ap.classes.Attraction;
+import com.example.ap.classes.Booking;
+import com.example.ap.classes.Festival;
 import com.example.ap.classes.User;
 import com.example.ap.classes.enums.USERTYPE;
 
@@ -23,6 +26,13 @@ public class FileHandling {
     public static String TouristFile="tourists.csv";
     public static String GuideFile="Guides.csv";
     public static String AdminFile="Admins.csv";
+    public static String ReportFile="Report.csv";
+    public static String AttractionsFile="Attractions.csv";
+    public static String FestivalsFile="Festivals.csv";
+    public static String BookingsFile="Bookings.csv";
+    public static String LogFile="Log.txt";
+    public static String AlertsFile="Alerts.csv";
+
 
     public static void WriteUser(USERTYPE usertype,User user){
         switch(usertype){
@@ -65,8 +75,67 @@ public class FileHandling {
         }
 
     }
-    public void ReadUser(){
+    public void removeUser(USERTYPE usertype,int uid){
+        String tempFile="tempUser.csv";
+        switch(usertype){
+            case Admin -> {
+//                try(BufferedWriter bw=new BufferedWriter(new FileWriter(AdminFile,true))){
+//                    String line=user.getDetails();
+//                    bw.write(line);
+//                    bw.newLine();
+//                }
+//                catch (IOException e){
+//                    System.out.println(e.getMessage());
+//                }
+            }
+            case Guide -> {
+                try(BufferedWriter bw=new BufferedWriter(new FileWriter(GuideFile,true))){
 
+                }
+                catch (IOException e){
+                    System.out.println(e.getMessage());
+
+                }
+
+            }
+            case Tourist -> {
+                try(BufferedWriter bw=new BufferedWriter(new FileWriter(TouristFile,true))){
+
+                }
+                catch (IOException e){
+                    System.out.println(e.getMessage());
+
+                }
+            }
+        }
+    }
+    public void editUser(USERTYPE usertype,int uid, User newUser){
+        switch(usertype) {
+            case Admin -> {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(AdminFile, true))) {
+
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            case Guide -> {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(GuideFile, true))) {
+
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+
+                }
+
+            }
+            case Tourist -> {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(TouristFile, true))) {
+
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+
+                }
+            }
+        }
     }
 
 
@@ -75,6 +144,19 @@ public class FileHandling {
         try(BufferedReader br=new BufferedReader(new FileReader(filename))) {
             while(br.readLine()!=null){
                 i++;
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return i;
+    }
+    public static int getNextId(String filename){
+        int i=1;
+        String line;
+        try(BufferedReader br=new BufferedReader(new FileReader(filename))) {
+            while((line=br.readLine())!=null){
+                if( line.trim().isEmpty() ) continue;
+                i=Integer.parseInt(line.split(",")[0])+1;
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -120,5 +202,32 @@ public class FileHandling {
             }
         }
         return false;
+    }
+
+    public static void MakeBooking(Booking booking){
+
+    }
+    public static void EditBooking(int bid,Booking newBooking){
+    }
+    public static void removeBooking(int bid){
+
+    }
+
+
+
+    public static void AddAttraction(Attraction attraction){
+
+    }
+    public static void editAttraction(int aid,Attraction newAttraction){
+    }
+    public static void removeAttraction(int aid){
+
+    }
+
+    public static void addFestival(int fid, Festival festival){
+
+    }
+    public static void removeFestival(int fid){
+
     }
 }

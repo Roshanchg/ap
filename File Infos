@@ -1,0 +1,26 @@
+Admins.csv
+id, name, email , phone number ,password
+
+Guides.csv
+id, name ,email ,phone number, password, language, years of experience, available?
+
+tourists.csv
+id, name ,email, phone number, password, language, nationality, emergency number
+
+Attractions.csv
+id, name, location, type , difficulty, altitude, restrictedMonsoon?
+
+Festivals.csv
+id,name,start Date, end Date, discount
+
+Bookings.csv
+bid, uid, gid, aid, date, discount = 0 default, price, cancelled?
+
+Alerts.csv
+id, type, message, months active
+
+Logs.txt
+time message
+
+Report.csv
+date ,User, booking attraction name, discount , Guide

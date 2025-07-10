@@ -65,6 +65,11 @@ public class RegisterController implements Initializable {
         formContainer.setManaged(true);
         guideFieldsContainer.setVisible(false);
         guideFieldsContainer.setManaged(false);
+        emergencyContactField.setVisible(true);
+        emergencyContactField.setManaged(true);
+
+        nationalityField.setVisible(true);
+        nationalityField.setManaged(true);
 
     }
 
@@ -77,43 +82,50 @@ public class RegisterController implements Initializable {
         formContainer.setManaged(true);
         guideFieldsContainer.setVisible(true);
         guideFieldsContainer.setManaged(true);
+        emergencyContactField.setVisible(false);
+        emergencyContactField.setManaged(false);
+
+        nationalityField.setVisible(false);
+        nationalityField.setManaged(false);
     }
 
     @FXML
     private void onRegisterButtonClicked() throws IOException {
-//        if (selectedRole==null) {
-//            showAlert("Please select a role first.");
-//            return;
-//        }
-//
-//        if (nameField.getText().isEmpty() || emailField.getText().isEmpty()
-//                || passwordField.getText().isEmpty() || confirmPasswordField.getText().isEmpty()) {
-//            showAlert("Please fill all required fields.");
-//            return;
-//        }
-//
-//        if (!passwordField.getText().equals(confirmPasswordField.getText())) {
-//            showAlert("Passwords do not match.");
-//            return;
-//        }
-//
-//        if (selectedRole==USERTYPE.Guide) {
-//            if (LanguagesField==null || guideExperienceField.getText().isEmpty()) {
-//                showAlert("Please complete guide-specific fields.");
-//                return;
-//            }
-//
-//        }
-//
-//        if(!FileHandling.isEmail(emailField.getText())){
-//            showAlert("Invalid Email address!!");
-//            return;
-//        }
-//
-//        if(!phoneField.getText().matches("\\d+") || !(phoneField.getText().length()==10)){
-//            showAlert("Insert a proper phone number");
-//            return;
-//        }
+
+        //form validation
+        if (selectedRole==null) {
+            showAlert("Please select a role first.");
+            return;
+        }
+
+        if (nameField.getText().isEmpty() || emailField.getText().isEmpty()
+                || passwordField.getText().isEmpty() || confirmPasswordField.getText().isEmpty()) {
+            showAlert("Please fill all required fields.");
+            return;
+        }
+
+        if (!passwordField.getText().equals(confirmPasswordField.getText())) {
+            showAlert("Passwords do not match.");
+            return;
+        }
+
+        if (selectedRole==USERTYPE.Guide) {
+            if (LanguagesField==null || guideExperienceField.getText().isEmpty()) {
+                showAlert("Please complete guide-specific fields.");
+                return;
+            }
+
+        }
+
+        if(!FileHandling.isEmail(emailField.getText())){
+            showAlert("Invalid Email address!!");
+            return;
+        }
+
+        if(!phoneField.getText().matches("\\d+") || !(phoneField.getText().length()==10)){
+            showAlert("Insert a proper phone number");
+            return;
+        }
 
         switch(selectedRole){
             case USERTYPE.Tourist -> {
@@ -130,7 +142,7 @@ public class RegisterController implements Initializable {
                 String password=passwordField.getText();
                 LANGUAGES languagePref= (LanguagesField.getValue()==null)?LANGUAGES.English:LanguagesField.getValue();
 
-                Tourist tourist=new Tourist(FileHandling.getSize(FileHandling.TouristFile),fullName,
+                Tourist tourist=new Tourist(FileHandling.getNextId(FileHandling.TouristFile),fullName,
                         email,phoneNumber,password, languagePref,nationality,emergencyContact);
                 FileHandling.WriteUser(USERTYPE.Tourist,tourist);
                 SessionHandler.getInstance().startSession(tourist.getId(),tourist.getName(),USERTYPE.Tourist);
@@ -146,13 +158,14 @@ public class RegisterController implements Initializable {
                 String password=passwordField.getText();
                 LANGUAGES languagePref= (LanguagesField.getValue()==null)?LANGUAGES.English:LanguagesField.getValue();
                 String yearsOfExperience=guideExperienceField.getText();
-                Guide guide=new Guide(FileHandling.getSize(FileHandling.TouristFile),fullName,
+                Guide guide=new Guide(FileHandling.getNextId(FileHandling.GuideFile),fullName,
                         email,phoneNumber,password ,languagePref,Integer.parseInt(yearsOfExperience));
                 FileHandling.WriteUser(USERTYPE.Guide,guide);
                 SessionHandler.getInstance().startSession(guide.getId(),guide.getName(),USERTYPE.Guide);
 
 //                  Navigate to guide Home page
                 Stage stage=(Stage) registerBtn.getScene().getWindow();
+                Navigator.Navigate(NAVIGATIONS.GUIDE,stage);
 
             }
             default -> System.out.println("BRUH MATE HOW DID YOU CHOOSE OTHER USERTYPE? bombaclatt");

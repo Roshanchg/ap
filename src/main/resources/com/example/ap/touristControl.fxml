@@ -4,90 +4,62 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+          stylesheets="@css/touristControl.css"
+          fx:controller="com.example.ap.touristEditController"
+          styleClass="content-pane" spacing="20">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            stylesheets="@css/touristControl.css"
-            fx:controller="com.example.ap.touristEditController">
+        <HBox spacing="20" alignment="CENTER_LEFT">
+            <Label text="Edit Tourist" styleClass="section-title"/>
+            <Label text="All Tourist" styleClass="section-subtitle"/>
+        </HBox>
 
-    <left>
-        <VBox styleClass="sidebar" spacing="20" prefWidth="200">
-            <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
-            </padding>
-            <Label text="Admin" styleClass="sidebar-title"/>
+        <HBox spacing="20" alignment="CENTER_LEFT">
+            <Button text="Filter" styleClass="action-button" onAction="#handleFilter"/>
+            <Button text="Clear Search" styleClass="secondary-button" onAction="#handleClearSearch"/>
+        </HBox>
 
-            <VBox styleClass="sidebar-section" spacing="10">
-                <Button text="Dashboard" styleClass="sidebar-button"/>
-                <Button text="Tourists" styleClass="sidebar-button active"/>
-                <Button text="Bookings" styleClass="sidebar-button"/>
-                <Button text="Edit Dates" styleClass="sidebar-button"/>
-                <Button text="Manage Guides" styleClass="sidebar-button"/>
-                <Button text="Report" styleClass="sidebar-button"/>
-            </VBox>
+        <GridPane styleClass="form-grid" hgap="20" vgap="15">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="30"/>
+                <ColumnConstraints percentWidth="70"/>
+            </columnConstraints>
 
-            <VBox styleClass="sidebar-section" spacing="10">
-                <Label text="Tourist Data" styleClass="sidebar-section-title"/>
-                <Button text="Employees" styleClass="sidebar-button"/>
-            </VBox>
-        </VBox>
-    </left>
+            <!-- Form rows remain the same as before -->
+            <!-- Row 1: Name -->
+            <Label text="Name" styleClass="form-label" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="nameField" text="Andrew Salgado" styleClass="form-field" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-    <center>
-        <VBox styleClass="content-pane" spacing="20">
-            <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
-            </padding>
+            <!-- Row 2: Email -->
+            <Label text="Email address" styleClass="form-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="emailField" text="example@mail.com" styleClass="form-field" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-            <HBox spacing="20" alignment="CENTER_LEFT">
-                <Label text="Edit Tourist" styleClass="section-title"/>
-                <Label text="All Tourist" styleClass="section-subtitle"/>
-            </HBox>
+            <!-- Row 3: Password -->
+            <Label text="Password" styleClass="form-label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <PasswordField fx:id="passwordField" styleClass="form-field" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-            <HBox spacing="20" alignment="CENTER_LEFT">
-                <Button text="Filter" styleClass="action-button" onAction="#handleFilter"/>
-                <Button text="Clear Search" styleClass="secondary-button" onAction="#handleClearSearch"/>
-            </HBox>
+            <!-- Row 4: Login ID -->
+            <Label text="Login ID" styleClass="form-label" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField fx:id="loginIdField" text="0" styleClass="form-field" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
-            <GridPane styleClass="form-grid" hgap="20" vgap="15">
-                <columnConstraints>
-                    <ColumnConstraints percentWidth="30"/>
-                    <ColumnConstraints percentWidth="70"/>
-                </columnConstraints>
+            <!-- Row 5: Bookings -->
+            <Label text="Bookings" styleClass="form-label" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="bookingsComboBox" value="Any" styleClass="form-field" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
 
-                <!-- Form rows remain the same as before -->
-                <!-- Row 1: Name -->
-                <Label text="Name" styleClass="form-label" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <TextField fx:id="nameField" text="Andrew Salgado" styleClass="form-field" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-
-                <!-- Row 2: Email -->
-                <Label text="Email address" styleClass="form-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                <TextField fx:id="emailField" text="example@mail.com" styleClass="form-field" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-
-                <!-- Row 3: Password -->
-                <Label text="Password" styleClass="form-label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                <PasswordField fx:id="passwordField" styleClass="form-field" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-
-                <!-- Row 4: Login ID -->
-                <Label text="Login ID" styleClass="form-label" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                <TextField fx:id="loginIdField" text="0" styleClass="form-field" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-
-                <!-- Row 5: Bookings -->
-                <Label text="Bookings" styleClass="form-label" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-                <ComboBox fx:id="bookingsComboBox" value="Any" styleClass="form-field" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-
-                <!-- Row 6: Contact Details -->
-                <Label text="Contact Details" styleClass="form-label" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-                <TextArea fx:id="contactDetailsArea" styleClass="form-textarea" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-            </GridPane>
-                <!-- ... -->
+            <!-- Row 6: Contact Details -->
+            <Label text="Contact Details" styleClass="form-label" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <TextArea fx:id="contactDetailsArea" styleClass="form-textarea" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+        </GridPane>
+            <!-- ... -->
 
 
-            <HBox spacing="20" alignment="CENTER_RIGHT">
-                <Button text="Confirm Edit" styleClass="primary-button" onAction="#handleConfirmEdit"/>
-                <Button text="Confirm Passwords" styleClass="secondary-button" onAction="#handleConfirmPasswords"/>
-                <Button text="Practice" styleClass="secondary-button"/>
-                <Button text="Select" styleClass="secondary-button"/>
-            </HBox>
-        </VBox>
-    </center>
-</BorderPane>
+        <HBox spacing="20" alignment="CENTER_RIGHT">
+            <Button text="Confirm Edit" styleClass="primary-button" onAction="#handleConfirmEdit"/>
+            <Button text="Confirm Passwords" styleClass="secondary-button" onAction="#handleConfirmPasswords"/>
+            <Button text="Practice" styleClass="secondary-button"/>
+            <Button text="Select" styleClass="secondary-button"/>
+        </HBox>
+</VBox>
