@@ -9,23 +9,23 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
 stylesheets="@css/admin.css"
-fx:controller="com.example.ap.AdminController">
+fx:controller="com.example.ap.AdminController"
+fx:id="mainBorderPane">
     <!-- Left Sidebar remains the same as before -->
     <left>
         <VBox styleClass="sidebar" spacing="20" prefWidth="200">
-            <VBox styleClass="sidebar" spacing="20" prefWidth="200">
-                <Label text="Admin" styleClass="sidebar-title"/>
+            <Label text="Admin" styleClass="sidebar-title"/>
 
-                <VBox styleClass="sidebar-section" spacing="10">
-                    <Label text="Tools" styleClass="sidebar-section-title"/>
-                    <Button text="Dashboard" styleClass="sidebar-button"/>
-                    <Button text="Tourists" styleClass="sidebar-button"/>
-                    <Button text="Attractions" styleClass="sidebar-button"/>
-                    <Button text="Festivals" styleClass="sidebar-button"/>
-                    <Button text="Guides" styleClass="sidebar-button"/>
-                    <Button text="Emergency Log" styleClass="sidebar-button"/>
-                    <Button text="Report" styleClass="sidebar-button"/>
-                </VBox>
+            <VBox styleClass="sidebar-section" spacing="10" fx:id="ToolsVbox">
+                <Label text="Tools" styleClass="sidebar-section-title" />
+                <Button text="Dashboard" fx:id="DashboardBt" styleClass="sidebar-button" onAction="#onDashboard" />
+                <Button text="Tourists" styleClass="sidebar-button" fx:id="TouristControlBt" onAction="#onTouristControl"/>
+                <Button text="Attractions" styleClass="sidebar-button" fx:id="AttractionsBt" onAction="#onAttractionControl"/>
+                <Button text="Festivals" styleClass="sidebar-button" fx:id="FestivalsBt" onAction="#onFestivalsControl"/>
+                <Button text="Guides" styleClass="sidebar-button" fx:id="GuidesBt" onAction="#onGuideControl"/>
+                <Button text="Bookings" styleClass="sidebar-button" fx:id="BookingsBt" onAction="#onBookingsControl"/>
+                <Button text="Emergency Log" styleClass="sidebar-button" fx:id="LogsBt" onAction="#onLogsControl"/>
+                <Button text="Report" styleClass="sidebar-button" fx:id="ReportBt" onAction="#onReportControl"/>
             </VBox>
         </VBox>
     </left>

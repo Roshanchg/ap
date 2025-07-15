@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane styleClass="content-pane" hgap="20" vgap="20">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="50"/>
+            <ColumnConstraints percentWidth="50"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints percentHeight="50"/>
+            <RowConstraints percentHeight="50"/>
+        </rowConstraints>
+
+        <!-- Tourist Data Section (now with pie chart) -->
+        <VBox styleClass="data-card" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <Label text="Tourist Data" styleClass="data-card-title"/>
+            <LineChart fx:id="touristDataChart" styleClass="data-chart" createSymbols="false">
+                <xAxis>
+                    <CategoryAxis label="Days" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Bookings" />
+                </yAxis>
+            </LineChart>
+
+        </VBox>
+
+        <!-- Travel Statistics Section (now with bar chart) -->
+        <VBox styleClass="data-card" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <Label text="Travel Statistics" styleClass="data-card-title"/>
+            <HBox alignment="CENTER" spacing="20">
+                <PieChart fx:id="travelPieChart" legendVisible="false" styleClass="data-chart"/>
+            </HBox>
+
+        </VBox>
+
+        <!-- Bad Weather Bookings Section -->
+        <VBox styleClass="data-card" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <Label text="Bad Weather Bookings" styleClass="data-card-title"/>
+            <Pane VBox.vgrow="ALWAYS"/>
+            <Button text="New Bookings" styleClass="action-button"/>
+        </VBox>
+
+        <!-- Mystical Treks Section -->
+        <VBox styleClass="data-card" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label text="Mystical Treks" styleClass="data-card-title"/>
+            <Label text="There are no risks assigned." styleClass="info-text"/>
+            <Label text="There are no action items assigned." styleClass="info-text"/>
+        </VBox>
+    </GridPane>
+</VBox>

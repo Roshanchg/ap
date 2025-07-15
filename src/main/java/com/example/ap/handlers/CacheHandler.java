@@ -89,6 +89,7 @@ public class CacheHandler {
             Booking booking;
             for(int i=1;i<=FileHandling.getSize(FileHandling.BookingsFile);i++) {
                 booking=ObjectFinder.getBooking(i);
+                assert booking != null;
                 if(booking.getUserId()==SessionHandler.getInstance().getUserId()){
                     WriteCache(USERTYPE.Tourist,booking.getDetails());
                 }
