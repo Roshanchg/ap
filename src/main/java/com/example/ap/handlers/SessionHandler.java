@@ -13,6 +13,7 @@ public class SessionHandler {
 
     private SessionHandler() {
         // Private constructor to prevent instantiation
+
     }
 
     public static SessionHandler getInstance() {

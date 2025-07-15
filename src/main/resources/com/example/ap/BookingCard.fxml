@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox styleClass="booking-card">
+    <Label text="Tlieho" styleClass="booking-title"/>
+    <Label text="Stunning alpine beauty" styleClass="booking-description" wrapText="true"/>
+    <Separator styleClass="card-separator"/>
+    <Label text="Travel Date: 2025-10-12" styleClass="booking-detail"/>
+    <Label text="Guide: Pema Sherpa" styleClass="booking-detail"/>
+    <Label text="Weather: Clear and Sunny" styleClass="booking-detail"/>
+    <Button text="Cancel Booking" styleClass="cancel-button"/>
+</VBox>

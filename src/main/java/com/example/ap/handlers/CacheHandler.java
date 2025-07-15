@@ -1,5 +1,6 @@
 package com.example.ap.handlers;
 
+import com.example.ap.classes.Booking;
 import com.example.ap.classes.enums.USERTYPE;
 
 import java.io.*;
@@ -57,7 +58,7 @@ public class CacheHandler {
         }
     }
 
-    public void WriteCache(USERTYPE usertype,String line) throws IOException{
+    public static void WriteCache(USERTYPE usertype,String line) throws IOException{
 
         switch (usertype){
             case Tourist -> {
@@ -83,6 +84,16 @@ public class CacheHandler {
         String bookingCache="cache/Tourist/booking.csv";
         List<String> bookings=new ArrayList<>();
         String line;
+        SessionHandler.getInstance().startSession(1,"Roshan Chaulagain",USERTYPE.Tourist);
+        if(!fileExists(bookingCache)){
+            Booking booking;
+            for(int i=1;i<=FileHandling.getSize(FileHandling.BookingsFile);i++) {
+                booking=ObjectFinder.getBooking(i);
+                if(booking.getUserId()==SessionHandler.getInstance().getUserId()){
+                    WriteCache(USERTYPE.Tourist,booking.getDetails());
+                }
+            }
+        }
         try(BufferedReader br= new BufferedReader(new FileReader(bookingCache))){
             while((line=br.readLine())!=null){
                 if (line.trim().isEmpty()) continue;
@@ -105,4 +116,9 @@ public class CacheHandler {
             return bookings;
         }
     }
+
+    public static boolean fileExists(String fileName){
+        return(new File(fileName).exists());
+    }
 }
+

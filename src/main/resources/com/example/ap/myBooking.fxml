@@ -6,53 +6,35 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             stylesheets="@css/my-booking.css" fx:controller="com.example.ap.myBookingController">
 
     <top>
         <VBox styleClass="header-box" spacing="10">
+        <HBox fx:id="topBar" alignment="CENTER_LEFT" prefHeight="65.0" spacing="50" styleClass="top_bar">
+            <Label fx:id="bookingOption" styleClass="clickable_label" text="My Bookings" />
+            <Label fx:id="attractionOption" styleClass="clickable_label" text="Attractions" />
+            <Label fx:id="festivalOption" styleClass="clickable_label" text="Festive Offers" />
+            <Label fx:id="exploreOption" styleClass="clickable_label" text="Explore" />
+            <Pane HBox.hgrow="ALWAYS" />
+            <ImageView fitHeight="50" fitWidth="50" fx:id="userOption" >
+                <Image url="@images/logo.png" />
+            </ImageView>
+        </HBox>
+
             <Label text="MY BOOKINGS" styleClass="main-title"/>
             <Button text="Add New Bookings" styleClass="add-button"/>
-            <Label text="Report Emergency" styleClass="section-title"/>
+            <Button text="Report Emergency" styleClass="emergencyButton"/>
             <Separator styleClass="separator"/>
         </VBox>
     </top>
 
     <center>
         <ScrollPane styleClass="scroll-pane" fitToWidth="false" hbarPolicy="AS_NEEDED" vbarPolicy="NEVER">
-            <HBox styleClass="bookings-container" spacing="20">
-                <!-- Booking Card 1 -->
-                <VBox styleClass="booking-card">
-                    <Label text="Mustang" styleClass="booking-title"/>
-                    <Label text="Mountain views, jungles and distant villages." styleClass="booking-description" wrapText="true"/>
-                    <Separator styleClass="card-separator"/>
-                    <Label text="Travel Date: 2025-10-12" styleClass="booking-detail"/>
-                    <Label text="Guide: Pema Sherpa" styleClass="booking-detail"/>
-                    <Label text="Weather: Clear and Sunny" styleClass="booking-detail"/>
-                    <Button text="Cancel Booking" styleClass="cancel-button"/>
-                </VBox>
+            <HBox styleClass="bookings-container" spacing="20" fx:id="bookingContainer">
 
-                <!-- Booking Card 2 -->
-                <VBox styleClass="booking-card">
-                    <Label text="Ghandruk" styleClass="booking-title"/>
-                    <Label text="Submerged village in the 70s." styleClass="booking-description" wrapText="true"/>
-                    <Separator styleClass="card-separator"/>
-                    <Label text="Travel Date: 2025-10-12" styleClass="booking-detail"/>
-                    <Label text="Guide: Pema Sherpa" styleClass="booking-detail"/>
-                    <Label text="Weather: Clear and Sunny" styleClass="booking-detail"/>
-                    <Button text="Cancel Booking" styleClass="cancel-button"/>
-                </VBox>
-
-                <!-- Booking Card 3 -->
-                <VBox styleClass="booking-card">
-                    <Label text="Tlieho" styleClass="booking-title"/>
-                    <Label text="Stunning alpine beauty" styleClass="booking-description" wrapText="true"/>
-                    <Separator styleClass="card-separator"/>
-                    <Label text="Travel Date: 2025-10-12" styleClass="booking-detail"/>
-                    <Label text="Guide: Pema Sherpa" styleClass="booking-detail"/>
-                    <Label text="Weather: Clear and Sunny" styleClass="booking-detail"/>
-                    <Button text="Cancel Booking" styleClass="cancel-button"/>
-                </VBox>
             </HBox>
         </ScrollPane>
     </center>

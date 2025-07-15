@@ -211,7 +211,7 @@ public class FileHandling {
 
 
     public static int getSize(String filename){
-        int i=1;
+        int i=0;
         try(BufferedReader br=new BufferedReader(new FileReader(filename))) {
             while(br.readLine()!=null){
                 i++;

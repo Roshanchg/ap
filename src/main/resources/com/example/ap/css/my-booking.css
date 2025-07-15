@@ -2,7 +2,26 @@
     -fx-font-family: "Segoe UI", Arial, sans-serif;
     -fx-base: #f5f5f5;
 }
-
+Button{
+    -fx-cursor:hand;
+}
+.top_bar {
+    -fx-border-width: 2px;
+    -fx-padding: 0 40 0 80; /* top right bottom left */
+    -fx-background-color: rgba(0,0,0,0.1);
+}
+.top_bar>Label{
+    -fx-text-fill:white;
+    -fx-font-weight:bold;
+    -fx-font-size:16;
+    -fx-cursor:hand;
+}
+.top_bar>ImageView{
+    -fx-cursor:hand;
+}
+.top_bar>Label:hover{
+    -fx-font-size:18;
+}
 .header-box {
     -fx-padding: 20px;
     -fx-background-color: #2c3e50;
@@ -14,10 +33,11 @@
     -fx-font-weight: bold;
 }
 
-.section-title {
-    -fx-text-fill: #bdc3c7;
+.emergencyButton {
+    -fx-text-fill: white;
     -fx-font-size: 18px;
-    -fx-font-weight: bold;
+    -fx-background-color: #e74c3c;
+
 }
 
 .separator {

@@ -6,6 +6,7 @@ module com.example.ap {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires java.sql.rowset;
+    requires java.desktop;
 
     opens com.example.ap to javafx.fxml;
     exports com.example.ap;
