@@ -1,13 +1,19 @@
 package com.example.ap.handlers;
 
 import com.example.ap.classes.*;
+import com.example.ap.classes.enums.ATTRACTIONDIFFICULTY;
+import com.example.ap.classes.enums.ATTRACTIONTYPE;
+import com.example.ap.classes.enums.LANGUAGES;
 import com.example.ap.classes.enums.USERTYPE;
 
+import java.awt.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,6 +40,98 @@ public class FileHandling {
     public static String LogFile="Log.txt";
     public static String AlertsFile="Alerts.csv";
 
+
+
+
+    public static List<User> AllUsers(USERTYPE usertype) throws IOException{
+        List<User> users= new ArrayList<>();
+        assert usertype !=null;
+        String line;
+        String[] parts;
+        int id;
+        String name;
+        String email;
+        String phoneNumber;
+        String password;
+        switch(usertype){
+            case Admin -> {
+                Admin admin;
+                try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.AdminFile))) {
+                    while((line=br.readLine())!=null){
+                        if(line.trim().isEmpty()) continue;
+                        parts=line.split(",");
+                        id=Integer.parseInt(parts[0]);
+
+                            name=parts[1];
+                            email=parts[2];
+                            phoneNumber=parts[3];
+                            password=parts[4];
+                            users.add(new Admin(id,name,email,phoneNumber,password));
+                    }
+                }
+                return users;
+            }
+            case Guide -> {
+                Guide guide;
+                LANGUAGES language;
+                int YearsOfExperience;
+                boolean availability;
+                try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.GuideFile))){
+                    while((line=br.readLine())!=null){
+                        if(line.trim().isEmpty()) continue;
+                        parts=line.split(",");
+                        id=Integer.parseInt(parts[0]);
+                            name=parts[1];
+                            email=parts[2];
+                            phoneNumber=parts[3];
+                            password=parts[4];
+                            language=switch(parts[5]){
+                                case "Nepali"-> LANGUAGES.Nepali;
+                                case "English"-> LANGUAGES.English;
+                                default -> throw new IllegalStateException("Unexpected value: " + parts[5]);
+                            };
+                            YearsOfExperience=Integer.parseInt(parts[6]);
+                            availability=Boolean.parseBoolean(parts[7]);
+                            guide=new Guide(id,name,email,phoneNumber,password,language,YearsOfExperience);
+                            guide.updateAvailability(availability);
+                            users.add(guide);
+                    }
+
+                }
+                return users;
+
+            }
+            case Tourist -> {
+                Tourist tourist;
+                LANGUAGES language;
+                String nationality;
+                String emergencyNumber;
+                try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.TouristFile))){
+                    while((line=br.readLine())!=null){
+                        if(line.trim().isEmpty()) continue;
+                        parts=line.split(",");
+                        id=Integer.parseInt(parts[0]);
+                            name=parts[1];
+                            email=parts[2];
+                            phoneNumber=parts[3];
+                            password=parts[4];
+                            language=switch(parts[5]){
+                                case "Nepali"-> LANGUAGES.Nepali;
+                                case "English"-> LANGUAGES.English;
+                                default -> throw new IllegalStateException("Unexpected value: " + parts[5]);
+                            };
+                            nationality=parts[6];
+                            emergencyNumber=parts[7];
+                            tourist=new Tourist(id,name,email,phoneNumber,password,language,nationality,emergencyNumber);
+                            users.add(tourist);
+                    }
+                }
+                return users;
+            }
+
+        }
+        return null;
+    }
 
     public static void WriteUser(USERTYPE usertype,User user){
         switch(usertype){
@@ -336,6 +434,52 @@ public class FileHandling {
 
     }
 
+
+    public static List<Attraction> AllAttraction() throws IOException{
+        List<Attraction> attractions=new ArrayList<>();
+
+        try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.AttractionsFile))){
+            String line;
+            String[] parts;
+            int id;
+            String name;
+            String location;
+            ATTRACTIONTYPE type;
+            ATTRACTIONDIFFICULTY difficulty;
+            String altitude;
+            boolean restrictedMonsoon;
+            Attraction attraction;
+            while((line=br.readLine())!=null){
+                if (line.trim().isEmpty()) continue;
+                parts=line.split(",");
+                id=Integer.parseInt(parts[0]);
+                name=parts[1];
+                location=parts[2];
+                type=switch(parts[3]){
+                    case "Camping"-> ATTRACTIONTYPE.Camping;
+                    case "Trekking" ->  ATTRACTIONTYPE.Trekking;
+                    case "Rafting"-> ATTRACTIONTYPE.Rafting;
+                    default -> throw new IllegalStateException("Unexpected value: " + parts[3]);
+                };
+                difficulty=switch(parts[4]){
+                    case "HIGH" ->ATTRACTIONDIFFICULTY.HIGH;
+                    case "LOW" -> ATTRACTIONDIFFICULTY.LOW;
+                    default -> throw new IllegalStateException("Unexpected value: " + parts[4]);
+                };
+                altitude=parts[5];
+                restrictedMonsoon=Boolean.parseBoolean(parts[6]);
+                attraction=new Attraction(id,name,location,type,difficulty,altitude,restrictedMonsoon);
+                attractions.add(attraction);
+            }
+        }
+        catch (FileNotFoundException e){
+            File file=new File(AttractionsFile);
+            file.createNewFile();
+            return null;
+
+        }
+        return attractions;
+    }
 
 
     public static void AddAttraction(Attraction attraction) throws IOException{

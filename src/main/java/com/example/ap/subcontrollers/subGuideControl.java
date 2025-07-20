@@ -1,0 +1,104 @@
+package com.example.ap.subcontrollers;
+
+import com.example.ap.classes.Guide;
+import com.example.ap.classes.Tourist;
+import com.example.ap.classes.User;
+import com.example.ap.classes.enums.LANGUAGES;
+import com.example.ap.classes.enums.USERTYPE;
+import com.example.ap.handlers.FileHandling;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.util.Callback;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class subGuideControl implements  Initializable{
+
+        @FXML
+        private TableView<Guide> guideTable;
+
+        @FXML private TableColumn<Guide, Integer> idColumn;
+        @FXML private TableColumn<Guide, String> nameColumn;
+        @FXML private TableColumn<Guide, String> emailColumn;
+        @FXML private TableColumn<Guide, String> phoneNumberColumn;
+        @FXML private TableColumn<Guide,Integer> yearsOfExperience;
+        @FXML private TableColumn<Guide,Boolean> availability;
+        @FXML private TableColumn<Guide, LANGUAGES> languagePrefColumn;
+        @FXML private TableColumn<Guide, Void> actionsColumn;
+
+        @Override
+        public void initialize(URL location, ResourceBundle resources) {
+            idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+            nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            languagePrefColumn.setCellValueFactory(new PropertyValueFactory<>("languageSpoken"));
+            emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+            phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+            yearsOfExperience.setCellValueFactory(new PropertyValueFactory<>("yearsOfExperience"));
+            availability.setCellValueFactory(new PropertyValueFactory<>("availability"));
+
+            try {
+                List<User> users = FileHandling.AllUsers(USERTYPE.Guide);
+                ObservableList<Guide> guides = FXCollections.observableArrayList();
+
+                assert users != null;
+                for (User user : users) {
+                    if (user instanceof Guide) {
+                        guides.add((Guide) user);
+                    }
+                }
+                guideTable.setItems(guides);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            setupActionButtons();
+        }
+
+        private void setupActionButtons() {
+            actionsColumn.setCellFactory(new Callback<>() {
+                @Override
+                public TableCell<Guide, Void> call(final TableColumn<Guide, Void> param) {
+                    return new TableCell<>() {
+                        private final Button editButton = new Button("Edit");
+                        private final Button deleteButton = new Button("Delete");
+                        private final HBox pane = new HBox(10, editButton, deleteButton);
+
+                        {
+                            editButton.setOnAction(event -> {
+                                Guide guide = getTableView().getItems().get(getIndex());
+                                System.out.println("Edit clicked for: " + guide.getName());
+                            });
+
+                            deleteButton.setOnAction(event -> {
+                                Guide guide = getTableView().getItems().get(getIndex());
+                                System.out.println("Delete clicked for: " + guide.getName());
+                                getTableView().getItems().remove(guide);
+                            });
+                        }
+
+                        @Override
+                        protected void updateItem(Void item, boolean empty) {
+                            super.updateItem(item, empty);
+                            if (empty) {
+                                setGraphic(null);
+                            } else {
+                                setGraphic(pane);
+                            }
+                        }
+                    };
+                }
+            });
+        }
+
+}

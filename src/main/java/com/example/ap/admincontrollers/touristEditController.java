@@ -1,4 +1,4 @@
-package com.example.ap;
+package com.example.ap.admincontrollers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;

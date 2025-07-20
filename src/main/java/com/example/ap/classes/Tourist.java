@@ -28,16 +28,7 @@ public class Tourist extends User {
         return tourist;
     }
 
-    public void searchAttraction(){
 
-    }
-    public void makeBooking(){
 
-    }
-    public void cancelBooking(){
 
-    }
-    public void reportEmergency(){
-
-    }
 }

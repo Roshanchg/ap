@@ -1,0 +1,104 @@
+package com.example.ap.subcontrollers;
+
+import com.example.ap.classes.Attraction;
+import com.example.ap.classes.Guide;
+import com.example.ap.classes.Tourist;
+import com.example.ap.classes.User;
+import com.example.ap.classes.enums.LANGUAGES;
+import com.example.ap.classes.enums.USERTYPE;
+import com.example.ap.handlers.FileHandling;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.util.Callback;
+import org.w3c.dom.Attr;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class subAttractionsControl implements Initializable {
+    @FXML
+    private TableView<Attraction> attractionsTable;
+
+    @FXML private TableColumn<Attraction, Integer> idColumn;
+    @FXML private TableColumn<Attraction, String> nameColumn;
+    @FXML private TableColumn<Attraction, String> locationColumn;
+    @FXML private TableColumn<Attraction, String> typeColumn;
+    @FXML private TableColumn<Attraction,Integer> difficultyColumn;
+    @FXML private TableColumn<Attraction,Boolean> altitudeColumn;
+    @FXML private TableColumn<Attraction, LANGUAGES> restrictedMonsoonColumn;
+    @FXML private TableColumn<Attraction, Void> actionsColumn;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        difficultyColumn.setCellValueFactory(new PropertyValueFactory<>("difficulty"));
+        altitudeColumn.setCellValueFactory(new PropertyValueFactory<>("altitude"));
+        restrictedMonsoonColumn.setCellValueFactory(new PropertyValueFactory<>("restrictedMonsoon"));
+
+        try {
+            List<Attraction> attractions = FileHandling.AllAttraction();
+            ObservableList<Attraction> attractionsList = FXCollections.observableArrayList();
+
+            for (Attraction attraction : attractions) {
+                if (attraction != null) {
+                    attractionsList.add((Attraction) attraction);
+                }
+            }
+            attractionsTable.setItems(attractionsList);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        setupActionButtons();
+    }
+
+    private void setupActionButtons() {
+        actionsColumn.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<Attraction, Void> call(final TableColumn<Attraction, Void> param) {
+                return new TableCell<>() {
+                    private final Button editButton = new Button("Edit");
+                    private final Button deleteButton = new Button("Delete");
+                    private final HBox pane = new HBox(10, editButton, deleteButton);
+
+                    {
+                        editButton.setOnAction(event -> {
+                            Attraction attraction = getTableView().getItems().get(getIndex());
+                            System.out.println("Edit clicked for: " + attraction.getName());
+                        });
+
+                        deleteButton.setOnAction(event -> {
+                            Attraction attraction = getTableView().getItems().get(getIndex());
+                            System.out.println("Delete clicked for: " + attraction.getName());
+                            // Example: remove from table
+                            getTableView().getItems().remove(attraction);
+                        });
+                    }
+
+                    @Override
+                    protected void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(pane);
+                        }
+                    }
+                };
+            }
+        });
+    }
+}

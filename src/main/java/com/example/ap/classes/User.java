@@ -31,17 +31,11 @@ public class User {
         return user;
     }
 
-    public void login(){
-
-    }
-    public void logOut(){
-
-    }
-
     public void updateProfile(String name,String email,String phoneNumber){
         this.name=name;
         this.email=email;
         this.phoneNumber=phoneNumber;
     }
+
 
 }

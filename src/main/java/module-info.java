@@ -10,4 +10,9 @@ module com.example.ap {
 
     opens com.example.ap to javafx.fxml;
     exports com.example.ap;
+    opens com.example.ap.subcontrollers to javafx.fxml;
+    opens com.example.ap.classes to javafx.base;
+    exports com.example.ap.admincontrollers;
+    opens com.example.ap.admincontrollers to javafx.fxml;
+
 }

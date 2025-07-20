@@ -59,43 +59,43 @@ public class AdminController {
 //    Tools Views
     @FXML
     public void onTouristControl() throws IOException {
-        Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminParts/touristControl.fxml")));
+        Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminParts/AllTourists.fxml")));
         mainBorderPane.setCenter(touristControl);
     }
 
     @FXML
     public void onGuideControl() throws IOException {
-        Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminParts/GuideControl.fxml")));
+        Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminParts/AllGuides.fxml")));
         mainBorderPane.setCenter(touristControl);
     }
 
     @FXML
     public void onAttractionControl() throws IOException {
-        Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminParts/touristControl.fxml")));
+        Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminParts/AllAttractions.fxml")));
         mainBorderPane.setCenter(touristControl);
     }
 
     @FXML
     public void onFestivalsControl() throws IOException {
-        Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminParts/touristControl.fxml")));
+        Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminParts/AllFestivals.fxml")));
         mainBorderPane.setCenter(touristControl);
     }
 
     @FXML
     public void onBookingsControl() throws IOException {
-        Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminParts/touristControl.fxml")));
+        Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminParts/AllBookings.fxml")));
         mainBorderPane.setCenter(touristControl);
     }
 
     @FXML
     public void onLogsControl() throws IOException {
-        Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminParts/touristControl.fxml")));
+        Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminParts/AllLogs.fxml")));
         mainBorderPane.setCenter(touristControl);
     }
 
     @FXML
     public void onReportControl() throws IOException {
-        Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminParts/touristControl.fxml")));
+        Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminParts/AllReports.fxml")));
         mainBorderPane.setCenter(touristControl);
     }
 

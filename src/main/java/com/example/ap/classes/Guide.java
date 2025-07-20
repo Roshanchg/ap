@@ -12,8 +12,8 @@ public class Guide extends User{
         this.yearsExperience=yearsExperience;
         this.availability=false;
     }
-    public int getYearsExperience(){return this.yearsExperience;}
-    public boolean isAvailability(){return this.availability;}
+    public int getYearsOfExperience(){return this.yearsExperience;}
+    public boolean getAvailability(){return this.availability;}
     public LANGUAGES getLanguageSpoken(){return this.languageSpoken;}
 
 
@@ -26,7 +26,7 @@ public class Guide extends User{
     @Override
     public String getDetails(){
         String guide=this.getId()+","+this.getName()+","+this.getEmail()+","+this.getPhoneNumber()+","+this.getPassword()+","+this.getLanguageSpoken()
-                +","+this.getYearsExperience()+","+this.isAvailability();
+                +","+this.getYearsOfExperience()+","+this.getAvailability();
         System.out.println("Guide: "+guide);
         return guide;
 
