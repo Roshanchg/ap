@@ -1,14 +1,16 @@
 package com.example.ap.subcontrollers;
 
+import com.example.ap.AdminControllerBorderPaneSingleton;
 import com.example.ap.classes.*;
 import com.example.ap.classes.enums.LANGUAGES;
-import com.example.ap.classes.enums.USERTYPE;
 import com.example.ap.handlers.FileHandling;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -16,11 +18,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
-import org.w3c.dom.Attr;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class subAttractionsControl implements Initializable {
@@ -36,6 +38,8 @@ public class subAttractionsControl implements Initializable {
     @FXML private TableColumn<Attraction, LANGUAGES> restrictedMonsoonColumn;
     @FXML private TableColumn<Attraction, Void> actionsColumn;
 
+    @FXML private Button addButton;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -50,6 +54,7 @@ public class subAttractionsControl implements Initializable {
             List<Attraction> attractions = FileHandling.AllAttraction();
             ObservableList<Attraction> attractionsList = FXCollections.observableArrayList();
 
+            assert attractions != null;
             for (Attraction attraction : attractions) {
                 if (attraction != null) {
                     attractionsList.add((Attraction) attraction);
@@ -119,5 +124,11 @@ public class subAttractionsControl implements Initializable {
             };
             return cell;
         });
+    }
+
+    @FXML
+    public void addAttraction() throws IOException {
+        Node attractionAdd = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/ap/AdminParts/AttractionControl.fxml")));
+        AdminControllerBorderPaneSingleton.getMainPane().setCenter(attractionAdd);
     }
 }

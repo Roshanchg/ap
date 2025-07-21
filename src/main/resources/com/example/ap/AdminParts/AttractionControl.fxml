@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       stylesheets="@../css/touristControl.css"
-      fx:controller="com.example.ap.AttrationControl"
+      fx:controller="com.example.ap.admincontrollers.attractionEditController"
       styleClass="content-pane" spacing="20">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
