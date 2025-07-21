@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.ap.subcontrollers.subFestivalControl"
+      fx:controller="com.example.ap.subcontrollers.subAlertControl"
       styleClass="content-pane" spacing="10"
       stylesheets="@../css/AllTourists.css">
 
@@ -15,11 +15,11 @@
     </padding>
 
     <HBox spacing="20" alignment="CENTER_LEFT">
-        <Label text="Festival Management" styleClass="section-title"/>
+        <Label text="Alert Management" styleClass="section-title"/>
     </HBox>
 
     <HBox spacing="20" alignment="CENTER_LEFT" styleClass="toolbar">
-        <Button text="Add Festival" styleClass="primary-button" />
+        <Button text="Add Alert" styleClass="primary-button" />
         <TextField promptText="Search..." styleClass="search-field"/>
         <Button text="Filter" styleClass="action-button" />
         <Button text="Clear" styleClass="secondary-button" />
@@ -27,14 +27,13 @@
 
     <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED" prefWidth="800" prefHeight="400">
         <content>
-            <TableView fx:id="festivalTable" styleClass="data-table" prefWidth="800">
+            <TableView fx:id="alertTable" styleClass="data-table" prefWidth="800">
                 <columns>
                     <TableColumn text="ID" fx:id="idColumn" styleClass="column-header" prefWidth="100"/>
-                    <TableColumn text="Name" fx:id="nameColumn" styleClass="column-header" prefWidth="250"/>
-                    <TableColumn text="Start Date" fx:id="startDateColumn" styleClass="column-header" prefWidth="250"/>
-                    <TableColumn text="End Date" fx:id="endDateColumn" styleClass="column-header" prefWidth="250"/>
-                    <TableColumn text="Discount Rate" fx:id="discountRateColumn" styleClass="column-header" prefWidth="100"/>
-                    <TableColumn text="Actions" fx:id="actionsColumn" styleClass="column-header" prefWidth="120"/>
+                    <TableColumn text="Risk Type" fx:id="riskTypeColumn" styleClass="column-header" prefWidth="200"/>
+                    <TableColumn text="Message" fx:id="messageColumn" styleClass="column-header" prefWidth="300"/>
+                    <TableColumn text="Months Active" fx:id="monthsActiveColumn" styleClass="column-header" prefWidth="120"/>
+                    <TableColumn text="Actions" fx:id="actionsColumn" styleClass="column-header" prefWidth="100"/>
                 </columns>
             </TableView>
         </content>

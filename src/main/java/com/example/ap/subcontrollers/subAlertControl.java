@@ -1,8 +1,7 @@
 package com.example.ap.subcontrollers;
 
 import com.example.ap.classes.*;
-import com.example.ap.classes.enums.LANGUAGES;
-import com.example.ap.classes.enums.USERTYPE;
+import com.example.ap.classes.enums.ALERTRISK;
 import com.example.ap.handlers.FileHandling;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,51 +18,49 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class subReportControl implements Initializable {
+public class subAlertControl implements Initializable {
     @FXML
-    private TableView<Guide> guideTable;
+    private TableView<Alerts> alertTable;
 
-    @FXML private TableColumn<Guide, Integer> idColumn;
-    @FXML private TableColumn<Guide, String> nameColumn;
-    @FXML private TableColumn<Tourist, String> emailColumn;
-    @FXML private TableColumn<Tourist, String> phoneNumberColumn;
-    @FXML private TableColumn<Guide,Integer> yearsOfExperience;
-    @FXML private TableColumn<Guide,Boolean> availability;
-    @FXML private TableColumn<Tourist, LANGUAGES> languagePrefColumn;
-    @FXML private TableColumn<Tourist, Void> actionsColumn;
+    @FXML private TableColumn<Alerts, Integer> idColumn;
+    @FXML private TableColumn<Alerts, String> messageColumn;
+    @FXML private TableColumn<Alerts, Integer> monthsActiveColumn;
+    @FXML private TableColumn<Alerts, ALERTRISK> riskTypeColumn;
+    @FXML private TableColumn<Alerts, Void> actionsColumn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        languagePrefColumn.setCellValueFactory(new PropertyValueFactory<>("languageSpoken"));
-        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-        yearsOfExperience.setCellValueFactory(new PropertyValueFactory<>("yearsOfExperience"));
-        availability.setCellValueFactory(new PropertyValueFactory<>("availability"));
+        messageColumn.setCellValueFactory(new PropertyValueFactory<>("message"));
+        riskTypeColumn.setCellValueFactory(new PropertyValueFactory<>("riskType"));
+        monthsActiveColumn.setCellValueFactory(new PropertyValueFactory<>("monthsActive"));
 
         try {
-            List<User> users = FileHandling.AllUsers(USERTYPE.Guide);
-            ObservableList<Guide> guides = FXCollections.observableArrayList();
+            List<Alerts> alerts = FileHandling.AllAlerts();
+            ObservableList<Alerts> alertsList = FXCollections.observableArrayList();
 
-            assert users != null;
-            for (User user : users) {
-                if (user instanceof Guide) {
-                    guides.add((Guide) user);
+            for (Alerts alert : alerts) {
+                if (alert!=null) {
+                    alertsList.add((Alerts) alert);
                 }
             }
-            guideTable.setItems(guides);
+            alertTable.setItems(alertsList);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         setupActionButtons();
+
+        centerColumn(idColumn);
+        centerColumn(messageColumn);
+        centerColumn(riskTypeColumn);
+        centerColumn(monthsActiveColumn);
     }
 
     private void setupActionButtons() {
         actionsColumn.setCellFactory(new Callback<>() {
             @Override
-            public TableCell<Tourist, Void> call(final TableColumn<Tourist, Void> param) {
+            public TableCell<Alerts, Void> call(final TableColumn<Alerts, Void> param) {
                 return new TableCell<>() {
                     private final Button editButton = new Button("Edit");
                     private final Button deleteButton = new Button("Delete");
@@ -71,15 +68,15 @@ public class subReportControl implements Initializable {
 
                     {
                         editButton.setOnAction(event -> {
-                            Tourist tourist = getTableView().getItems().get(getIndex());
-                            System.out.println("Edit clicked for: " + tourist.getName());
+                            Alerts alert = getTableView().getItems().get(getIndex());
+                            System.out.println("Edit clicked for: " + alert.getMessage());
                         });
 
                         deleteButton.setOnAction(event -> {
-                            Tourist tourist = getTableView().getItems().get(getIndex());
-                            System.out.println("Delete clicked for: " + tourist.getName());
+                            Alerts alert = getTableView().getItems().get(getIndex());
+                            System.out.println("Delete clicked for: " + alert.getMessage());
                             // Example: remove from table
-                            getTableView().getItems().remove(tourist);
+                            getTableView().getItems().remove(alert);
                         });
                     }
 

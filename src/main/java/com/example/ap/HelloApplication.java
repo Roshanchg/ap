@@ -1,6 +1,7 @@
 package com.example.ap;
 
 import com.example.ap.handlers.CacheHandler;
+import com.example.ap.handlers.FileHandling;
 import com.example.ap.handlers.ImportantVariables;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -33,7 +35,8 @@ public class HelloApplication extends Application {
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        FileHandling.init();
         launch();
     }
 }

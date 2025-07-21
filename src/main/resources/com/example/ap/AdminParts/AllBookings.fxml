@@ -15,11 +15,10 @@
     </padding>
 
     <HBox spacing="20" alignment="CENTER_LEFT">
-        <Label text="Tourist Management" styleClass="section-title"/>
+        <Label text="Booking Management" styleClass="section-title"/>
     </HBox>
 
     <HBox spacing="20" alignment="CENTER_LEFT" styleClass="toolbar">
-        <Button text="Add Tourist" styleClass="primary-button" />
         <TextField promptText="Search..." styleClass="search-field"/>
         <Button text="Filter" styleClass="action-button" />
         <Button text="Clear" styleClass="secondary-button" />
@@ -29,7 +28,7 @@
         <content>
             <TableView fx:id="bookingsTable" styleClass="data-table" prefWidth="800">
                 <columns>
-                    <TableColumn text="ID" fx:id="idColumn" styleClass="column-header" prefWidth="100"/>
+                    <TableColumn text="ID" fx:id="idColumn" styleClass="column-header" prefWidth="82"/>
                     <TableColumn text="Uid" fx:id="uidColumn" styleClass="column-header" prefWidth="100"/>
                     <TableColumn text="Gid" fx:id="gidColumn" styleClass="column-header" prefWidth="100"/>
                     <TableColumn text="Aid" fx:id="aidColumn" styleClass="column-header" prefWidth="100"/>

@@ -11,11 +11,11 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Button;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
 
 public class AdminController {
+    @FXML public Button BookingsBt;
     @FXML private PieChart travelPieChart;
     @FXML private LineChart<String, Number> weatherLineChart;
     @FXML private BorderPane mainBorderPane;
@@ -25,7 +25,7 @@ public class AdminController {
     @FXML private Button FestivalsBt;
     @FXML private Button GuidesBt;
     @FXML private Button LogsBt;
-    @FXML private Button ReportBt;
+    @FXML private Button AlertBt;
 
 
     public void initialize() {
@@ -95,7 +95,7 @@ public class AdminController {
 
     @FXML
     public void onReportControl() throws IOException {
-        Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminParts/AllReports.fxml")));
+        Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminParts/AllAlerts.fxml")));
         mainBorderPane.setCenter(touristControl);
     }
 

@@ -19,55 +19,57 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class subFestivalControl implements Initializable {
     @FXML
-    private TableView<Guide> guideTable;
+    private TableView<Festival> festivalTable;
 
-    @FXML private TableColumn<Guide, Integer> idColumn;
-    @FXML private TableColumn<Guide, String> nameColumn;
-    @FXML private TableColumn<Tourist, String> emailColumn;
-    @FXML private TableColumn<Tourist, String> phoneNumberColumn;
-    @FXML private TableColumn<Guide,Integer> yearsOfExperience;
-    @FXML private TableColumn<Guide,Boolean> availability;
-    @FXML private TableColumn<Tourist, LANGUAGES> languagePrefColumn;
-    @FXML private TableColumn<Tourist, Void> actionsColumn;
+    @FXML private TableColumn<Festival, Integer> idColumn;
+    @FXML private TableColumn<Festival, String> nameColumn;
+    @FXML private TableColumn<Festival, Date> startDateColumn;
+    @FXML private TableColumn<Festival, Date> endDateColumn;
+    @FXML private TableColumn<Festival,Double> discountRateColumn;
+    @FXML private TableColumn<Festival, Void> actionsColumn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        languagePrefColumn.setCellValueFactory(new PropertyValueFactory<>("languageSpoken"));
-        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-        yearsOfExperience.setCellValueFactory(new PropertyValueFactory<>("yearsOfExperience"));
-        availability.setCellValueFactory(new PropertyValueFactory<>("availability"));
+        startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        discountRateColumn.setCellValueFactory(new PropertyValueFactory<>("discountRate"));
 
         try {
-            List<User> users = FileHandling.AllUsers(USERTYPE.Guide);
-            ObservableList<Guide> guides = FXCollections.observableArrayList();
+            List<Festival> festivals = FileHandling.AllFestival();
+            ObservableList<Festival> festivalList = FXCollections.observableArrayList();
 
-            assert users != null;
-            for (User user : users) {
-                if (user instanceof Guide) {
-                    guides.add((Guide) user);
+            for (Festival festival : festivals) {
+                if (festival != null) {
+                    festivalList.add((Festival) festival);
                 }
             }
-            guideTable.setItems(guides);
+            festivalTable.setItems(festivalList);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         setupActionButtons();
 
+        centerColumn(idColumn);
+        centerColumn(nameColumn);
+        centerColumn(startDateColumn);
+        centerColumn(endDateColumn);
+        centerColumn(discountRateColumn);
+
     }
 
     private void setupActionButtons() {
         actionsColumn.setCellFactory(new Callback<>() {
             @Override
-            public TableCell<Tourist, Void> call(final TableColumn<Tourist, Void> param) {
+            public TableCell<Festival, Void> call(final TableColumn<Festival, Void> param) {
                 return new TableCell<>() {
                     private final Button editButton = new Button("Edit");
                     private final Button deleteButton = new Button("Delete");
@@ -75,15 +77,15 @@ public class subFestivalControl implements Initializable {
 
                     {
                         editButton.setOnAction(event -> {
-                            Tourist tourist = getTableView().getItems().get(getIndex());
-                            System.out.println("Edit clicked for: " + tourist.getName());
+                            Festival festival = getTableView().getItems().get(getIndex());
+                            System.out.println("Edit clicked for: " + festival.getName());
                         });
 
                         deleteButton.setOnAction(event -> {
-                            Tourist tourist = getTableView().getItems().get(getIndex());
-                            System.out.println("Delete clicked for: " + tourist.getName());
+                            Festival festival = getTableView().getItems().get(getIndex());
+                            System.out.println("Delete clicked for: " + festival.getName());
                             // Example: remove from table
-                            getTableView().getItems().remove(tourist);
+                            getTableView().getItems().remove(festival);
                         });
                     }
 

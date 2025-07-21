@@ -25,7 +25,7 @@ fx:id="mainBorderPane">
                 <Button text="Guides" styleClass="sidebar-button" fx:id="GuidesBt" onAction="#onGuideControl"/>
                 <Button text="Bookings" styleClass="sidebar-button" fx:id="BookingsBt" onAction="#onBookingsControl"/>
                 <Button text="Emergency Log" styleClass="sidebar-button" fx:id="LogsBt" onAction="#onLogsControl"/>
-                <Button text="Report" styleClass="sidebar-button" fx:id="ReportBt" onAction="#onReportControl"/>
+                <Button text="Alerts" styleClass="sidebar-button" fx:id="AlertBt" onAction="#onReportControl"/>
             </VBox>
         </VBox>
     </left>

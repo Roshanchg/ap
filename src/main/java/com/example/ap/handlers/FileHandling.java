@@ -1,10 +1,8 @@
 package com.example.ap.handlers;
 
 import com.example.ap.classes.*;
-import com.example.ap.classes.enums.ATTRACTIONDIFFICULTY;
-import com.example.ap.classes.enums.ATTRACTIONTYPE;
-import com.example.ap.classes.enums.LANGUAGES;
-import com.example.ap.classes.enums.USERTYPE;
+import com.example.ap.classes.enums.*;
+import javafx.scene.control.Alert;
 
 import java.awt.*;
 import java.io.*;
@@ -12,7 +10,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,6 +21,9 @@ import java.util.regex.Pattern;
 public class FileHandling {
     public static String email_regex="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
     public static Pattern email_pattern=Pattern.compile(email_regex);
+
+
+
 
     public static boolean isEmail(String string){
         if(string.isEmpty()){
@@ -42,6 +46,26 @@ public class FileHandling {
 
 
 
+
+    public static void init() throws IOException{
+        List<File> files = Arrays.asList(
+                new File(TouristFile),
+                new File(GuideFile),
+                new File(AdminFile),
+                new File(ReportFile),
+                new File(AttractionsFile),
+                new File(FestivalsFile),
+                new File(BookingsFile),
+                new File(LogFile),
+                new File(AlertsFile)
+        );
+
+        for(File file:files){
+            if(!file.exists()){
+                file.createNewFile();
+            }
+        }
+    }
 
     public static List<User> AllUsers(USERTYPE usertype) throws IOException{
         List<User> users= new ArrayList<>();
@@ -642,6 +666,38 @@ public class FileHandling {
         }
     }
 
+    public static List<Alerts> AllAlerts()throws IOException{
+        List<Alerts> alerts=new ArrayList<>();
+        File file=new File(AlertsFile);
+        if(!file.exists()){file.createNewFile();}
+
+        try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.AlertsFile))){
+            int id;
+            ALERTRISK risk;
+            String message;
+            int monthsActive;
+            Alerts alert;
+            String line;
+            String[] parts;
+            while((line=br.readLine())!=null){
+                if (line.trim().isEmpty()) continue;
+                parts=line.split(",");
+                id=Integer.parseInt(parts[0]);
+                risk=switch(parts[1]){
+                    case "HEAVY_RAINFALL" -> ALERTRISK.HEAVY_RAINFALL;
+                    default->
+                            throw new IllegalStateException("Unexpected value: " + parts[1]);
+                    };
+                    message=parts[2];
+                    monthsActive=Integer.parseInt(parts[3]);
+                    alert=new Alerts(id,risk,message,monthsActive);
+                    alerts.add(alert);
+                }
+        }
+        return alerts;
+    }
+
+
     public static void ExportAlert() throws IOException {
         Files.copy(
                 Paths.get(AlertsFile),
@@ -694,10 +750,35 @@ public class FileHandling {
         );
     }
 
+
+    public static List<EmergencyLog> AllLogs() throws IOException{
+        List<EmergencyLog> logs=new ArrayList<>();
+        File logsFile=new File(LogFile);
+        if(!logsFile.exists()){
+            makeLogs("Created Log File");
+        }
+        try(BufferedReader br=new BufferedReader(new FileReader(logsFile))) {
+            String line;
+            String[] parts;
+            String dateTime;
+            String message;
+            EmergencyLog log;
+            while((line=br.readLine())!=null){
+                if(line.trim().isEmpty()) continue;
+                parts=line.split(" ",2);
+                dateTime=parts[0];
+                message=parts[1];
+                log=new EmergencyLog(dateTime,message);
+                logs.add(log);
+            }
+        }
+        return logs;
+    }
+
     public static void makeLogs(String message)throws IOException{
-        LocalDate currentDate=LocalDate.now();
+        LocalDateTime currentDateTime=LocalDateTime.now();
         try(BufferedWriter bw=new BufferedWriter(new FileWriter(LogFile))){
-            bw.write(currentDate+" "+message);
+            bw.write(currentDateTime+" "+message);
             bw.newLine();
         }
     }

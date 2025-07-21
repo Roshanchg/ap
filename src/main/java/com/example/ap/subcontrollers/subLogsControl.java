@@ -1,8 +1,6 @@
 package com.example.ap.subcontrollers;
 
 import com.example.ap.classes.*;
-import com.example.ap.classes.enums.LANGUAGES;
-import com.example.ap.classes.enums.USERTYPE;
 import com.example.ap.handlers.FileHandling;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,81 +22,32 @@ import java.util.ResourceBundle;
 
 public class subLogsControl implements Initializable {
     @FXML
-    private TableView<Guide> guideTable;
+    private TableView<EmergencyLog> logsTable;
 
-    @FXML private TableColumn<Guide, Integer> idColumn;
-    @FXML private TableColumn<Guide, String> nameColumn;
-    @FXML private TableColumn<Tourist, String> emailColumn;
-    @FXML private TableColumn<Tourist, String> phoneNumberColumn;
-    @FXML private TableColumn<Guide,Integer> yearsOfExperience;
-    @FXML private TableColumn<Guide,Boolean> availability;
-    @FXML private TableColumn<Tourist, LANGUAGES> languagePrefColumn;
-    @FXML private TableColumn<Tourist, Void> actionsColumn;
+    @FXML private TableColumn<EmergencyLog, String> timeColumn;
+    @FXML private TableColumn<EmergencyLog, String> messageColumn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        languagePrefColumn.setCellValueFactory(new PropertyValueFactory<>("languageSpoken"));
-        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-        yearsOfExperience.setCellValueFactory(new PropertyValueFactory<>("yearsOfExperience"));
-        availability.setCellValueFactory(new PropertyValueFactory<>("availability"));
-
+        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
+        messageColumn.setCellValueFactory(new PropertyValueFactory<>("message"));
         try {
-            List<User> users = FileHandling.AllUsers(USERTYPE.Guide);
-            ObservableList<Guide> guides = FXCollections.observableArrayList();
+            List<EmergencyLog> logs = FileHandling.AllLogs();
+            ObservableList<EmergencyLog> logsList = FXCollections.observableArrayList();
 
-            assert users != null;
-            for (User user : users) {
-                if (user instanceof Guide) {
-                    guides.add((Guide) user);
+            for (EmergencyLog log : logs) {
+                if (log!=null) {
+                    logsList.add((EmergencyLog) log);
                 }
             }
-            guideTable.setItems(guides);
+            logsTable.setItems(logsList);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        setupActionButtons();
 
-    }
-
-    private void setupActionButtons() {
-        actionsColumn.setCellFactory(new Callback<>() {
-            @Override
-            public TableCell<Tourist, Void> call(final TableColumn<Tourist, Void> param) {
-                return new TableCell<>() {
-                    private final Button editButton = new Button("Edit");
-                    private final Button deleteButton = new Button("Delete");
-                    private final HBox pane = new HBox(10, editButton, deleteButton);
-
-                    {
-                        editButton.setOnAction(event -> {
-                            Tourist tourist = getTableView().getItems().get(getIndex());
-                            System.out.println("Edit clicked for: " + tourist.getName());
-                        });
-
-                        deleteButton.setOnAction(event -> {
-                            Tourist tourist = getTableView().getItems().get(getIndex());
-                            System.out.println("Delete clicked for: " + tourist.getName());
-                            // Example: remove from table
-                            getTableView().getItems().remove(tourist);
-                        });
-                    }
-
-                    @Override
-                    protected void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(pane);
-                        }
-                    }
-                };
-            }
-        });
+        centerColumn(timeColumn);
+        centerColumn(messageColumn);
     }
 
     private <T> void centerColumn(TableColumn<EmergencyLog, T> column) {
