@@ -373,6 +373,43 @@ public class FileHandling {
         return false;
     }
 
+    public static List<Booking> AllBookings() throws IOException{
+        List<Booking> bookings=new ArrayList<>();
+        File file=new File(BookingsFile);
+        if(!file.exists()){
+            file.createNewFile();
+        }
+        try(BufferedReader br=new BufferedReader(new FileReader(BookingsFile))){
+            String line;
+            String[] parts;
+            int id;
+            int uid;
+            int gid;
+            int aid;
+            LocalDate date;
+            double discount;
+            boolean isCancelled;
+            int fid;
+            Booking booking;
+            while((line=br.readLine())!=null){
+                if (line.trim().isEmpty()) continue;
+                parts=line.split(",");
+                id=Integer.parseInt(parts[0]);
+                uid=Integer.parseInt(parts[1]);
+                gid=Integer.parseInt(parts[2]);
+                aid=Integer.parseInt(parts[3]);
+                date=LocalDate.parse(parts[4]);
+                discount=Double.parseDouble(parts[5]);
+                isCancelled=Boolean.parseBoolean(parts[6]);
+                fid=Integer.parseInt(parts[7]);
+                booking=new Booking(id,uid,gid,aid,date,discount,isCancelled,fid);
+                bookings.add(booking);
+                }
+        }
+        return bookings;
+    }
+
+
     public static void MakeBooking(Booking booking)throws IOException{
         try(BufferedWriter bw=new BufferedWriter(new FileWriter(FileHandling.BookingsFile,true))){
             bw.write(booking.getDetails());
@@ -541,6 +578,36 @@ public class FileHandling {
         }
 
     }
+
+    public static List<Festival> AllFestival() throws IOException{
+        List<Festival> festivals=new ArrayList<>();
+        File file=new File(FestivalsFile);
+        if(!file.exists()){file.createNewFile();}
+
+        try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.FestivalsFile))){
+            String line;
+            String[] parts;
+            int fid;
+            String name;
+            LocalDate start;
+            LocalDate end;
+            double discount;
+            Festival festival;
+            while((line=br.readLine())!=null){
+                if (line.trim().isEmpty()) continue;
+                parts=line.split(",");
+                fid=Integer.parseInt(parts[0]);
+                name=parts[1];
+                start= LocalDate.parse(parts[2]);
+                end=LocalDate.parse(parts[3]);
+                discount=Double.parseDouble(parts[4]);
+                festival=new Festival(fid,name,start,end,discount);
+                festivals.add(festival);
+            }
+        }
+        return festivals;
+    }
+
 
     public static void addFestival(Festival festival) throws IOException{
         try(BufferedWriter bw=new BufferedWriter(new FileWriter(FileHandling.FestivalsFile,true))){

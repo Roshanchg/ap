@@ -1,5 +1,6 @@
 package com.example.ap.subcontrollers;
 
+import com.example.ap.classes.Booking;
 import com.example.ap.classes.Tourist;
 import com.example.ap.classes.User;
 import com.example.ap.classes.enums.LANGUAGES;
@@ -9,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -60,6 +62,14 @@ public class subTouristControl implements Initializable {
         }
 
         setupActionButtons();
+
+        centerColumn(idColumn);
+        centerColumn(nameColumn);
+        centerColumn(languagePrefColumn);
+        centerColumn(emailColumn);
+        centerColumn(phoneNumberColumn);
+        centerColumn(nationalityColumn);
+        centerColumn(emergencyNumberColumn);
     }
 
     private void setupActionButtons() {
@@ -98,6 +108,20 @@ public class subTouristControl implements Initializable {
                     }
                 };
             }
+        });
+    }
+
+    private <T> void centerColumn(TableColumn<Tourist, T> column) {
+        column.setCellFactory(col -> {
+            TableCell<Tourist, T> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(T item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setText(empty || item == null ? null : item.toString());
+                    setAlignment(Pos.CENTER);
+                }
+            };
+            return cell;
         });
     }
 }

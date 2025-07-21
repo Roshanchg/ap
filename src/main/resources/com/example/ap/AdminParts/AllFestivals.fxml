@@ -15,7 +15,7 @@
     </padding>
 
     <HBox spacing="20" alignment="CENTER_LEFT">
-        <Label text="Tourist Management" styleClass="section-title"/>
+        <Label text="Festival Management" styleClass="section-title"/>
     </HBox>
 
     <HBox spacing="20" alignment="CENTER_LEFT" styleClass="toolbar">
@@ -27,7 +27,7 @@
 
     <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED" prefWidth="800" prefHeight="400">
         <content>
-            <TableView fx:id="guideTable" styleClass="data-table" prefWidth="800">
+            <TableView fx:id="festivalTable" styleClass="data-table" prefWidth="800">
                 <columns>
                     <TableColumn text="ID" fx:id="idColumn" styleClass="column-header" prefWidth="80"/>
                     <TableColumn text="Name" fx:id="nameColumn" styleClass="column-header" prefWidth="200"/>

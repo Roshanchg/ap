@@ -16,4 +16,8 @@ public class Alerts {
     public String getDetails(){
         return this.id+","+this.riskType+","+this.message+","+this.monthsActive;
     }
+    public int getId(){return this.id;}
+    public ALERTRISK getRiskType(){return this.riskType;}
+    public String getMessage(){return this.message;}
+    public int getMonthsActive(){return this.monthsActive;}
 }

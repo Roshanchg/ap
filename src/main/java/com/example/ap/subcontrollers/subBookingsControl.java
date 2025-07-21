@@ -1,5 +1,6 @@
 package com.example.ap.subcontrollers;
 
+import com.example.ap.classes.Booking;
 import com.example.ap.classes.Guide;
 import com.example.ap.classes.Tourist;
 import com.example.ap.classes.User;
@@ -10,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -20,70 +22,81 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class subBookingsControl implements Initializable {
     @FXML
-    private TableView<Guide> guideTable;
+    private TableView<Booking> bookingsTable;
 
-    @FXML private TableColumn<Guide, Integer> idColumn;
-    @FXML private TableColumn<Guide, String> nameColumn;
-    @FXML private TableColumn<Tourist, String> emailColumn;
-    @FXML private TableColumn<Tourist, String> phoneNumberColumn;
-    @FXML private TableColumn<Guide,Integer> yearsOfExperience;
-    @FXML private TableColumn<Guide,Boolean> availability;
-    @FXML private TableColumn<Tourist, LANGUAGES> languagePrefColumn;
-    @FXML private TableColumn<Tourist, Void> actionsColumn;
+    @FXML private TableColumn<Booking, Integer> idColumn;
+    @FXML private TableColumn<Booking, Integer> uidColumn;
+    @FXML private TableColumn<Booking, Integer> gidColumn;
+    @FXML private TableColumn<Booking, Integer> aidColumn;
+    @FXML private TableColumn<Booking,Integer> fidColumn;
+    @FXML private TableColumn<Booking, Date> dateColumn;
+    @FXML private TableColumn<Booking, Boolean> cancelledColumn;
+    @FXML private TableColumn<Booking, Double> discountColumn;
+    @FXML private TableColumn<Booking, Void> actionsColumn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        languagePrefColumn.setCellValueFactory(new PropertyValueFactory<>("languageSpoken"));
-        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-        yearsOfExperience.setCellValueFactory(new PropertyValueFactory<>("yearsOfExperience"));
-        availability.setCellValueFactory(new PropertyValueFactory<>("availability"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("bookingId"));
+        fidColumn.setCellValueFactory(new PropertyValueFactory<>("fid"));
+        gidColumn.setCellValueFactory(new PropertyValueFactory<>("guideId"));
+        uidColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        aidColumn.setCellValueFactory(new PropertyValueFactory<>("aid"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("bookingDate"));
+        cancelledColumn.setCellValueFactory(new PropertyValueFactory<>("isCancelled"));
+        discountColumn.setCellValueFactory(new PropertyValueFactory<>("discount"));
 
         try {
-            List<User> users = FileHandling.AllUsers(USERTYPE.Guide);
-            ObservableList<Guide> guides = FXCollections.observableArrayList();
+            List<Booking> bookings = FileHandling.AllBookings();
+            ObservableList<Booking> bookingList = FXCollections.observableArrayList();
 
-            assert users != null;
-            for (User user : users) {
-                if (user instanceof Guide) {
-                    guides.add((Guide) user);
+            for (Booking booking : bookings) {
+                if (booking!=null) {
+                    bookingList.add((Booking) booking);
                 }
             }
-            guideTable.setItems(guides);
+            bookingsTable.setItems(bookingList);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         setupActionButtons();
+
+        centerColumn(idColumn);
+        centerColumn(uidColumn);
+        centerColumn(gidColumn);
+        centerColumn(aidColumn);
+        centerColumn(fidColumn);
+        centerColumn(dateColumn);
+        centerColumn(discountColumn);
+        centerColumn(cancelledColumn);
     }
 
     private void setupActionButtons() {
         actionsColumn.setCellFactory(new Callback<>() {
             @Override
-            public TableCell<Tourist, Void> call(final TableColumn<Tourist, Void> param) {
+            public TableCell<Booking, Void> call(final TableColumn<Booking, Void> param) {
                 return new TableCell<>() {
-                    private final Button editButton = new Button("Edit");
+                    private final Button guideAssign = new Button("Assign Guide");
                     private final Button deleteButton = new Button("Delete");
-                    private final HBox pane = new HBox(10, editButton, deleteButton);
+                    private final HBox pane = new HBox(10, guideAssign, deleteButton);
 
                     {
-                        editButton.setOnAction(event -> {
-                            Tourist tourist = getTableView().getItems().get(getIndex());
-                            System.out.println("Edit clicked for: " + tourist.getName());
+                        guideAssign.setOnAction(event -> {
+                            Booking booking = getTableView().getItems().get(getIndex());
+                            System.out.println("Edit clicked for: " + booking.getBookingId());
                         });
 
                         deleteButton.setOnAction(event -> {
-                            Tourist tourist = getTableView().getItems().get(getIndex());
-                            System.out.println("Delete clicked for: " + tourist.getName());
+                            Booking booking = getTableView().getItems().get(getIndex());
+                            System.out.println("Delete clicked for: " + booking.getBookingId());
                             // Example: remove from table
-                            getTableView().getItems().remove(tourist);
+                            getTableView().getItems().remove(booking);
                         });
                     }
 
@@ -98,6 +111,20 @@ public class subBookingsControl implements Initializable {
                     }
                 };
             }
+        });
+    }
+
+    private <T> void centerColumn(TableColumn<Booking, T> column) {
+        column.setCellFactory(col -> {
+            TableCell<Booking, T> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(T item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setText(empty || item == null ? null : item.toString());
+                    setAlignment(Pos.CENTER);
+                }
+            };
+            return cell;
         });
     }
 }

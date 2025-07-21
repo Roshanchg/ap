@@ -21,5 +21,10 @@ public class Festival {
     public double getDiscountRate(){
         return this.discountRate;
     }
+    public int getId(){return this.id;}
+    public String getName(){return this.name;}
+    public LocalDate getStartDate(){return this.startDate;}
+    public LocalDate getEndDate(){return this.endDate;}
+
 
 }

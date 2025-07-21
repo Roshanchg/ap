@@ -9,4 +9,6 @@ public class EmergencyLog {
     public String getDetails(){
         return this.time+","+this.message;
     }
+    public String getTime(){return this.time;}
+    public String getMessage(){return this.message;}
 }

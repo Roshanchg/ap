@@ -23,27 +23,28 @@ public class Booking {
         this.bookingDate=bookingDate;
         this.isCancelled=isCancelled;
         this.fid=fid;
+        this.discount=discount;
     }
     public String getDetails(){
         return this.bookingId+","+this.userId+","+this.guideId+","+
                 this.aid+","+this.bookingDate+","+this.discount+","+this.isCancelled+","+this.fid;
     }
 
-    public int getUserId(){
-        return this.userId;
-    }
+
     public void applyDiscount() throws IOException {
         LocalDate currentDate=LocalDate.now();
         Festival festival= ObjectFinder.getFestivalForDate(currentDate);
         assert festival != null;
         this.discount=festival.getDiscountRate();
     }
-    public void showAlerts(){
-
-    }
-    public void logEmergency(){
-
-    }
+    public int getBookingId(){return this.bookingId;}
+    public int getAid(){return this.aid;}
+    public double getDiscount(){return this.discount;}
+    public boolean getIsCancelled(){return this.isCancelled;}
+    public int getUserId(){return this.userId;}
+    public LocalDate getBookingDate(){return this.bookingDate;}
+    public int getGuideId(){return this.guideId;}
+    public int getFid(){return this.fid;}
 
 
 }

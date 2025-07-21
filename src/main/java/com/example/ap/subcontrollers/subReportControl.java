@@ -1,8 +1,6 @@
 package com.example.ap.subcontrollers;
 
-import com.example.ap.classes.Guide;
-import com.example.ap.classes.Tourist;
-import com.example.ap.classes.User;
+import com.example.ap.classes.*;
 import com.example.ap.classes.enums.LANGUAGES;
 import com.example.ap.classes.enums.USERTYPE;
 import com.example.ap.handlers.FileHandling;
@@ -10,10 +8,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
@@ -98,6 +94,19 @@ public class subReportControl implements Initializable {
                     }
                 };
             }
+        });
+    }
+    private <T> void centerColumn(TableColumn<Alerts, T> column) {
+        column.setCellFactory(col -> {
+            TableCell<Alerts, T> cell = new TableCell<>() {
+                @Override
+                protected void updateItem(T item, boolean empty) {
+                    super.updateItem(item, empty);
+                    setText(empty || item == null ? null : item.toString());
+                    setAlignment(Pos.CENTER);
+                }
+            };
+            return cell;
         });
     }
 }
