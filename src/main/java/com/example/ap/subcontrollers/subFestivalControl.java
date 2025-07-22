@@ -1,5 +1,6 @@
 package com.example.ap.subcontrollers;
 
+import com.example.ap.AdminControllerBorderPaneSingleton;
 import com.example.ap.classes.*;
 import com.example.ap.classes.enums.LANGUAGES;
 import com.example.ap.classes.enums.USERTYPE;
@@ -7,8 +8,10 @@ import com.example.ap.handlers.FileHandling;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -19,8 +22,10 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class subFestivalControl implements Initializable {
@@ -71,21 +76,22 @@ public class subFestivalControl implements Initializable {
             @Override
             public TableCell<Festival, Void> call(final TableColumn<Festival, Void> param) {
                 return new TableCell<>() {
-                    private final Button editButton = new Button("Edit");
                     private final Button deleteButton = new Button("Delete");
-                    private final HBox pane = new HBox(10, editButton, deleteButton);
+                    private final HBox pane = new HBox(10, deleteButton);
 
                     {
-                        editButton.setOnAction(event -> {
-                            Festival festival = getTableView().getItems().get(getIndex());
-                            System.out.println("Edit clicked for: " + festival.getName());
-                        });
+
 
                         deleteButton.setOnAction(event -> {
                             Festival festival = getTableView().getItems().get(getIndex());
                             System.out.println("Delete clicked for: " + festival.getName());
                             // Example: remove from table
                             getTableView().getItems().remove(festival);
+                            try {
+                                FileHandling.removeFestival(festival.getId());
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         });
                     }
 
@@ -103,16 +109,27 @@ public class subFestivalControl implements Initializable {
         });
     }
     private <T> void centerColumn(TableColumn<Festival, T> column) {
-        column.setCellFactory(col -> {
-            TableCell<Festival, T> cell = new TableCell<>() {
-                @Override
-                protected void updateItem(T item, boolean empty) {
-                    super.updateItem(item, empty);
-                    setText(empty || item == null ? null : item.toString());
-                    setAlignment(Pos.CENTER);
+        column.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(T item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    if (item instanceof Date) {
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                        setText(formatter.format((Date) item));
+                    } else {
+                        setText(item.toString());
+                    }
                 }
-            };
-            return cell;
+                setAlignment(Pos.CENTER);
+            }
         });
+    }
+    @FXML
+    public void addFestival() throws IOException {
+        Node festivalAdd = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/ap/AdminParts/FestivalsControl.fxml")));
+        AdminControllerBorderPaneSingleton.getMainPane().setCenter(festivalAdd);
     }
 }

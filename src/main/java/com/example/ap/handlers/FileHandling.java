@@ -198,7 +198,7 @@ public class FileHandling {
         }
 
     }
-    public void removeUser(USERTYPE usertype,int uid){
+    public static void removeUser(USERTYPE usertype,int uid) throws IOException {
         switch(usertype){
             case Admin -> {
 
@@ -206,6 +206,7 @@ public class FileHandling {
             case Guide -> {
                 File originalFile=new File(GuideFile);
                 File tempFile=new File("temp",GuideFile);
+                tempFile.createNewFile();
                 try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
                     User user= ObjectFinder.getUser(uid,usertype);
                     assert user != null;
@@ -221,22 +222,25 @@ public class FileHandling {
                             bw.newLine();
                         }
                     }
-                    if (!originalFile.delete()) {
-                        throw new IOException("Could not delete original file");
-                    }
-                    if (!tempFile.renameTo(originalFile)) {
-                        throw new IOException("Could not rename temp file to original");
-                    }
+
                 }
                 catch (IOException e){
                     System.out.println(e.getMessage());
 
                 }
+                if (!originalFile.delete()) {
+                    throw new IOException("Could not delete original file");
+                }
+                if (!tempFile.renameTo(originalFile)) {
+                    throw new IOException("Could not rename temp file to original");
+                }
+
 
             }
             case Tourist -> {
                 File originalFile=new File(TouristFile);
                 File tempFile=new File("temp",TouristFile);
+                tempFile.createNewFile();
                 try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
                     User user= ObjectFinder.getUser(uid,usertype);
                     assert user != null;
@@ -252,26 +256,29 @@ public class FileHandling {
                             bw.newLine();
                         }
                     }
-                    if (!originalFile.delete()) {
-                        throw new IOException("Could not delete original file");
-                    }
-                    if (!tempFile.renameTo(originalFile)) {
-                        throw new IOException("Could not rename temp file to original");
-                    }
                 }
                 catch (IOException e){
                     System.out.println(e.getMessage());
 
                 }
+
+                if (!originalFile.delete()) {
+                    throw new IOException("Could not delete original file");
+                }
+                if (!tempFile.renameTo(originalFile)) {
+                    throw new IOException("Could not rename temp file to original");
+                }
+
             }
         }
     }
-    public void editUser(USERTYPE usertype,int uid, User newUser){
+    public static void editUser(USERTYPE usertype, int uid, User newUser) throws IOException {
         switch(usertype) {
             case Admin -> {}
             case Guide -> {
                 File originalFile=new File(GuideFile);
                 File tempFile=new File("temp",GuideFile);
+                tempFile.createNewFile();
                 try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
                     User user= ObjectFinder.getUser(uid,usertype);
                     assert user != null;
@@ -287,21 +294,23 @@ public class FileHandling {
                             bw.newLine();
                         }
                     }
+
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+
                     if (!originalFile.delete()) {
                         throw new IOException("Could not delete original file");
                     }
                     if (!tempFile.renameTo(originalFile)) {
                         throw new IOException("Could not rename temp file to original");
-                    }
-                } catch (IOException e) {
-                    System.out.println(e.getMessage());
-
                 }
 
             }
             case Tourist -> {
                 File originalFile=new File(TouristFile);
                 File tempFile=new File("temp",TouristFile);
+                tempFile.createNewFile();
                 try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
                     User user= ObjectFinder.getUser(uid,usertype);
                     assert user != null;
@@ -317,15 +326,16 @@ public class FileHandling {
                             bw.newLine();
                         }
                     }
-                    if (!originalFile.delete()) {
-                        throw new IOException("Could not delete original file");
-                    }
-                    if (!tempFile.renameTo(originalFile)) {
-                        throw new IOException("Could not rename temp file to original");
-                    }
+
                 } catch (IOException e) {
                     System.out.println(e.getMessage());
 
+                }
+                if (!originalFile.delete()) {
+                    throw new IOException("Could not delete original file");
+                }
+                if (!tempFile.renameTo(originalFile)) {
+                    throw new IOException("Could not rename temp file to original");
                 }
             }
         }
@@ -443,6 +453,7 @@ public class FileHandling {
     public static void editBooking(int bid,Booking newBooking)throws IOException{
         File originalFile=new File(BookingsFile);
         File tempFile=new File("temp",BookingsFile);
+        tempFile.createNewFile();
         try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
             Booking booking= ObjectFinder.getBooking(bid);
             assert booking != null;
@@ -458,18 +469,20 @@ public class FileHandling {
                     bw.newLine();
                 }
             }
-            if (!originalFile.delete()) {
-                throw new IOException("Could not delete original file");
-            }
-            if (!tempFile.renameTo(originalFile)) {
-                throw new IOException("Could not rename temp file to original");
-            }
+
+        }
+        if (!originalFile.delete()) {
+            throw new IOException("Could not delete original file");
+        }
+        if (!tempFile.renameTo(originalFile)) {
+            throw new IOException("Could not rename temp file to original");
         }
 
     }
     public static void removeBooking(int bid) throws IOException{
         File originalFile=new File(BookingsFile);
         File tempFile=new File("temp",BookingsFile);
+        tempFile.createNewFile();
         try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
             Booking booking= ObjectFinder.getBooking(bid);
             assert booking != null;
@@ -485,12 +498,13 @@ public class FileHandling {
                     bw.newLine();
                 }
             }
-            if (!originalFile.delete()) {
-                throw new IOException("Could not delete original file");
-            }
-            if (!tempFile.renameTo(originalFile)) {
-                throw new IOException("Could not rename temp file to original");
-            }
+        }
+
+        if (!originalFile.delete()) {
+            throw new IOException("Could not delete original file");
+        }
+        if (!tempFile.renameTo(originalFile)) {
+            throw new IOException("Could not rename temp file to original");
         }
 
     }
@@ -552,6 +566,7 @@ public class FileHandling {
     public static void editAttraction(int aid,Attraction newAttraction) throws IOException{
         File originalFile=new File(AttractionsFile);
         File tempFile=new File("temp", AttractionsFile);
+        tempFile.createNewFile();
         try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
             Attraction attraction= ObjectFinder.getAttraction(aid);
             assert attraction != null;
@@ -567,40 +582,54 @@ public class FileHandling {
                     bw.newLine();
                 }
             }
-            if (!originalFile.delete()) {
-                throw new IOException("Could not delete original file");
-            }
-            if (!tempFile.renameTo(originalFile)) {
-                throw new IOException("Could not rename temp file to original");
-            }
+
+        }
+        if (!originalFile.delete()) {
+            throw new IOException("Could not delete original file");
+        }
+        if (!tempFile.renameTo(originalFile)) {
+            throw new IOException("Could not rename temp file to original");
         }
     }
     public static void removeAttraction(int aid)throws IOException{
         File originalFile=new File(AttractionsFile);
         File tempFile=new File("temp", AttractionsFile);
-        try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
-            Attraction attraction= ObjectFinder.getAttraction(aid);
+        tempFile.createNewFile();
+        try(BufferedReader br=new BufferedReader(new FileReader(originalFile))) {
+            Attraction attraction = ObjectFinder.getAttraction(aid);
             assert attraction != null;
-            String attractionInfo=attraction.getDetails();
+            String attractionInfo = attraction.getDetails();
             String line;
-            while((line=br.readLine())!=null){
-                if(line.equals(attractionInfo)){
+            while ((line = br.readLine()) != null) {
+                if (line.equals(attractionInfo)) {
                     continue;
                 }
-                try(BufferedWriter bw=new BufferedWriter(new FileWriter(
-                        tempFile,true))){
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(
+                        tempFile, true))) {
                     bw.write(line);
                     bw.newLine();
                 }
             }
-            if (!originalFile.delete()) {
-                throw new IOException("Could not delete original file");
-            }
-            if (!tempFile.renameTo(originalFile)) {
-                throw new IOException("Could not rename temp file to original");
-            }
         }
+            if(tempFile.exists()) {
+                if (!originalFile.delete()) {
+                    throw new IOException("Could not delete original file");
+                }
+                if (!tempFile.renameTo(originalFile)) {
+                    throw new IOException("Could not rename temp file to original");
+                }
+            }
 
+    }
+
+    public static LocalDate parseLocalDate(String raw) {
+        if (raw == null || raw.isBlank() || raw.equalsIgnoreCase("null")) return null;
+        try {
+            return LocalDate.parse(raw); // assumes yyyy-MM-dd
+        } catch (Exception e) {
+            System.err.println("Invalid date format: " + raw);
+            return null;
+        }
     }
 
     public static List<Festival> AllFestival() throws IOException{
@@ -622,8 +651,10 @@ public class FileHandling {
                 parts=line.split(",");
                 fid=Integer.parseInt(parts[0]);
                 name=parts[1];
-                start= LocalDate.parse(parts[2]);
-                end=LocalDate.parse(parts[3]);
+
+                start= parseLocalDate(parts[2]);
+                end=parseLocalDate(parts[3]);
+                if(start==null || end==null){continue;}
                 discount=Double.parseDouble(parts[4]);
                 festival=new Festival(fid,name,start,end,discount);
                 festivals.add(festival);
@@ -642,6 +673,7 @@ public class FileHandling {
     public static void removeFestival(int fid)throws IOException{
         File originalFile=new File(FestivalsFile);
         File tempFile=new File("temp", FestivalsFile);
+        tempFile.createNewFile();
         try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
             Festival festival= ObjectFinder.getFestive(fid);
             assert festival != null;
@@ -657,12 +689,13 @@ public class FileHandling {
                     bw.newLine();
                 }
             }
-            if (!originalFile.delete()) {
-                throw new IOException("Could not delete original file");
-            }
-            if (!tempFile.renameTo(originalFile)) {
-                throw new IOException("Could not rename temp file to original");
-            }
+        }
+
+        if (!originalFile.delete()) {
+            throw new IOException("Could not delete original file");
+        }
+        if (!tempFile.renameTo(originalFile)) {
+            throw new IOException("Could not rename temp file to original");
         }
     }
 
@@ -696,7 +729,34 @@ public class FileHandling {
         }
         return alerts;
     }
+    public static void editAlert(int aid,Alerts newAlert) throws IOException {
+        File originalFile=new File(AlertsFile);
+        File tempFile=new File("temp",AlertsFile );
+        tempFile.createNewFile();
+        try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
+            Alerts alert= ObjectFinder.getAlert(aid);
+            assert alert != null;
+            String alertInfo=alert.getDetails();
+            String line;
+            while((line=br.readLine())!=null){
+                if(line.equals(alertInfo)){
+                    line=newAlert.getDetails();
+                }
+                try(BufferedWriter bw=new BufferedWriter(new FileWriter(
+                        tempFile,true))){
+                    bw.write(line);
+                    bw.newLine();
+                }
+            }
 
+        }
+        if (!originalFile.delete()) {
+            throw new IOException("Could not delete original file");
+        }
+        if (!tempFile.renameTo(originalFile)) {
+            throw new IOException("Could not rename temp file to original");
+        }
+    }
 
     public static void ExportAlert() throws IOException {
         Files.copy(
@@ -714,6 +774,7 @@ public class FileHandling {
     public static void removeAlerts(int aid)throws IOException{
         File originalFile=new File(AlertsFile);
         File tempFile=new File("temp", AlertsFile);
+        tempFile.createNewFile();
         try(BufferedReader br=new BufferedReader(new FileReader(originalFile))){
             Alerts alerts= ObjectFinder.getAlert(aid);
             assert alerts != null;
@@ -729,12 +790,13 @@ public class FileHandling {
                     bw.newLine();
                 }
             }
-            if (!originalFile.delete()) {
-                throw new IOException("Could not delete original file");
-            }
-            if (!tempFile.renameTo(originalFile)) {
-                throw new IOException("Could not rename temp file to original");
-            }
+
+        }
+        if (!originalFile.delete()) {
+            throw new IOException("Could not delete original file");
+        }
+        if (!tempFile.renameTo(originalFile)) {
+            throw new IOException("Could not rename temp file to original");
         }
     }
 
@@ -772,12 +834,13 @@ public class FileHandling {
                 logs.add(log);
             }
         }
+        logs=logs.reversed();
         return logs;
     }
 
     public static void makeLogs(String message)throws IOException{
         LocalDateTime currentDateTime=LocalDateTime.now();
-        try(BufferedWriter bw=new BufferedWriter(new FileWriter(LogFile))){
+        try(BufferedWriter bw=new BufferedWriter(new FileWriter(LogFile,true))){
             bw.write(currentDateTime+" "+message);
             bw.newLine();
         }

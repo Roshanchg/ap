@@ -1,5 +1,7 @@
 package com.example.ap.subcontrollers;
 
+import com.example.ap.AdminControllerBorderPaneSingleton;
+import com.example.ap.admincontrollers.EditVsAddSingleton;
 import com.example.ap.classes.Booking;
 import com.example.ap.classes.Guide;
 import com.example.ap.classes.Tourist;
@@ -10,8 +12,10 @@ import com.example.ap.handlers.FileHandling;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -23,6 +27,7 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class subGuideControl implements  Initializable{
@@ -89,12 +94,27 @@ public class subGuideControl implements  Initializable{
                             editButton.setOnAction(event -> {
                                 Guide guide = getTableView().getItems().get(getIndex());
                                 System.out.println("Edit clicked for: " + guide.getName());
+                                EditVsAddSingleton.setEdit();
+                                EditVsAddSingleton.setId(guide.getId());
+                                Node guideEdit = null;
+                                try {
+                                    guideEdit = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/ap/AdminParts/GuideControl.fxml")));
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                AdminControllerBorderPaneSingleton.getMainPane().setCenter(guideEdit);
                             });
 
                             deleteButton.setOnAction(event -> {
                                 Guide guide = getTableView().getItems().get(getIndex());
                                 System.out.println("Delete clicked for: " + guide.getName());
                                 getTableView().getItems().remove(guide);
+                                try {
+                                    FileHandling.removeUser(USERTYPE.Guide,guide.getId());
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                EditVsAddSingleton.resetVariables();
                             });
                         }
 
@@ -123,5 +143,14 @@ public class subGuideControl implements  Initializable{
             };
             return cell;
         });
+    }
+
+    @FXML
+    public void addGuide() throws IOException {
+
+        EditVsAddSingleton.setAdd();
+        EditVsAddSingleton.resetVariables();
+        Node guideAdd = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/ap/AdminParts/GuideControl.fxml")));
+        AdminControllerBorderPaneSingleton.getMainPane().setCenter(guideAdd);
     }
 }

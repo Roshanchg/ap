@@ -19,7 +19,7 @@
     </HBox>
 
     <HBox spacing="20" alignment="CENTER_LEFT" styleClass="toolbar">
-        <Button text="Add Alert" styleClass="primary-button" />
+        <Button text="Add Alert" styleClass="primary-button" onAction="#addAlert"/>
         <TextField promptText="Search..." styleClass="search-field"/>
         <Button text="Filter" styleClass="action-button" />
         <Button text="Clear" styleClass="secondary-button" />
@@ -31,9 +31,9 @@
                 <columns>
                     <TableColumn text="ID" fx:id="idColumn" styleClass="column-header" prefWidth="100"/>
                     <TableColumn text="Risk Type" fx:id="riskTypeColumn" styleClass="column-header" prefWidth="200"/>
-                    <TableColumn text="Message" fx:id="messageColumn" styleClass="column-header" prefWidth="300"/>
-                    <TableColumn text="Months Active" fx:id="monthsActiveColumn" styleClass="column-header" prefWidth="120"/>
-                    <TableColumn text="Actions" fx:id="actionsColumn" styleClass="column-header" prefWidth="100"/>
+                    <TableColumn text="Message" fx:id="messageColumn" styleClass="column-header" prefWidth="440"/>
+                    <TableColumn text="Months Active" fx:id="monthsActiveColumn" styleClass="column-header" prefWidth="140"/>
+                    <TableColumn text="Actions" fx:id="actionsColumn" styleClass="column-header" prefWidth="180"/>
                 </columns>
             </TableView>
         </content>

@@ -1,13 +1,17 @@
 package com.example.ap.subcontrollers;
 
+import com.example.ap.AdminControllerBorderPaneSingleton;
+import com.example.ap.admincontrollers.EditVsAddSingleton;
 import com.example.ap.classes.*;
 import com.example.ap.classes.enums.ALERTRISK;
 import com.example.ap.handlers.FileHandling;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
@@ -16,6 +20,7 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class subAlertControl implements Initializable {
@@ -70,6 +75,16 @@ public class subAlertControl implements Initializable {
                         editButton.setOnAction(event -> {
                             Alerts alert = getTableView().getItems().get(getIndex());
                             System.out.println("Edit clicked for: " + alert.getMessage());
+                            EditVsAddSingleton.setEdit();
+                            EditVsAddSingleton.setId(alert.getId());
+                            Node alertAdd = null;
+                            try {
+                                alertAdd = FXMLLoader.load(Objects.requireNonNull(
+                                        getClass().getResource("/com/example/ap/AdminParts/AlertsControl.fxml")));
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                            AdminControllerBorderPaneSingleton.getMainPane().setCenter(alertAdd);
                         });
 
                         deleteButton.setOnAction(event -> {
@@ -77,6 +92,11 @@ public class subAlertControl implements Initializable {
                             System.out.println("Delete clicked for: " + alert.getMessage());
                             // Example: remove from table
                             getTableView().getItems().remove(alert);
+                            try {
+                                FileHandling.removeAlerts(alert.getId());
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         });
                     }
 
@@ -105,5 +125,13 @@ public class subAlertControl implements Initializable {
             };
             return cell;
         });
+    }
+
+    @FXML
+    public void addAlert() throws IOException {
+        EditVsAddSingleton.setAdd();
+        EditVsAddSingleton.resetVariables();
+        Node alertAdd = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/ap/AdminParts/AlertsControl.fxml")));
+        AdminControllerBorderPaneSingleton.getMainPane().setCenter(alertAdd);
     }
 }

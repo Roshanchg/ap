@@ -1,6 +1,7 @@
 package com.example.ap.subcontrollers;
 
 import com.example.ap.AdminControllerBorderPaneSingleton;
+import com.example.ap.admincontrollers.EditVsAddSingleton;
 import com.example.ap.classes.*;
 import com.example.ap.classes.enums.LANGUAGES;
 import com.example.ap.handlers.FileHandling;
@@ -26,6 +27,8 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class subAttractionsControl implements Initializable {
+
+    private final String fxmlForm="/com/example/ap/AdminParts/AttractionControl.fxml";
     @FXML
     private TableView<Attraction> attractionsTable;
 
@@ -89,13 +92,29 @@ public class subAttractionsControl implements Initializable {
                         editButton.setOnAction(event -> {
                             Attraction attraction = getTableView().getItems().get(getIndex());
                             System.out.println("Edit clicked for: " + attraction.getName());
+                            EditVsAddSingleton.setEdit();
+                            EditVsAddSingleton.setId(attraction.getId());
+                            try {
+                                Node node=FXMLLoader.load(Objects.requireNonNull(
+                                        getClass().getResource(fxmlForm)));
+
+                                AdminControllerBorderPaneSingleton.getMainPane().setCenter(node);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         });
 
                         deleteButton.setOnAction(event -> {
                             Attraction attraction = getTableView().getItems().get(getIndex());
                             System.out.println("Delete clicked for: " + attraction.getName());
                             // Example: remove from table
+                            try {
+                                FileHandling.removeAttraction(attraction.getId());
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                             getTableView().getItems().remove(attraction);
+
                         });
                     }
 
@@ -128,7 +147,8 @@ public class subAttractionsControl implements Initializable {
 
     @FXML
     public void addAttraction() throws IOException {
-        Node attractionAdd = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/ap/AdminParts/AttractionControl.fxml")));
+        EditVsAddSingleton.setAdd();
+        Node attractionAdd = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlForm)));
         AdminControllerBorderPaneSingleton.getMainPane().setCenter(attractionAdd);
     }
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.ap.subcontrollers.subBookingGuideAssignController"
+      styleClass="content-pane" spacing="10"
+      stylesheets="@../css/AllTourists.css">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <HBox spacing="20" alignment="CENTER_LEFT">
+        <Label text="Available Guides For Assigning" styleClass="section-title"/>
+    </HBox>
+
+    <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED" prefWidth="800" prefHeight="400">
+        <content>
+            <TableView fx:id="guideTable" styleClass="data-table" prefWidth="800">
+                <columns>
+                    <TableColumn text="ID" fx:id="idColumn" styleClass="column-header" prefWidth="120"/>
+                    <TableColumn text="Name" fx:id="nameColumn" styleClass="column-header" prefWidth="220"/>
+                    <TableColumn text="Email" fx:id="emailColumn" styleClass="column-header" prefWidth="220"/>
+                    <TableColumn text="Phone" fx:id="phoneNumberColumn" styleClass="column-header" prefWidth="180"/>
+                    <TableColumn text="Language" fx:id="languagePrefColumn" styleClass="column-header" prefWidth="100"/>
+                    <TableColumn text="Years of Experience" fx:id="yearsOfExperience" styleClass="column-header" prefWidth="120"/>
+                    <TableColumn text="Assign" fx:id="assignColumn" styleClass="column-header" prefWidth="80"/>
+                </columns>
+            </TableView>
+        </content>
+    </ScrollPane>
+</VBox>

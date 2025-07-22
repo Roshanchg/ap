@@ -1,56 +1,120 @@
 package com.example.ap.admincontrollers;
 
+import com.example.ap.AdminControllerBorderPaneSingleton;
+import com.example.ap.classes.Alerts;
+import com.example.ap.classes.Attraction;
+import com.example.ap.classes.Tourist;
+import com.example.ap.classes.enums.*;
+import com.example.ap.handlers.FileHandling;
+import com.example.ap.handlers.ObjectFinder;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+
+import java.io.IOException;
+import java.util.Objects;
 
 public class touristEditController {
+    private final String allTourists ="/com/example/ap/AdminParts/AllTourists.fxml";
     @FXML private TextField nameField;
     @FXML private TextField emailField;
-    @FXML
-    private PasswordField passwordField;
-    @FXML private TextField loginIdField;
-    @FXML private ComboBox<String> bookingsComboBox;
-    @FXML private TextArea contactDetailsArea;
+    @FXML private TextField phoneField;
+    @FXML private ComboBox<LANGUAGES> languagePrefField;
+    @FXML private TextField nationalityField;
+    @FXML private TextField emergencyContactField;
+
+    @FXML private  TextField passwordField;
+
+    @FXML private Label passwordLabel;
 
     @FXML
-    public void initialize() {
-        // Initialize form fields
-        bookingsComboBox.getItems().addAll("Any", "1-5", "6-10", "10+");
+    public void initialize() throws IOException {
+        languagePrefField.getItems().addAll(LANGUAGES.values());
+
+
+
+        if(EditVsAddSingleton.isIsAdd()) {
+            languagePrefField.setValue(LANGUAGES.English);
+            EditVsAddSingleton.resetVariables();
+            passwordField.setVisible(true);
+            passwordLabel.setVisible(true);
+        }
+        int id=EditVsAddSingleton.getId();
+        if(id!=0){
+            Tourist tourist= (Tourist) ObjectFinder.getUser(id, USERTYPE.Tourist);
+            assert tourist!=null;
+            languagePrefField.setValue(tourist.getLanguagePref());
+            nameField.setText(tourist.getName());
+            emailField.setText(tourist.getEmail());
+            phoneField.setText(tourist.getPhoneNumber());
+            emergencyContactField.setText(tourist.getEmergencyContact());
+            nationalityField.setText(tourist.getNationality());
+            passwordField.setVisible(false);
+            passwordLabel.setVisible(false);
+        }
     }
 
     @FXML
-    private void handleConfirmEdit() {
-        // Logic to save tourist edits
-        System.out.println("Tourist data saved:");
-        System.out.println("Name: " + nameField.getText());
-        System.out.println("Email: " + emailField.getText());
-        System.out.println("Login ID: " + loginIdField.getText());
-        System.out.println("Contact Details: " + contactDetailsArea.getText());
+    private void handleCancel() throws IOException {
+        Node node= FXMLLoader.load(Objects.requireNonNull(getClass().getResource(allTourists)));
+        BorderPane rootPane= AdminControllerBorderPaneSingleton.getMainPane();
+        rootPane.setCenter(node);
     }
 
     @FXML
-    private void handleConfirmPasswords() {
-        // Logic to confirm/update password
-        System.out.println("Password confirmed/updated");
-    }
+    private void handleConfirmEdit() throws IOException {
 
-    @FXML
-    private void handleFilter() {
-        // Logic for filtering tourists
-        System.out.println("Filtering tourists...");
-    }
+        String name=nameField.getText();
+        String email=emailField.getText();
+        String phoneNumber=phoneField.getText();
+        String emergencyNumber=emergencyContactField.getText();
+        String nationality=nationalityField.getText();
+        String password;
+        LANGUAGES languagePref=languagePrefField.getValue();
 
-    @FXML
-    private void handleClearSearch() {
-        // Logic to clear search/filters
-        nameField.clear();
-        emailField.clear();
-        loginIdField.clear();
-        contactDetailsArea.clear();
-        bookingsComboBox.setValue("Any");
-        System.out.println("Search cleared");
+        int id;
+        if(name.isEmpty()||languagePref==null){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Empty field/s");
+            alert.showAndWait();
+            return;
+        }
+        if (!phoneNumber.matches("\\d{10}") || !emergencyNumber.matches("\\d{10}")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Invalid phone number and/or emergency number");
+            alert.showAndWait();
+            return;
+        }
+        if(!FileHandling.isEmail(email)){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Invalid email");
+            alert.showAndWait();
+            return;
+        }
+
+        if(EditVsAddSingleton.isIsAdd()) {
+            password=passwordField.getText();
+            id = FileHandling.getNextId(FileHandling.TouristFile);
+            Tourist tourist=new Tourist(id,name,email,phoneNumber,password,languagePref,nationality,emergencyNumber);
+            FileHandling.WriteUser(USERTYPE.Tourist,tourist);
+
+            FileHandling.makeLogs("Added Tourist:  " + tourist.getName());
+            EditVsAddSingleton.resetVariables();
+        }
+        else{
+            id = EditVsAddSingleton.getId();
+            password= Objects.requireNonNull(ObjectFinder.getUser(id, USERTYPE.Tourist)).getPassword();
+            Tourist tourist=new Tourist(id,name,email,phoneNumber,password,languagePref,nationality,emergencyNumber);
+            FileHandling.makeLogs("Edited Tourist:  " +
+                    Objects.requireNonNull(ObjectFinder.getUser(id,USERTYPE.Tourist)).getDetails()+" to: "+tourist.getDetails());
+
+            FileHandling.editUser(USERTYPE.Tourist,id,tourist);
+            EditVsAddSingleton.resetVariables();
+        }
+        BorderPane borderPane = AdminControllerBorderPaneSingleton.getMainPane();
+        Node allAlerts = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(this.allTourists)));
+        borderPane.setCenter(allAlerts);
     }
 }

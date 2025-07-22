@@ -53,7 +53,7 @@ public class Navigator {
 
             }
             case userEdit -> {
-                activeLoader=new FXMLLoader(Navigator.class.getResource("/com/example/ap/AdminParts/touristControl.fxml"));
+                activeLoader=new FXMLLoader(Navigator.class.getResource("/com/example/ap/AdminParts/TouristControl.fxml"));
                 activeTitle="Guide Page";
                 resizable=false;
             }

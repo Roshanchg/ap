@@ -1,6 +1,7 @@
 package com.example.ap.subcontrollers;
 
-import com.example.ap.classes.Booking;
+import com.example.ap.AdminControllerBorderPaneSingleton;
+import com.example.ap.admincontrollers.EditVsAddSingleton;
 import com.example.ap.classes.Tourist;
 import com.example.ap.classes.User;
 import com.example.ap.classes.enums.LANGUAGES;
@@ -9,8 +10,10 @@ import com.example.ap.handlers.FileHandling;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -22,6 +25,7 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class subTouristControl implements Initializable {
@@ -84,15 +88,26 @@ public class subTouristControl implements Initializable {
                     {
                         editButton.setOnAction(event -> {
                             Tourist tourist = getTableView().getItems().get(getIndex());
-                            // TODO: Add your edit logic here
                             System.out.println("Edit clicked for: " + tourist.getName());
+                            EditVsAddSingleton.setEdit();
+                            EditVsAddSingleton.setId(tourist.getId());
+                            Node touristEdit = null;
+                            try {
+                                touristEdit = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/ap/AdminParts/TouristControl.fxml")));
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                            AdminControllerBorderPaneSingleton.getMainPane().setCenter(touristEdit);
                         });
 
                         deleteButton.setOnAction(event -> {
                             Tourist tourist = getTableView().getItems().get(getIndex());
-                            // TODO: Add your delete logic here
                             System.out.println("Delete clicked for: " + tourist.getName());
-                            // Example: remove from table
+                            try {
+                                FileHandling.removeUser(USERTYPE.Tourist,tourist.getId());
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                             getTableView().getItems().remove(tourist);
                         });
                     }
@@ -123,5 +138,13 @@ public class subTouristControl implements Initializable {
             };
             return cell;
         });
+    }
+
+    @FXML
+    public void addTourist() throws IOException {
+        EditVsAddSingleton.setAdd();
+        EditVsAddSingleton.resetVariables();
+        Node touristAdd = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/ap/AdminParts/TouristControl.fxml")));
+        AdminControllerBorderPaneSingleton.getMainPane().setCenter(touristAdd);
     }
 }

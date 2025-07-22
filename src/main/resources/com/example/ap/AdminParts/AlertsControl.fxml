@@ -6,7 +6,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       stylesheets="@../css/touristControl.css"
-      fx:controller="com.example.ap.admincontrollers.festivalEditController"
+      fx:controller="com.example.ap.admincontrollers.alertEditController"
       styleClass="content-pane" spacing="20">
 
     <padding>
@@ -20,19 +20,16 @@
         </columnConstraints>
 
         <!-- Row 0 -->
-        <Label text="Name" styleClass="form-label" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <TextField fx:id="nameField" styleClass="form-field" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Label text="Risk Type" styleClass="form-label" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="riskTypeField" styleClass="form-field" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
         <!-- Row 1 -->
-        <Label text="StartDate" styleClass="form-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <DatePicker fx:id="startDateField" promptText="Select a date" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-        <!-- Row 2 -->
-        <Label text="Type" styleClass="form-label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <DatePicker fx:id="endDateField" promptText="Select a date" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <Label text="Message" styleClass="form-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="messageField" styleClass="form-field" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-        <!-- Row 3 -->
-        <Label text="DiscountRate" styleClass="form-label" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-        <TextField fx:id="discountField" promptText="Enter a number" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+        <!-- Row 2 -->
+        <Label text="Months Active" styleClass="form-label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="monthsActiveField" styleClass="form-field" GridPane.rowIndex="2" GridPane.columnIndex="1" />
 
     </GridPane>
 

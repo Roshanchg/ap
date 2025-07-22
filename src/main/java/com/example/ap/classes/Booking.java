@@ -47,4 +47,6 @@ public class Booking {
     public int getFid(){return this.fid;}
 
 
+    public void setGid(int id){this.guideId=id;}
+
 }

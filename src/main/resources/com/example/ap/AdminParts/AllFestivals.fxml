@@ -19,7 +19,7 @@
     </HBox>
 
     <HBox spacing="20" alignment="CENTER_LEFT" styleClass="toolbar">
-        <Button text="Add Festival" styleClass="primary-button" />
+        <Button text="Add Festival" styleClass="primary-button" onAction="#addFestival"/>
         <TextField promptText="Search..." styleClass="search-field"/>
         <Button text="Filter" styleClass="action-button" />
         <Button text="Clear" styleClass="secondary-button" />
