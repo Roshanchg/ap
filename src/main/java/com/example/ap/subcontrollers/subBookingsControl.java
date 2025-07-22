@@ -110,8 +110,6 @@ public class subBookingsControl implements Initializable {
 
                         deleteButton.setOnAction(event -> {
                             Booking booking = getTableView().getItems().get(getIndex());
-                            System.out.println("Delete clicked for: " + booking.getBookingId());
-                            // Example: remove from table
                             getTableView().getItems().remove(booking);
                             try {
                                 FileHandling.removeBooking(booking.getBookingId());

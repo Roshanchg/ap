@@ -88,27 +88,28 @@ public class subTouristControl implements Initializable {
                     {
                         editButton.setOnAction(event -> {
                             Tourist tourist = getTableView().getItems().get(getIndex());
-                            System.out.println("Edit clicked for: " + tourist.getName());
                             EditVsAddSingleton.setEdit();
                             EditVsAddSingleton.setId(tourist.getId());
                             Node touristEdit = null;
                             try {
                                 touristEdit = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/ap/AdminParts/TouristControl.fxml")));
+                                AdminControllerBorderPaneSingleton.getMainPane().setCenter(touristEdit);
+
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
-                            AdminControllerBorderPaneSingleton.getMainPane().setCenter(touristEdit);
                         });
 
                         deleteButton.setOnAction(event -> {
                             Tourist tourist = getTableView().getItems().get(getIndex());
-                            System.out.println("Delete clicked for: " + tourist.getName());
                             try {
                                 FileHandling.removeUser(USERTYPE.Tourist,tourist.getId());
+                                FileHandling.makeLogs("Tourist Removed: "+tourist.getDetails());
+                                getTableView().getItems().remove(tourist);
+
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
-                            getTableView().getItems().remove(tourist);
                         });
                     }
 

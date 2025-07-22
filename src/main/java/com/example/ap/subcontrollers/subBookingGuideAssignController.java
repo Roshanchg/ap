@@ -87,7 +87,6 @@ public class subBookingGuideAssignController implements Initializable {
                     {
                         assignButton.setOnAction(event -> {
                             Guide guide = getTableView().getItems().get(getIndex());
-                            System.out.println("Assign clicked for: " + guide.getName());
                             try {
                                 Booking booking= ObjectFinder.getBooking(BookingCurrentActiveSingleton.getId());
                                 assert booking != null;

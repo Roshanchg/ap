@@ -78,17 +78,13 @@ public class subFestivalControl implements Initializable {
                 return new TableCell<>() {
                     private final Button deleteButton = new Button("Delete");
                     private final HBox pane = new HBox(10, deleteButton);
-
                     {
-
-
                         deleteButton.setOnAction(event -> {
                             Festival festival = getTableView().getItems().get(getIndex());
-                            System.out.println("Delete clicked for: " + festival.getName());
-                            // Example: remove from table
                             getTableView().getItems().remove(festival);
                             try {
                                 FileHandling.removeFestival(festival.getId());
+                                FileHandling.makeLogs("Festival Removed: "+festival.getDetails());
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }

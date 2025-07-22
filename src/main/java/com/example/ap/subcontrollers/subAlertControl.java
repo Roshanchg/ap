@@ -74,26 +74,25 @@ public class subAlertControl implements Initializable {
                     {
                         editButton.setOnAction(event -> {
                             Alerts alert = getTableView().getItems().get(getIndex());
-                            System.out.println("Edit clicked for: " + alert.getMessage());
                             EditVsAddSingleton.setEdit();
                             EditVsAddSingleton.setId(alert.getId());
                             Node alertAdd = null;
                             try {
                                 alertAdd = FXMLLoader.load(Objects.requireNonNull(
                                         getClass().getResource("/com/example/ap/AdminParts/AlertsControl.fxml")));
+                                AdminControllerBorderPaneSingleton.getMainPane().setCenter(alertAdd);
+
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
-                            AdminControllerBorderPaneSingleton.getMainPane().setCenter(alertAdd);
                         });
 
                         deleteButton.setOnAction(event -> {
                             Alerts alert = getTableView().getItems().get(getIndex());
-                            System.out.println("Delete clicked for: " + alert.getMessage());
-                            // Example: remove from table
                             getTableView().getItems().remove(alert);
                             try {
                                 FileHandling.removeAlerts(alert.getId());
+                                FileHandling.makeLogs("Alert Removed: "+alert.getDetails());
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }

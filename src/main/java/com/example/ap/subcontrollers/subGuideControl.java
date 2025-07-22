@@ -93,24 +93,26 @@ public class subGuideControl implements  Initializable{
                         {
                             editButton.setOnAction(event -> {
                                 Guide guide = getTableView().getItems().get(getIndex());
-                                System.out.println("Edit clicked for: " + guide.getName());
                                 EditVsAddSingleton.setEdit();
                                 EditVsAddSingleton.setId(guide.getId());
                                 Node guideEdit = null;
                                 try {
                                     guideEdit = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/ap/AdminParts/GuideControl.fxml")));
+                                    AdminControllerBorderPaneSingleton.getMainPane().setCenter(guideEdit);
+
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
                                 }
-                                AdminControllerBorderPaneSingleton.getMainPane().setCenter(guideEdit);
                             });
 
                             deleteButton.setOnAction(event -> {
                                 Guide guide = getTableView().getItems().get(getIndex());
-                                System.out.println("Delete clicked for: " + guide.getName());
                                 getTableView().getItems().remove(guide);
                                 try {
                                     FileHandling.removeUser(USERTYPE.Guide,guide.getId());
+                                    FileHandling.makeLogs("Guide Removed: "+guide.getDetails());
+                                    getTableView().getItems().remove(guide);
+
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
                                 }

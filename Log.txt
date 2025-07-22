@@ -25,3 +25,4 @@
 2025-07-22T18:27:32.831717400 Added Tourist:  Roshan Chg
 2025-07-22T19:01:45.033941800 Edited Guide:  1,Safal Lohani,safal@g.com,9800000000,safal,English,10,true to: 1,Safal Lohani,safal@g.com,9800000000,safal,English,10,true
 2025-07-22T19:02:05.881754200 Assigned Guide: Safal Lohani to booking: 1,1,1,0,2025-07-14,0.0,false,0
+2025-07-22T19:09:15.688701900 Assigned Guide: Roshan Chg to booking: 1,1,2,0,2025-07-14,0.0,false,0

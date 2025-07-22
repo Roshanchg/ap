@@ -91,7 +91,6 @@ public class subAttractionsControl implements Initializable {
                     {
                         editButton.setOnAction(event -> {
                             Attraction attraction = getTableView().getItems().get(getIndex());
-                            System.out.println("Edit clicked for: " + attraction.getName());
                             EditVsAddSingleton.setEdit();
                             EditVsAddSingleton.setId(attraction.getId());
                             try {
@@ -106,14 +105,13 @@ public class subAttractionsControl implements Initializable {
 
                         deleteButton.setOnAction(event -> {
                             Attraction attraction = getTableView().getItems().get(getIndex());
-                            System.out.println("Delete clicked for: " + attraction.getName());
-                            // Example: remove from table
                             try {
                                 FileHandling.removeAttraction(attraction.getId());
+                                FileHandling.makeLogs("Attraction Deleted: "+attraction.getDetails());
+                                getTableView().getItems().remove(attraction);
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
-                            getTableView().getItems().remove(attraction);
 
                         });
                     }
