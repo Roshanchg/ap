@@ -21,6 +21,7 @@ public class GuideDashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         welcomeLabel.setText("Welcome, Guide!");
     }
 

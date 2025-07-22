@@ -1,5 +1,6 @@
 package com.example.ap;
 
+import com.example.ap.classes.Booking;
 import com.example.ap.classes.User;
 import com.example.ap.handlers.CacheHandler;
 import com.example.ap.handlers.SessionHandler;
@@ -32,8 +33,8 @@ public class myBookingController {
     private void initialize() throws IOException {
 
         int loggedUserId=SessionHandler.getInstance().getUserId();
-        List<String> BookingsString= CacheHandler.getBookingsCache();
-        for(String line:BookingsString){
+        List<Booking> myBookings= CacheHandler.getBookingsCache();
+        for(Booking booking:myBookings){
         Node bookingCard = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("BookingCard.fxml")));
         bookingContainer.getChildren().add(bookingCard);
         }
