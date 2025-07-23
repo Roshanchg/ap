@@ -146,6 +146,7 @@ public class ProfileEditTouristController implements Initializable {
         FileHandling.removeUser(USERTYPE.Tourist,id);
         DeletionHandler.onUserDelete(id,USERTYPE.Tourist);
         SessionHandler.getInstance().endSession();
+        CacheHandler.reloadCache(USERTYPE.Tourist);
         Navigator.Navigate(NAVIGATIONS.REGISTER,(Stage) nameField.getScene().getWindow());
     }
 
