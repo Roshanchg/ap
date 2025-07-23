@@ -67,6 +67,30 @@ public class FileHandling {
         }
     }
 
+    public static boolean phoneExists(String phonenumber,USERTYPE usertype) throws IOException{
+        List<User> users=new ArrayList<>();
+        users=AllUsers(usertype);
+        assert users != null;
+        for(User user: users){
+            if (user.getPhoneNumber().equals(phonenumber)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean emailExists(String email,USERTYPE usertype) throws IOException{
+        List<User> users=new ArrayList<>();
+        users=AllUsers(usertype);
+        assert users != null;
+        for(User user: users){
+            if (user.getEmail().equals(email)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static List<User> AllUsers(USERTYPE usertype) throws IOException{
         List<User> users= new ArrayList<>();
         assert usertype !=null;
@@ -182,6 +206,7 @@ public class FileHandling {
 
             }
             case Tourist -> {
+
                 try(BufferedWriter bw=new BufferedWriter(new FileWriter(TouristFile,true))){
                     String line=user.getDetails();
                     bw.write(line);

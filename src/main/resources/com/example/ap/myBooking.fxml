@@ -17,7 +17,7 @@
                 <Label fx:id="bookingOption" styleClass="clickable_label" text="%bookingOption" />
                 <Label fx:id="attractionOption" styleClass="clickable_label" text="%attractionOption" />
                 <Label fx:id="festivalOption" styleClass="clickable_label" text="%festivalOption" />
-                <Label fx:id="exploreOption" styleClass="clickable_label" text="%exploreOption" />
+                <Label fx:id="homeOption" styleClass="clickable_label" text="%homeOption" />
                 <Pane HBox.hgrow="ALWAYS" />
                 <ImageView fitHeight="50" fitWidth="50" fx:id="userOption">
                     <Image url="@images/logo.png" />

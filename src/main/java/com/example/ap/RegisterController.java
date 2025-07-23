@@ -138,7 +138,15 @@ public class RegisterController implements Initializable {
                     break;
                 }
                 String phoneNumber=phoneField.getText();
+                if(FileHandling.phoneExists(phoneNumber,USERTYPE.Tourist)){
+                    showAlert("This Phone Number already exists");
+                    break;
+                }
                 String email=emailField.getText();
+                if(FileHandling.emailExists(email,USERTYPE.Tourist)){
+                    showAlert("This Email Already exists");
+                    break;
+                }
                 String password=passwordField.getText();
                 LANGUAGES languagePref= (LanguagesField.getValue()==null)?LANGUAGES.English:LanguagesField.getValue();
 
@@ -155,6 +163,14 @@ public class RegisterController implements Initializable {
                 String fullName=nameField.getText();
                 String phoneNumber=phoneField.getText();
                 String email=emailField.getText();
+                if(FileHandling.phoneExists(phoneNumber,USERTYPE.Guide)){
+                    showAlert("This Phone Number already exists");
+                    break;
+                }
+                if(FileHandling.emailExists(email,USERTYPE.Guide)){
+                    showAlert("This Email Already exists");
+                    break;
+                }
                 String password=passwordField.getText();
                 LANGUAGES languagePref= (LanguagesField.getValue()==null)?LANGUAGES.English:LanguagesField.getValue();
                 String yearsOfExperience=guideExperienceField.getText();
