@@ -82,16 +82,70 @@ public class Navigator {
                 resizable=false;
             }
             case attraction -> {
-
+                Tourist tourist=(Tourist) ObjectFinder.getUser(SessionHandler.getInstance().getUserId(), USERTYPE.Tourist);
+                assert tourist != null;
+                if(tourist.getLanguagePref()== LANGUAGES.Nepali){
+                    LocaleStorageSingleton.setLocaleNp();
+                }
+                else{
+                    LocaleStorageSingleton.setLocaleEn();
+                }
+                bundle = ResourceBundle.getBundle("languages.language", LocaleStorageSingleton.getLocale());
+                activeLoader=new FXMLLoader(Navigator.class.getResource("/com/example/ap/viewAttractions.fxml"),bundle);
+                activeTitle="All Attractions Page";
+                resizable=false;
             }
             case festive -> {
-
+                Tourist tourist=(Tourist) ObjectFinder.getUser(SessionHandler.getInstance().getUserId(), USERTYPE.Tourist);
+                assert tourist != null;
+                if(tourist.getLanguagePref()== LANGUAGES.Nepali){
+                    LocaleStorageSingleton.setLocaleNp();
+                }
+                else{
+                    LocaleStorageSingleton.setLocaleEn();
+                }
+                bundle = ResourceBundle.getBundle("languages.language", LocaleStorageSingleton.getLocale());
+                activeLoader=new FXMLLoader(Navigator.class.getResource("/com/example/ap/viewFestivals.fxml"),bundle);
+                activeTitle="All Attractions Page";
+                resizable=false;
             }
             case userEdit -> {
                 activeLoader=new FXMLLoader(Navigator.class.getResource("/com/example/ap/AdminParts/TouristControl.fxml"));
                 activeTitle="Guide Page";
                 resizable=false;
             }
+            case profileEditTourist -> {
+                Tourist tourist=(Tourist) ObjectFinder.getUser(SessionHandler.getInstance().getUserId(), USERTYPE.Tourist);
+                assert tourist != null;
+                if(tourist.getLanguagePref()== LANGUAGES.Nepali){
+                    LocaleStorageSingleton.setLocaleNp();
+                }
+                else{
+                    LocaleStorageSingleton.setLocaleEn();
+                }
+                bundle = ResourceBundle.getBundle("languages.language", LocaleStorageSingleton.getLocale());
+                activeLoader=new FXMLLoader(Navigator.class.getResource("/com/example/ap/ProfileEditTourist.fxml"),bundle);
+                activeTitle="Edit User Page";
+                resizable=false;
+            }
+            case profileEditGuide -> {
+
+            }
+            case MakeBooking -> {
+                Tourist tourist=(Tourist) ObjectFinder.getUser(SessionHandler.getInstance().getUserId(), USERTYPE.Tourist);
+                assert tourist != null;
+                if(tourist.getLanguagePref()== LANGUAGES.Nepali){
+                    LocaleStorageSingleton.setLocaleNp();
+                }
+                else{
+                    LocaleStorageSingleton.setLocaleEn();
+                }
+                bundle = ResourceBundle.getBundle("languages.language", LocaleStorageSingleton.getLocale());
+                activeLoader=new FXMLLoader(Navigator.class.getResource("/com/example/ap/MakeBooking.fxml"),bundle);
+                activeTitle="Make Booking";
+                resizable=false;
+            }
+
             default -> {
                 activeLoader=new FXMLLoader(Navigator.class.getResource("/com/example/ap/registerPage.fxml"));
                 activeTitle="Register Page";

@@ -5,6 +5,8 @@ import com.example.ap.classes.enums.*;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ObjectFinder {
 
@@ -240,26 +242,33 @@ public class ObjectFinder {
 
 
 
-    public static Festival getFestivalForDate(LocalDate currentDate) throws IOException{
+    public static List<Festival>  getFestivalForCurrent(LocalDate currentDate) throws IOException{
+        List<Festival> festivals=new ArrayList<>();
         try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.FestivalsFile))){
-            int id;
             String line;
             String[] parts;
-            LocalDate startDate;
-            LocalDate endDate;
+            int fid;
+            String name;
+            LocalDate start;
+            LocalDate end;
+            double discount;
+            Festival festival;
             while((line=br.readLine())!=null){
                 if (line.trim().isEmpty()) continue;
                 parts=line.split(",");
-                startDate=LocalDate.parse(parts[2]);
-                endDate=LocalDate.parse(parts[3]);
-                if((currentDate.equals(endDate)||currentDate.isBefore(endDate))
-                        &&(currentDate.equals(startDate)|| currentDate.isAfter(startDate) )){
-                    id=Integer.parseInt(parts[0]);
-                    return ObjectFinder.getFestive(id);
+                fid=Integer.parseInt(parts[0]);
+                name=parts[1];
+                start= LocalDate.parse(parts[2]);
+                end=LocalDate.parse(parts[3]);
+                discount=Double.parseDouble(parts[4]);
+                if((currentDate.equals(end)||currentDate.isBefore(end))
+                        &&(currentDate.equals(start)|| currentDate.isAfter(start) )) {
+                    festival = new Festival(fid, name, start, end, discount);
+                    festivals.add(festival);
                 }
-            }
 
+            }
         }
-        return null;
+        return festivals;
     }
 }

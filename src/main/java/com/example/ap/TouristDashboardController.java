@@ -3,18 +3,15 @@ package com.example.ap;
 import com.example.ap.classes.enums.NAVIGATIONS;
 import com.example.ap.handlers.ImportantVariables;
 import com.example.ap.handlers.Navigator;
-import com.example.ap.handlers.SessionHandler;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import javax.sql.rowset.spi.TransactionalWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -56,19 +53,23 @@ public class TouristDashboardController implements Initializable {
     }
 
     @FXML
-    private void onViewAttractions() {
-        System.out.println("Navigating to Attractions Page...");
+    private void onViewAttractions()throws IOException {
+        Navigator.Navigate(NAVIGATIONS.attraction,(Stage) bottomBar.getScene().getWindow());
     }
 
     @FXML
-    private void onBookTrip() {
+    private void onBookTrip() throws IOException{
         System.out.println("Navigating to Booking Page...");
 
     }
 
     @FXML
+    private void onViewFestivals()throws IOException{
+        Navigator.Navigate(NAVIGATIONS.festive,(Stage) bottomBar.getScene().getWindow());
+    }
+
+    @FXML
     private void onViewBookings() throws IOException {
-        System.out.println("Navigating to My Bookings...");
         Navigator.Navigate(NAVIGATIONS.booking,(Stage) bottomBar.getScene().getWindow());
     }
 
@@ -78,9 +79,7 @@ public class TouristDashboardController implements Initializable {
     }
 
     @FXML
-    private void onLogout() throws IOException {
-        System.out.println("Logging out...");
-        SessionHandler.getInstance().endSession();
-        Navigator.Navigate(NAVIGATIONS.REGISTER,(Stage) bottomBar.getScene().getWindow());
+    private void onProfileEdit() throws IOException {
+        Navigator.Navigate(NAVIGATIONS.profileEditTourist,(Stage) bottomBar.getScene().getWindow());
     }
 }

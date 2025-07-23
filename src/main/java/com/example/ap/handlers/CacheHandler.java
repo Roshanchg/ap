@@ -131,12 +131,13 @@ public class CacheHandler {
                 date=LocalDate.parse(parts[4]);
                 discount=Double.parseDouble(parts[5]);
                 isCancelled=Boolean.parseBoolean(parts[6]);
+                if(isCancelled)continue;
                 fid=Integer.parseInt(parts[7]);
                 booking=new Booking(id,uid,gid,aid,date,discount,isCancelled,fid);
                 bookings.add(booking);
             }
         }
-        return bookings;
+        return bookings.reversed();
     }
 
 

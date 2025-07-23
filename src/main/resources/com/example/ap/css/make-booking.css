@@ -1,0 +1,37 @@
+/* Overall padding for form */
+VBox {
+    -fx-padding: 20 100 20 100; /* top, right, bottom, left */
+}
+
+/* Top bar background and padding */
+.top_bar {
+    -fx-background-color: #2c3e50;
+    -fx-padding: 10 20;
+}
+
+/* Style for clickable labels in top bar */
+.clickable_label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+/* Hover effect for labels */
+.clickable_label:hover {
+    -fx-font-size: 16px;
+    -fx-text-fill: #ecf0f1;
+}
+
+/* Main title styling */
+.main-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+/* Status label styling */
+.status-label {
+    -fx-text-fill: red;
+    -fx-font-size: 14px;
+    -fx-padding: 10 0 0 0;
+}

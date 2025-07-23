@@ -30,13 +30,6 @@ public class Booking {
                 this.aid+","+this.bookingDate+","+this.discount+","+this.isCancelled+","+this.fid;
     }
 
-
-    public void applyDiscount() throws IOException {
-        LocalDate currentDate=LocalDate.now();
-        Festival festival= ObjectFinder.getFestivalForDate(currentDate);
-        assert festival != null;
-        this.discount=festival.getDiscountRate();
-    }
     public int getBookingId(){return this.bookingId;}
     public int getAid(){return this.aid;}
     public double getDiscount(){return this.discount;}
@@ -46,7 +39,9 @@ public class Booking {
     public int getGuideId(){return this.guideId;}
     public int getFid(){return this.fid;}
 
-
+    public void cancel(){
+        this.isCancelled=true;
+    }
     public void setGid(int id){this.guideId=id;}
 
 }

@@ -18,6 +18,10 @@ public class Festival {
         return this.id+","+this.name+","+this.startDate+","+this.endDate+","+this.discountRate;
     }
 
+    @Override
+    public String toString(){
+        return this.name;
+    }
     public double getDiscountRate(){
         return this.discountRate;
     }

@@ -4,6 +4,7 @@ import com.example.ap.AdminControllerBorderPaneSingleton;
 import com.example.ap.classes.*;
 import com.example.ap.classes.enums.LANGUAGES;
 import com.example.ap.classes.enums.USERTYPE;
+import com.example.ap.handlers.DeletionHandler;
 import com.example.ap.handlers.FileHandling;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -85,6 +86,7 @@ public class subFestivalControl implements Initializable {
                             try {
                                 FileHandling.removeFestival(festival.getId());
                                 FileHandling.makeLogs("Festival Removed: "+festival.getDetails());
+                                DeletionHandler.onFestivalDeletion(festival.getId());
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }

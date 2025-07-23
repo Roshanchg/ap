@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.ap.MakeBookingController"
+      spacing="20" style="-fx-padding: 20;" alignment="TOP_CENTER"
+      stylesheets="@css/make-booking.css">
+
+    <!-- Top bar (example minimal) -->
+    <HBox fx:id="topBar" spacing="50" alignment="CENTER_LEFT" styleClass="top_bar">
+        <Label fx:id="homeOption" text="%homeOption" styleClass="clickable_label" onMouseClicked="#onViewBookings"/>
+        <Label fx:id="bookingOption" text="%bookingOption" styleClass="clickable_label" onMouseClicked="#onViewBookings"/>
+        <Label fx:id="attractionOption" text="%attractionOption" styleClass="clickable_label" onMouseClicked="#onViewAttractions"/>
+        <Label fx:id="festivalOption" text="%festivalOption" styleClass="clickable_label" onMouseClicked="#onViewFestivals"/>
+        <Pane HBox.hgrow="ALWAYS"/>
+        <ImageView fitHeight="50" fitWidth="50" fx:id="userOption" onMouseClicked="#onProfileEdit" >
+            <Image url="@images/logo.png" />
+        </ImageView>
+    </HBox>
+
+    <Label text="Make a Booking" styleClass="main-title"/>
+
+    <GridPane hgap="15" vgap="15">
+
+        <Label text="Attraction:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Label fx:id="attractionLabel" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Booking Date:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <DatePicker fx:id="bookingDatePicker" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Festival Discount:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="festivalComboBox" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+
+        <Label text="Discount Rate:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <Label fx:id="discountLabel" text="0%" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <HBox spacing="15" alignment="CENTER_RIGHT">
+        <Button text="Submit Booking" fx:id="submitButton" onAction="#onSubmit"/>
+        <Button text="Cancel" fx:id="cancelButton" onAction="#onCancel"/>
+    </HBox>
+
+    <Label fx:id="statusLabel" styleClass="status-label"/>
+
+</VBox>

@@ -4,6 +4,7 @@ import com.example.ap.AdminControllerBorderPaneSingleton;
 import com.example.ap.admincontrollers.EditVsAddSingleton;
 import com.example.ap.classes.*;
 import com.example.ap.classes.enums.LANGUAGES;
+import com.example.ap.handlers.DeletionHandler;
 import com.example.ap.handlers.FileHandling;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -108,6 +109,7 @@ public class subAttractionsControl implements Initializable {
                             try {
                                 FileHandling.removeAttraction(attraction.getId());
                                 FileHandling.makeLogs("Attraction Deleted: "+attraction.getDetails());
+                                DeletionHandler.onAttractionDelete(attraction.getId());
                                 getTableView().getItems().remove(attraction);
                             } catch (IOException e) {
                                 throw new RuntimeException(e);

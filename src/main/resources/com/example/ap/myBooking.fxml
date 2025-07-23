@@ -13,19 +13,19 @@
 
     <top>
         <VBox styleClass="header-box" spacing="10">
-            <HBox fx:id="topBar" alignment="CENTER_LEFT" prefHeight="65.0" spacing="50" styleClass="top_bar">
+            <HBox fx:id="topBar" alignment="CENTER_LEFT" prefHeight="65.0" spacing="50" styleClass="top_bar" >
+                <Label fx:id="homeOption" styleClass="clickable_label" text="%homeOption" onMouseClicked="#goHome" />
                 <Label fx:id="bookingOption" styleClass="clickable_label" text="%bookingOption" />
-                <Label fx:id="attractionOption" styleClass="clickable_label" text="%attractionOption" />
-                <Label fx:id="festivalOption" styleClass="clickable_label" text="%festivalOption" />
-                <Label fx:id="homeOption" styleClass="clickable_label" text="%homeOption" />
+                <Label fx:id="attractionOption" styleClass="clickable_label" text="%attractionOption" onMouseClicked="#goAttractions"/>
+                <Label fx:id="festivalOption" styleClass="clickable_label" text="%festivalOption" onMouseClicked="#goFestivals"/>
                 <Pane HBox.hgrow="ALWAYS" />
-                <ImageView fitHeight="50" fitWidth="50" fx:id="userOption">
+                <ImageView fitHeight="50" fitWidth="50" fx:id="userOption" onMouseClicked="#goUserEdit">
                     <Image url="@images/logo.png" />
                 </ImageView>
             </HBox>
 
             <Label text="%mainBookingTitleMyBooking" styleClass="main-title"/>
-            <Button text="%addBookingMyBooking" styleClass="add-button"/>
+            <Button text="%addBookingMyBooking" styleClass="add-button" onAction="#goAttractions"/>
             <Button text="%reportEmergencyMyBooking" styleClass="emergencyButton"/>
             <Separator styleClass="separator"/>
         </VBox>

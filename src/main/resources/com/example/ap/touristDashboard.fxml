@@ -17,11 +17,11 @@
    <!-- Top section -->
    <HBox fx:id="topBar" alignment="CENTER_LEFT" prefHeight="65.0" spacing="50" styleClass="top_bar">
       <Label fx:id="bookingOption" styleClass="clickable_label" text="%bookingOption" onMouseClicked="#onViewBookings"/>
-      <Label fx:id="attractionOption" styleClass="clickable_label" text="%attractionOption" />
-      <Label fx:id="festivalOption" styleClass="clickable_label" text="%festivalOption" />
-      <Label fx:id="exploreOption" styleClass="clickable_label" text="%exploreOption" />
+      <Label fx:id="attractionOption" styleClass="clickable_label" text="%attractionOption" onMouseClicked="#onViewAttractions"/>
+      <Label fx:id="festivalOption" styleClass="clickable_label" text="%festivalOption" onMouseClicked="#onViewFestivals"/>
+      <Label fx:id="exploreOption" styleClass="clickable_label" text="%exploreOption" onMouseClicked="#onViewAttractions"/>
       <Pane HBox.hgrow="ALWAYS" />
-      <ImageView fitHeight="50" fitWidth="50" fx:id="userOption" onMouseClicked="#onLogout">
+      <ImageView fitHeight="50" fitWidth="50" fx:id="userOption" onMouseClicked="#onProfileEdit">
          <Image url="@images/logo.png" />
       </ImageView>
    </HBox>
@@ -34,7 +34,7 @@
       <VBox alignment="CENTER">
          <Label text="%mainLabel1"/>
          <Label text="%mainLabel2" style="-fx-padding:0 0 20 90;"/>
-         <Button fx:id="mainButton" text="%mainButton" />
+         <Button fx:id="mainButton" text="%mainButton" onAction="#onViewAttractions" />
       </VBox>
    </HBox>
 

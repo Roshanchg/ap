@@ -26,3 +26,9 @@
 2025-07-22T19:01:45.033941800 Edited Guide:  1,Safal Lohani,safal@g.com,9800000000,safal,English,10,true to: 1,Safal Lohani,safal@g.com,9800000000,safal,English,10,true
 2025-07-22T19:02:05.881754200 Assigned Guide: Safal Lohani to booking: 1,1,1,0,2025-07-14,0.0,false,0
 2025-07-22T19:09:15.688701900 Assigned Guide: Roshan Chg to booking: 1,1,2,0,2025-07-14,0.0,false,0
+2025-07-23T13:24:16.429104100 Added Attraction  2,Pokhara,Nepal,Rafting,LOW,low,true
+2025-07-23T13:24:40.879725800 Added Attraction  3,Kathmandu,Nepal,Trekking,LOW,low,false
+2025-07-23T13:25:24.854663400 Tourist Removed: 2,test,test@g.co,0000000000,roshan,Nepali,nepali,0000000000
+2025-07-23T13:25:26.194759100 Tourist Removed: 3,Motu,mot@gg.cco,0000000001,roshan,Nepali,bihari,1020102010
+2025-07-23T15:35:50.713517500 Edited Tourist: 1,Roshan Chaulagain,chgroshan6@gmail.com,9869724313,roshan,English,Nepali,9869724313 to: 1,Roshan Chg,chgroshan6@gmail.com,9869724313,roshan,English,Nepali,9869724313
+2025-07-23T15:45:20.274787600 Added festival  2,test,2025-07-23,2025-07-25,10.0

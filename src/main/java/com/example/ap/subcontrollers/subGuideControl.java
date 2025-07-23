@@ -8,6 +8,7 @@ import com.example.ap.classes.Tourist;
 import com.example.ap.classes.User;
 import com.example.ap.classes.enums.LANGUAGES;
 import com.example.ap.classes.enums.USERTYPE;
+import com.example.ap.handlers.DeletionHandler;
 import com.example.ap.handlers.FileHandling;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -112,6 +113,7 @@ public class subGuideControl implements  Initializable{
                                     FileHandling.removeUser(USERTYPE.Guide,guide.getId());
                                     FileHandling.makeLogs("Guide Removed: "+guide.getDetails());
                                     getTableView().getItems().remove(guide);
+                                    DeletionHandler.onUserDelete(guide.getId(),USERTYPE.Guide);
 
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);

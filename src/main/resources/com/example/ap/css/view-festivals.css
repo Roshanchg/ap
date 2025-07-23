@@ -1,0 +1,97 @@
+.root {
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-base: #f5f5f5;
+}
+
+Button {
+    -fx-cursor: hand;
+}
+
+.top_bar {
+    -fx-border-width: 2px;
+    -fx-padding: 0 40 0 80; /* top right bottom left */
+    -fx-background-color: rgba(0,0,0,0.1);
+}
+
+.top_bar > Label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+}
+
+.top_bar > ImageView {
+    -fx-cursor: hand;
+}
+
+.top_bar > Label:hover {
+    -fx-font-size: 18px;
+}
+
+.header-box {
+    -fx-padding: 20px;
+    -fx-background-color: #2c3e50;
+}
+
+.main-title {
+    -fx-text-fill: #ecf0f1;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.separator {
+    -fx-padding: 5px 0;
+}
+
+.filter-field {
+    -fx-max-width: 300px;  /* less wide */
+    -fx-pref-height: 35px; /* more tall */
+    -fx-font-size: 14px;
+    -fx-padding: 5 10 5 10;
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+    -fx-border-color: #ddd;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 20px;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.festivalContainer {
+    -fx-padding: 10px 20px;
+}
+
+.festival-card {
+    -fx-background-color: #f4f4f4;
+    -fx-background-radius: 10;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 10;
+    -fx-padding: 10;
+    -fx-spacing: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0);
+    -fx-min-width: 280px;
+    -fx-max-width: 280px;
+}
+
+.festival-title {
+    -fx-text-fill: #2c3e50;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.book-button {
+    -fx-background-color: #32CD32; /* lime green */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 15px;
+    -fx-background-radius: 4px;
+}
+
+.book-button:hover {
+    -fx-background-color: #2eb82e;
+}

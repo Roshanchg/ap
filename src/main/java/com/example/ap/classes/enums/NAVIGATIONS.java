@@ -10,5 +10,9 @@ public enum NAVIGATIONS {
     booking,
     attraction,
     festive,
-    userEdit
+    userEdit,
+
+    profileEditTourist,
+    profileEditGuide,
+    MakeBooking
 }
