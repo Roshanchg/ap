@@ -4,10 +4,7 @@ import com.example.ap.classes.Tourist;
 import com.example.ap.classes.enums.LANGUAGES;
 import com.example.ap.classes.enums.NAVIGATIONS;
 import com.example.ap.classes.enums.USERTYPE;
-import com.example.ap.handlers.FileHandling;
-import com.example.ap.handlers.Navigator;
-import com.example.ap.handlers.ObjectFinder;
-import com.example.ap.handlers.SessionHandler;
+import com.example.ap.handlers.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -146,6 +144,7 @@ public class ProfileEditTouristController implements Initializable {
     public void onDeleteAccount(ActionEvent actionEvent)throws IOException {
         int id=SessionHandler.getInstance().getUserId();
         FileHandling.removeUser(USERTYPE.Tourist,id);
+        DeletionHandler.onUserDelete(id,USERTYPE.Tourist);
         SessionHandler.getInstance().endSession();
         Navigator.Navigate(NAVIGATIONS.REGISTER,(Stage) nameField.getScene().getWindow());
     }
