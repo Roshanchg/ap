@@ -78,7 +78,7 @@ public class MakeBookingController implements Initializable {
                 fid
                 );
         FileHandling.MakeBooking(booking);
-        CacheHandler.reloadCache(USERTYPE.Tourist);
+        CacheHandler.ClearCache();
         ActiveAttractionSingleton.reset();
         ActiveFestivalSingleton.reset();
         Navigator.Navigate(NAVIGATIONS.booking,(Stage) topBar.getScene().getWindow());
