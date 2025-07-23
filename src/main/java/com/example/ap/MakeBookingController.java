@@ -4,6 +4,7 @@ import com.example.ap.classes.Attraction;
 import com.example.ap.classes.Booking;
 import com.example.ap.classes.Festival;
 import com.example.ap.classes.enums.NAVIGATIONS;
+import com.example.ap.classes.enums.USERTYPE;
 import com.example.ap.handlers.*;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -77,7 +78,7 @@ public class MakeBookingController implements Initializable {
                 fid
                 );
         FileHandling.MakeBooking(booking);
-        CacheHandler.ClearCache();
+        CacheHandler.reloadCache(USERTYPE.Tourist);
         ActiveAttractionSingleton.reset();
         ActiveFestivalSingleton.reset();
         Navigator.Navigate(NAVIGATIONS.booking,(Stage) topBar.getScene().getWindow());
