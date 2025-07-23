@@ -1,6 +1,11 @@
 package com.example.ap.handlers;
 
+import com.example.ap.LocaleStorageSingleton;
+import com.example.ap.classes.Guide;
+import com.example.ap.classes.Tourist;
+import com.example.ap.classes.enums.LANGUAGES;
 import com.example.ap.classes.enums.NAVIGATIONS;
+import com.example.ap.classes.enums.USERTYPE;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class Navigator {
     public static FXMLLoader activeLoader;
@@ -15,6 +22,7 @@ public class Navigator {
     public static boolean resizable;
     @FXML
     public static void Navigate(NAVIGATIONS nav, Stage stage) throws IOException {
+        ResourceBundle bundle = ResourceBundle.getBundle("languages.language", LocaleStorageSingleton.getLocale());
         switch(nav){
             case ADMIN -> {
                 activeLoader=new FXMLLoader(Navigator.class.getResource("/com/example/ap/adminDashboard.fxml"));
@@ -32,18 +40,45 @@ public class Navigator {
                 resizable=false;
             }
             case TOURIST -> {
-                activeLoader=new FXMLLoader(Navigator.class.getResource("/com/example/ap/touristDashboard.fxml"));
+                Tourist tourist=(Tourist) ObjectFinder.getUser(SessionHandler.getInstance().getUserId(), USERTYPE.Tourist);
+                assert tourist != null;
+                if(tourist.getLanguagePref()== LANGUAGES.Nepali){
+                    LocaleStorageSingleton.setLocaleNp();
+                }
+                else{
+                    LocaleStorageSingleton.setLocaleEn();
+                }
+                bundle = ResourceBundle.getBundle("languages.language", LocaleStorageSingleton.getLocale());
+                activeLoader= new FXMLLoader(Navigator.class.getResource("/com/example/ap/touristDashboard.fxml"), bundle);
                 activeTitle="Tourist Page";
                 resizable=false;
             }
             case GUIDE -> {
-                activeLoader=new FXMLLoader(Navigator.class.getResource("/com/example/ap/guideDashboard.fxml"));
+                Guide guide=(Guide) ObjectFinder.getUser(SessionHandler.getInstance().getUserId(), USERTYPE.Guide);
+                assert guide != null;
+                if(guide.getLanguageSpoken()== LANGUAGES.Nepali){
+                    LocaleStorageSingleton.setLocaleNp();
+                }
+                else{
+                    LocaleStorageSingleton.setLocaleEn();
+                }
+                bundle = ResourceBundle.getBundle("languages.language", LocaleStorageSingleton.getLocale());
+                activeLoader=new FXMLLoader(Navigator.class.getResource("/com/example/ap/guideDashboard.fxml"),bundle);
                 activeTitle="Guide Page";
                 resizable=false;
             }
             case booking -> {
-                activeLoader=new FXMLLoader(Navigator.class.getResource("/com/example/ap/myBooking.fxml"));
-                activeTitle="Guide Page";
+                Tourist tourist=(Tourist) ObjectFinder.getUser(SessionHandler.getInstance().getUserId(), USERTYPE.Tourist);
+                assert tourist != null;
+                if(tourist.getLanguagePref()== LANGUAGES.Nepali){
+                    LocaleStorageSingleton.setLocaleNp();
+                }
+                else{
+                    LocaleStorageSingleton.setLocaleEn();
+                }
+                bundle = ResourceBundle.getBundle("languages.language", LocaleStorageSingleton.getLocale());
+                activeLoader=new FXMLLoader(Navigator.class.getResource("/com/example/ap/myBooking.fxml"),bundle);
+                activeTitle="My Bookings Page";
                 resizable=false;
             }
             case attraction -> {

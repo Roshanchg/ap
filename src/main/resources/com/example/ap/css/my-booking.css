@@ -110,3 +110,20 @@ Button{
 .cancel-button:hover {
     -fx-background-color: #c0392b;
 }
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.booking-card {
+    -fx-background-color: #f4f4f4;
+    -fx-background-radius: 10;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 10;
+    -fx-padding: 10;
+}
+
+.emergencyButton {
+    -fx-background-color: #ff6666;
+    -fx-text-fill: white;
+}

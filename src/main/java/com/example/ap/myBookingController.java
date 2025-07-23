@@ -2,53 +2,113 @@ package com.example.ap;
 
 import com.example.ap.classes.Booking;
 import com.example.ap.classes.User;
+import com.example.ap.classes.enums.USERTYPE;
 import com.example.ap.handlers.CacheHandler;
-import com.example.ap.handlers.SessionHandler;
+import com.example.ap.handlers.ObjectFinder;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 
-import java.awt.print.Book;
 import java.io.IOException;
-import java.util.Collection;
+import java.net.URL;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.ResourceBundle;
+import java.util.function.Function;
 
+public class myBookingController implements Initializable {
+    private List<Booking> bookings;
 
-public class myBookingController {
-
-    @FXML
-    private VBox bookingsContainer;
-
-    @FXML
-    private Button addNewBookingButton;
+    private Function<Integer, String> guideNameResolver;
 
     @FXML
-    private HBox bookingContainer;
+    private FlowPane bookingContainer;
 
-    @FXML
-    private void initialize() throws IOException {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        List<Booking> bookings = null;
+        try {
+            bookings = CacheHandler.getBookingsCache();
+            this.bookings = bookings;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-        int loggedUserId=SessionHandler.getInstance().getUserId();
-        List<Booking> myBookings= CacheHandler.getBookingsCache();
-        for(Booking booking:myBookings){
-        Node bookingCard = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("BookingCard.fxml")));
-        bookingContainer.getChildren().add(bookingCard);
+        guideNameResolver = guideId -> {
+            if (guideId == 0) {
+                return "Not Assigned";
+            }
+            User guide = null;
+            try {
+                guide = ObjectFinder.getUser(guideId, USERTYPE.Guide);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return guide != null ? guide.getName() : "Not Assigned";
+        };
+        initializeBookings(this.bookings);
+    }
+
+    public void setBookings(List<Booking> bookings, Function<Integer, String> guideNameResolver) {
+        this.bookings = bookings;
+        this.guideNameResolver = guideNameResolver;
+
+        bookingContainer.getChildren().clear();
+
+        for (Booking booking : bookings) {
+            VBox card = new VBox(8);
+            card.setPadding(new Insets(15));
+            card.setPrefWidth(220);
+            card.setStyle("""
+                    -fx-background-color: white;
+                    -fx-background-radius: 12;
+                    -fx-border-color: #dddddd;
+                    -fx-border-radius: 12;
+                    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 4);
+                    """);
+
+            String attractionName;
+            try {
+                var attraction = ObjectFinder.getAttraction(booking.getAid());
+                attractionName = (attraction != null) ? attraction.getName() : "Removed Attraction";
+            } catch (IOException e) {
+                attractionName = "Removed Attraction";
+            }
+            Label attraction = new Label("Attraction: " + attractionName);
+
+            // Create guide label with a special ID so we can update text later
+            Label guide = new Label();
+            guide.setUserData("guideLabel_" + booking.getBookingId()); // identify label uniquely
+            guide.setText("Guide: " + guideNameResolver.apply(booking.getGuideId()));
+
+            Label date = new Label("Date: " + booking.getBookingDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            Label discount = new Label("Discount: " + booking.getDiscount() + "%");
+            Label description = new Label("Standard tourist package.\nIncludes basic amenities.");
+            description.setWrapText(true);
+
+            Button cancelBtn = new Button("Cancel");
+            cancelBtn.setStyle("-fx-background-color: #e63946; -fx-text-fill: white; -fx-background-radius: 20;");
+            cancelBtn.setOnAction(e -> handleCancel(booking));
+
+            card.getChildren().addAll(attraction, guide, date, discount, description, cancelBtn);
+            bookingContainer.getChildren().add(card);
         }
     }
 
-    @FXML
-    private void handleAddNewBooking() {
-        System.out.println("Add New Booking clicked");
-        // Add your logic here
+
+    private void handleCancel(Booking booking) {
+        System.out.println("Cancel booking with ID: " + booking.getBookingId());
     }
 
-    @FXML
-    private void handleCancelBooking() {
-        System.out.println("Cancel Booking clicked");
-        // Add your logic here
+    public void initializeBookings(List<Booking> bookings) {
+        setBookings(bookings, guideNameResolver);
     }
+
+
+
 }

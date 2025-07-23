@@ -20,6 +20,17 @@ public class CacheHandler {
 
     public static final String assignmentsCacheFile="cache/Guide/assign.csv";
 
+    public static void initCache() {
+        try {
+            Files.createDirectories(Paths.get("Exports"));
+            Files.createDirectories(cacheDir);
+            Files.createDirectories(Paths.get(bookingCacheFile).getParent());
+            Files.createDirectories(Paths.get(assignmentsCacheFile).getParent());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void ClearCache(){
 
         try (Stream<Path> paths = Files.walk(cacheDir)) {
@@ -84,7 +95,7 @@ public class CacheHandler {
     }
 
     public static void initBookingsCache()throws IOException{
-        if(!fileExists(assignmentsCacheFile)){
+        if(!fileExists(bookingCacheFile)){
             List<Booking> allBookings=FileHandling.AllBookings();
             for(Booking booking: allBookings) {
                 assert booking != null;

@@ -16,10 +16,10 @@
 
    <!-- Top section -->
    <HBox fx:id="topBar" alignment="CENTER_LEFT" prefHeight="65.0" spacing="50" styleClass="top_bar">
-      <Label fx:id="bookingOption" styleClass="clickable_label" text="My Bookings" />
-      <Label fx:id="attractionOption" styleClass="clickable_label" text="Attractions" />
-      <Label fx:id="festivalOption" styleClass="clickable_label" text="Festive Offers" />
-      <Label fx:id="exploreOption" styleClass="clickable_label" text="Explore" />
+      <Label fx:id="bookingOption" styleClass="clickable_label" text="%bookingOption" onMouseClicked="#onViewBookings"/>
+      <Label fx:id="attractionOption" styleClass="clickable_label" text="%attractionOption" />
+      <Label fx:id="festivalOption" styleClass="clickable_label" text="%festivalOption" />
+      <Label fx:id="exploreOption" styleClass="clickable_label" text="%exploreOption" />
       <Pane HBox.hgrow="ALWAYS" />
       <ImageView fitHeight="50" fitWidth="50" fx:id="userOption" onMouseClicked="#onLogout">
          <Image url="@images/logo.png" />
@@ -31,10 +31,10 @@
 
    <!-- Middle section -->
    <HBox fx:id="mainLabel" alignment="CENTER_LEFT" styleClass="main_label">
-      <VBox alignment="CENTER" >
-         <Label text="EXPLORE"/>
-         <Label text="NEPAL" style="-fx-padding:0 0 20 90;"/>
-         <Button fx:id="mainButton" text="Click Me" />
+      <VBox alignment="CENTER">
+         <Label text="%mainLabel1"/>
+         <Label text="%mainLabel2" style="-fx-padding:0 0 20 90;"/>
+         <Button fx:id="mainButton" text="%mainButton" />
       </VBox>
    </HBox>
 
@@ -47,21 +47,20 @@
       <HBox fx:id="bottomBar" prefHeight="60.0" spacing="50" styleClass="bottom_bar" alignment="CENTER_LEFT">
 
          <VBox spacing="5" styleClass="bottom_child" prefWidth="200">
-            <Label text="01" styleClass="cyan_ones"/>
-            <Label text="Mustang" styleClass="mid_ones"/>
-            <Label text="Mountain views, jungles " styleClass="bottom_ones"/>
-            <Label text="and distant villages." styleClass="bottom_ones"/>
-
-         </VBox>
-         <VBox spacing="5" styleClass="bottom_child"  prefWidth="200">
-            <Label text="02" styleClass="cyan_ones"/>
-            <Label text="Ghangruk" styleClass="mid_ones"/>
-            <Label text="Submerged village in the 70s." styleClass="bottom_ones"/>
+            <Label text="%bottomLabel1.1" styleClass="cyan_ones"/>
+            <Label text="%bottomLabel1.2" styleClass="mid_ones"/>
+            <Label text="%bottomLabel1.3" styleClass="bottom_ones"/>
+            <Label text="%bottomLabel1.4" styleClass="bottom_ones"/>
          </VBox>
          <VBox spacing="5" styleClass="bottom_child" prefWidth="200">
-            <Label text="03" styleClass="cyan_ones"/>
-            <Label text="Thlichok" styleClass="mid_ones"/>
-            <Label text="Stunning alpine beauty" styleClass="bottom_ones"/>
+            <Label text="%bottomLabel2.1" styleClass="cyan_ones"/>
+            <Label text="%bottomLabel2.2" styleClass="mid_ones"/>
+            <Label text="%bottomLabel2.3" styleClass="bottom_ones"/>
+         </VBox>
+         <VBox spacing="5" styleClass="bottom_child" prefWidth="200">
+            <Label text="%bottomLabel3.1" styleClass="cyan_ones"/>
+            <Label text="%bottomLabel3.2" styleClass="mid_ones"/>
+            <Label text="%bottomLabel3.3" styleClass="bottom_ones"/>
          </VBox>
       </HBox>
       <Pane HBox.hgrow="NEVER"/>
