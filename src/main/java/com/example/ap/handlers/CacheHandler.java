@@ -137,6 +137,10 @@ public class CacheHandler {
                 bookings.add(booking);
             }
         }
+        catch (FileNotFoundException e){
+            return null;
+        }
+
         return bookings.reversed();
     }
 
@@ -184,6 +188,9 @@ public class CacheHandler {
                 bookings.add(booking);
                 }
             }
+        catch (FileNotFoundException e){
+            return null;
+        }
         return bookings;
     }
 

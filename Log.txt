@@ -32,3 +32,6 @@
 2025-07-23T13:25:26.194759100 Tourist Removed: 3,Motu,mot@gg.cco,0000000001,roshan,Nepali,bihari,1020102010
 2025-07-23T15:35:50.713517500 Edited Tourist: 1,Roshan Chaulagain,chgroshan6@gmail.com,9869724313,roshan,English,Nepali,9869724313 to: 1,Roshan Chg,chgroshan6@gmail.com,9869724313,roshan,English,Nepali,9869724313
 2025-07-23T15:45:20.274787600 Added festival  2,test,2025-07-23,2025-07-25,10.0
+2025-07-24T07:16:38.686111300 Edited Guide: 2,Roshan Chg,ch@g.co,0000000000,aaaa,English,0,true to: 2,Roshan Chg,ch@g.co,0000000000,aaaa,English,0,false
+2025-07-24T07:16:59.305792600 Edited Guide: 2,Roshan Chg,ch@g.co,0000000000,aaaa,English,0,false to: 2,Roshan Chg,ch@g.co,0000000000,aaaa,English,0,false
+2025-07-24T07:17:10.402521800 Edited Guide: 2,Roshan Chg,ch@g.co,0000000000,aaaa,English,0,false to: 2,Roshan Chg,ch@g.co,0000000000,aaaa,Nepali,0,false

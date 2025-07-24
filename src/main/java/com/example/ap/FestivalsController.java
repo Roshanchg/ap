@@ -86,6 +86,7 @@ public class FestivalsController implements Initializable {
     }
 
     private void handleBooking(Festival festival) throws IOException{
+        ActiveFestivalSingleton.reset();
         System.out.println("Booking festival: " + festival.getName());
         ActiveFestivalSingleton.setFid(festival.getId());
         Navigator.Navigate(NAVIGATIONS.attraction,(Stage) festivalContainer.getScene().getWindow());

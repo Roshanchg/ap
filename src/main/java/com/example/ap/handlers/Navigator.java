@@ -64,7 +64,7 @@ public class Navigator {
                 }
                 bundle = ResourceBundle.getBundle("languages.language", LocaleStorageSingleton.getLocale());
                 activeLoader=new FXMLLoader(Navigator.class.getResource("/com/example/ap/guideDashboard.fxml"),bundle);
-                activeTitle="Guide Page";
+                activeTitle="Edit User Page";
                 resizable=false;
             }
             case booking -> {
@@ -129,6 +129,18 @@ public class Navigator {
                 resizable=false;
             }
             case profileEditGuide -> {
+                Guide guide=(Guide) ObjectFinder.getUser(SessionHandler.getInstance().getUserId(), USERTYPE.Guide);
+                assert guide != null;
+                if(guide.getLanguageSpoken()== LANGUAGES.Nepali){
+                    LocaleStorageSingleton.setLocaleNp();
+                }
+                else{
+                    LocaleStorageSingleton.setLocaleEn();
+                }
+                bundle = ResourceBundle.getBundle("languages.language", LocaleStorageSingleton.getLocale());
+                activeLoader=new FXMLLoader(Navigator.class.getResource("/com/example/ap/ProfileEditGuide.fxml"),bundle);
+                activeTitle="Edit User Page";
+                resizable=false;
 
             }
             case MakeBooking -> {

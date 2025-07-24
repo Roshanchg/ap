@@ -84,6 +84,7 @@ public class AttractionsController implements Initializable {
     }
 
     private void handleBooking(Attraction attraction) throws IOException {
+        ActiveAttractionSingleton.reset();
         System.out.println("Booking attraction: " + attraction.getName());
         ActiveAttractionSingleton.setAid(attraction.getId());
         Navigator.Navigate(NAVIGATIONS.MakeBooking,(Stage) attractionContainer.getScene().getWindow());

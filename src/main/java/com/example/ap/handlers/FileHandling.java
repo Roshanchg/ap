@@ -51,7 +51,6 @@ public class FileHandling {
         List<File> files = Arrays.asList(
                 new File(TouristFile),
                 new File(GuideFile),
-                new File(AdminFile),
                 new File(ReportFile),
                 new File(AttractionsFile),
                 new File(FestivalsFile),
@@ -65,6 +64,7 @@ public class FileHandling {
                 file.createNewFile();
             }
         }
+        AdminInitializer.init();
     }
 
     public static boolean phoneExists(String phonenumber,USERTYPE usertype) throws IOException{

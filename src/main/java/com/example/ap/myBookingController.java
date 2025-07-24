@@ -62,7 +62,9 @@ public class myBookingController implements Initializable {
         this.guideNameResolver = guideNameResolver;
 
         bookingContainer.getChildren().clear();
-
+        if(bookings==null){
+            return;
+        }
         for (Booking booking : bookings) {
             VBox card = new VBox(8);
             card.setPadding(new Insets(15));
@@ -84,9 +86,8 @@ public class myBookingController implements Initializable {
             }
             Label attraction = new Label("Attraction: " + attractionName);
 
-            // Create guide label with a special ID so we can update text later
             Label guide = new Label();
-            guide.setUserData("guideLabel_" + booking.getBookingId()); // identify label uniquely
+            guide.setUserData("guideLabel_" + booking.getBookingId());
             guide.setText("Guide: " + guideNameResolver.apply(booking.getGuideId()));
 
             Label date = new Label("Date: " + booking.getBookingDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
