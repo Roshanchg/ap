@@ -7,14 +7,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -62,5 +60,12 @@ public class subLogsControl implements Initializable {
             };
             return cell;
         });
+    }
+    @FXML
+    public void onExportLogs() throws IOException {
+        FileHandling.getLogs();
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("Log Exported at /Exports/Log.txt");
+        alert.showAndWait();
     }
 }

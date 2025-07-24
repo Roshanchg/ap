@@ -19,9 +19,7 @@
     </HBox>
 
     <HBox spacing="20" alignment="CENTER_LEFT" styleClass="toolbar">
-        <TextField promptText="Search..." styleClass="search-field"/>
-        <Button text="Filter" styleClass="action-button" />
-        <Button text="Clear" styleClass="secondary-button" />
+        <Button text="Export Logs" styleClass="action-button" onAction="#onExportLogs" />
     </HBox>
 
     <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED" prefWidth="800" prefHeight="400">

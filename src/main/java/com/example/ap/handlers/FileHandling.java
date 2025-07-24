@@ -878,6 +878,27 @@ public class FileHandling {
                 StandardCopyOption.REPLACE_EXISTING
         );
     }
+    public static void exportEmergencyLogs()throws IOException{
+        List<EmergencyLog> emergencyLog=AdminDashboardHandler.getEmergencyLogs();
+        if(emergencyLog==null){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Emergency Log Export Error");
+            alert.setContentText("No Emergency Logs Found to export!! \nCancelling export");
+            alert.showAndWait();
+            return;
+        }
+        File emergencyLogFile=new File("Exports/EmergencyLogs.txt");
+        if(emergencyLogFile.exists()){
+            emergencyLogFile.delete();
+        }
+        emergencyLogFile.createNewFile();
+        try(BufferedWriter bw=new BufferedWriter(new FileWriter(emergencyLogFile,true))){
+            for(EmergencyLog log:emergencyLog){
+                bw.write(log.getDetails());
+                bw.newLine();
+            }
+        }
+    }
 
 
 

@@ -10,7 +10,8 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.example.ap.subcontrollers.AdminDashboard">
     <GridPane styleClass="content-pane" hgap="20" vgap="20">
         <columnConstraints>
             <ColumnConstraints percentWidth="50"/>
@@ -46,16 +47,16 @@
 
         <!-- Bad Weather Bookings Section -->
         <VBox styleClass="data-card" GridPane.columnIndex="0" GridPane.rowIndex="1">
-            <Label text="Bad Weather Bookings" styleClass="data-card-title"/>
-            <Pane VBox.vgrow="ALWAYS"/>
-            <Button text="New Bookings" styleClass="action-button"/>
+            <Label text="Emergency Logs" styleClass="data-card-title"/>
+            <VBox fx:id="emergencyLogsContainer" spacing="10" VBox.vgrow="ALWAYS" />
+            <Button text="Export Log" styleClass="action-button" onAction="#exportLog"/>
         </VBox>
 
         <!-- Mystical Treks Section -->
         <VBox styleClass="data-card" GridPane.columnIndex="1" GridPane.rowIndex="1">
-            <Label text="Mystical Treks" styleClass="data-card-title"/>
-            <Label text="There are no risks assigned." styleClass="info-text"/>
-            <Label text="There are no action items assigned." styleClass="info-text"/>
+            <Label text="Risks" styleClass="data-card-title"/>
+            <VBox fx:id="alertsContainer" spacing="10" VBox.vgrow="ALWAYS"/>
+            <Button text="New Alert" styleClass="action-button" onAction="#createAlert"/>
         </VBox>
     </GridPane>
 </VBox>
