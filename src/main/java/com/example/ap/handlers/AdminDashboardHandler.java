@@ -45,10 +45,11 @@ public class AdminDashboardHandler {
     }
     public static List<EmergencyLog> getEmergencyLogs()throws IOException{
         List<EmergencyLog> emergencyOnly=new ArrayList<>();
-        emergencyOnly=null;
+        String message;
         List<EmergencyLog> allLogs=FileHandling.AllLogs();
         for(EmergencyLog log:allLogs){
-            if((log.getMessage().split(" ",2)[0]).equals("Emergency: ")){
+            message= log.getMessage();
+            if(message.split(" ",2)[0].trim().equalsIgnoreCase("Emergency:")){
                 emergencyOnly.add(log);
             }
         }

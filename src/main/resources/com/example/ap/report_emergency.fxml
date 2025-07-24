@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.ap.subcontrollers.ReportEmergencyController"
+      alignment="CENTER" style=" -fx-padding: 20;">
+    <Label text="Enter Emergency Message:"/>
+    <TextField fx:id="messageField" promptText="Type here..."/>
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Cancel" onAction="#onCancel"/>
+        <Button text="Confirm" onAction="#onConfirm"/>
+    </HBox>
+</VBox>

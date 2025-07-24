@@ -28,13 +28,6 @@ public class TouristDashboardController implements Initializable {
     @FXML private HBox mainLabel;
     @FXML private HBox bottomBar;
 
-    private String touristName;
-
-    public void setTouristName(String name) {
-        this.touristName = name;
-//        welcomeLabel.setText("Welcome, " + touristName + "!");
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> {
@@ -58,12 +51,6 @@ public class TouristDashboardController implements Initializable {
     }
 
     @FXML
-    private void onBookTrip() throws IOException{
-        System.out.println("Navigating to Booking Page...");
-
-    }
-
-    @FXML
     private void onViewFestivals()throws IOException{
         Navigator.Navigate(NAVIGATIONS.festive,(Stage) bottomBar.getScene().getWindow());
     }
@@ -71,11 +58,6 @@ public class TouristDashboardController implements Initializable {
     @FXML
     private void onViewBookings() throws IOException {
         Navigator.Navigate(NAVIGATIONS.booking,(Stage) bottomBar.getScene().getWindow());
-    }
-
-    @FXML
-    private void onReportEmergency() {
-        System.out.println("Emergency reported!");
     }
 
     @FXML

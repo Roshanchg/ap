@@ -78,8 +78,12 @@ public class AdminDashboard implements Initializable {
         List<EmergencyLog> logs = AdminDashboardHandler.getEmergencyLogs();
         emergencyLogsContainer.getChildren().clear();
         if(logs==null) return;
+        String message;
+        String username;
         for (EmergencyLog log : logs) {
-            Label label = new Label(log.getMessage()); // use your actual getter
+            username=log.getMessage().split(" ")[1].trim();
+            message=log.getMessage().split(" ")[2].trim();
+            Label label = new Label("From: "+username+", "+message);
             label.getStyleClass().add("info-text");
             emergencyLogsContainer.getChildren().add(label);
         }
@@ -95,10 +99,8 @@ public class AdminDashboard implements Initializable {
         }
     }
 
-    public void createAlert(ActionEvent actionEvent) throws IOException {
-        BorderPane mainBorderPane= AdminControllerBorderPaneSingleton.getMainPane();
-        Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/ap/AdminParts/AllAlerts.fxml")));
-        mainBorderPane.setCenter(touristControl);
+    public void exportReport(ActionEvent actionEvent) throws IOException {
+        FileHandling.makeReport();
     }
 
     public void exportLog(ActionEvent actionEvent) throws IOException{

@@ -56,7 +56,7 @@
         <VBox styleClass="data-card" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <Label text="Risks" styleClass="data-card-title"/>
             <VBox fx:id="alertsContainer" spacing="10" VBox.vgrow="ALWAYS"/>
-            <Button text="New Alert" styleClass="action-button" onAction="#createAlert"/>
+            <Button text="Export Reports" styleClass="action-button" onAction="#exportReport"/>
         </VBox>
     </GridPane>
 </VBox>

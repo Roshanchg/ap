@@ -4,16 +4,13 @@ import com.example.ap.classes.*;
 import com.example.ap.classes.enums.*;
 import javafx.scene.control.Alert;
 
-import java.awt.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,7 +34,8 @@ public class FileHandling {
     public static String TouristFile="tourists.csv";
     public static String GuideFile="Guides.csv";
     public static String AdminFile="Admins.csv";
-    public static String ReportFile="Report.csv";
+    public static String ReportBarFile ="Exports/ReportBar.csv";
+    public static String ReportPieFile ="Exports/ReportPie.csv";
     public static String AttractionsFile="Attractions.csv";
     public static String FestivalsFile="Festivals.csv";
     public static String BookingsFile="Bookings.csv";
@@ -51,7 +49,6 @@ public class FileHandling {
         List<File> files = Arrays.asList(
                 new File(TouristFile),
                 new File(GuideFile),
-                new File(ReportFile),
                 new File(AttractionsFile),
                 new File(FestivalsFile),
                 new File(BookingsFile),
@@ -826,17 +823,45 @@ public class FileHandling {
     }
 
     public static void makeReport() throws IOException{
+        LocalDate date;
+        Attraction attraction;
+        int atCount;
+        int bkCount;
+        Map<LocalDate,Integer> DateCountMap=AdminDashboardHandler.getBookingDateChartMap();
+        Map<Attraction,Integer> AttractionCountMap=AdminDashboardHandler.getAttractionBookingMap();
+        File reportBar=new File(ReportBarFile);
+        File reportPie=new File(ReportPieFile);
+        if(reportBar.exists()){
+            reportBar.delete();
+        }
+        if(reportPie.exists()){
+            reportPie.delete();
+        }
+        reportBar.createNewFile();
+        reportPie.createNewFile();
+
+        try(BufferedWriter bw=new BufferedWriter(new FileWriter(reportBar))){
+            for(Map.Entry<LocalDate,Integer> entry:DateCountMap.entrySet()){
+                date=entry.getKey();
+                bkCount=entry.getValue();
+                bw.write(date+","+bkCount);
+                bw.newLine();
+            }
+        }
+        try(BufferedWriter bw=new BufferedWriter(new FileWriter(reportPie))){
+            for(Map.Entry<Attraction,Integer> entry:AttractionCountMap.entrySet()){
+                attraction=entry.getKey();
+                atCount=entry.getValue();
+                bw.write(attraction.getName()+","+atCount);
+                bw.newLine();
+            }
+        }
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Reports Export Success");
+        alert.setContentText("Reports Exported at Exports/ReportBar.csv &\n Exports/ReportPie.csv");
+        alert.showAndWait();
 
     }
-
-    public static void getReport()throws IOException{
-        Files.copy(
-                Paths.get(ReportFile),
-                Paths.get("Exports", Paths.get(ReportFile).getFileName().toString()),
-                StandardCopyOption.REPLACE_EXISTING
-        );
-    }
-
 
     public static List<EmergencyLog> AllLogs() throws IOException{
         List<EmergencyLog> logs=new ArrayList<>();
@@ -898,6 +923,10 @@ public class FileHandling {
                 bw.newLine();
             }
         }
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Emergency Log Export Success");
+        alert.setContentText("Emergency Logs Exported at Exports/EmergencyLogs.txt");
+        alert.showAndWait();
     }
 
 

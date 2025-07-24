@@ -22,5 +22,9 @@ id, type, message, months active
 Logs.txt
 time message
 
-Report.csv
-date ,User, booking attraction name, discount , Guide
+
+ReportBar.csv (Not a Class)
+attraction, bookingCount
+
+ReportPie.csv
+date, bookingCount

@@ -24,8 +24,9 @@ fx:id="mainBorderPane">
                 <Button text="Festivals" styleClass="sidebar-button" fx:id="FestivalsBt" onAction="#onFestivalsControl"/>
                 <Button text="Guides" styleClass="sidebar-button" fx:id="GuidesBt" onAction="#onGuideControl"/>
                 <Button text="Bookings" styleClass="sidebar-button" fx:id="BookingsBt" onAction="#onBookingsControl"/>
-                <Button text="Emergency Log" styleClass="sidebar-button" fx:id="LogsBt" onAction="#onLogsControl"/>
+                <Button text="Logs" styleClass="sidebar-button" fx:id="LogsBt" onAction="#onLogsControl"/>
                 <Button text="Alerts" styleClass="sidebar-button" fx:id="AlertBt" onAction="#onReportControl"/>
+                <Button text="Log Out" styleClass="sidebar-button" fx:id="logoutBt" onAction="#onLogOut"/>
             </VBox>
         </VBox>
     </left>

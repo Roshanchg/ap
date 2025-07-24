@@ -4,23 +4,28 @@ import com.example.ap.classes.Booking;
 import com.example.ap.classes.User;
 import com.example.ap.classes.enums.NAVIGATIONS;
 import com.example.ap.classes.enums.USERTYPE;
-import com.example.ap.handlers.CacheHandler;
-import com.example.ap.handlers.FileHandling;
-import com.example.ap.handlers.Navigator;
-import com.example.ap.handlers.ObjectFinder;
+import com.example.ap.handlers.*;
+import com.example.ap.subcontrollers.ReportEmergencyController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
@@ -112,7 +117,6 @@ public class myBookingController implements Initializable {
 
 
     private void handleCancel(Booking booking) throws IOException{
-        System.out.println("Cancel booking with ID: " + booking.getBookingId());
         booking.cancel();
         FileHandling.editBooking(booking.getBookingId(),booking);
         CacheHandler.ClearCache();
@@ -143,4 +147,39 @@ public class myBookingController implements Initializable {
     public void goUserEdit() throws IOException{
         Navigator.Navigate(NAVIGATIONS.profileEditTourist,(Stage) bookingContainer.getScene().getWindow());
     }
+
+    @FXML
+    public void reportEmergency() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ap/report_emergency.fxml"));
+            Parent root = loader.load();
+
+            Stage dialog = new Stage();
+            dialog.setTitle("Report Emergency");
+            dialog.setScene(new Scene(root));
+            dialog.initModality(Modality.APPLICATION_MODAL); // block main window
+            dialog.showAndWait();
+
+            ReportEmergencyController controller = loader.getController();
+            String message = controller.getResult();
+
+            if (message != null && !message.isEmpty()) {
+                FileHandling.makeLogs("Emergency: "+ Objects.requireNonNull(
+                        ObjectFinder.getUser(
+                        SessionHandler.getInstance().getUserId()
+                                , USERTYPE.Tourist)).getName()
+                +". "+message);
+                Alert alert=new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Emergency Log Success");
+                alert.setContentText("Emergency Message sent!");
+                alert.showAndWait();
+            } else {
+                dialog.close();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
