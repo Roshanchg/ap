@@ -127,18 +127,18 @@ public class ProfileEditGuestController implements Initializable {
     }
 
     @FXML
-    public void onViewAssigns(MouseEvent mouseEvent) throws IOException{
+    public void onViewAssigns() throws IOException{
         Navigator.Navigate(NAVIGATIONS.GUIDE,(Stage) nameField.getScene().getWindow());
     }
 
     @FXML
-    public void onLogout(ActionEvent actionEvent) throws IOException {
+    public void onLogout() throws IOException {
         SessionHandler.getInstance().endSession();
         Navigator.Navigate(NAVIGATIONS.REGISTER,(Stage) nameField.getScene().getWindow());
     }
 
     @FXML
-    public void onDeleteAccount(ActionEvent actionEvent)throws IOException {
+    public void onDeleteAccount()throws IOException {
         int id=SessionHandler.getInstance().getUserId();
         FileHandling.removeUser(USERTYPE.Guide,id);
         DeletionHandler.onUserDelete(id,USERTYPE.Guide);
