@@ -111,6 +111,7 @@ public class ProfileEditGuestController implements Initializable {
         FileHandling.makeLogs("Edited Guide: " + currentGuide.getDetails() + " to: " + updatedGuide.getDetails());
         FileHandling.editUser(USERTYPE.Guide, currentGuide.getId(), updatedGuide);
         showAlert("Success", "Your information has been updated successfully.");
+        Navigator.Navigate(NAVIGATIONS.profileEditGuide,(Stage) nameField.getScene().getWindow());
     }
 
     private boolean isValidPhone(String phone) {

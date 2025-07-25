@@ -42,3 +42,4 @@
 2025-07-25T07:22:05.417919400 Assigned Guide: Roshan Chg to booking: 2,1,2,1,2025-07-20,10.0,false,2
 2025-07-25T07:50:29.504536400 Edited Guide:  2,Roshan,chgroshan6@gmail.com,1111111111,roshan,English,1,true to: 2,Roshan,chgroshan6@gmail.com,1111111111,roshan,English,1,true
 2025-07-25T07:50:46.488347600 Assigned Guide: Roshan to booking: 1,3,2,1,2025-07-31,0.0,false,0
+2025-07-25T14:24:22.317999400 Edited Tourist: 3,Raghav,rag@gmail.com,1111111111,raghav,Nepali,Nepali,1111111111 to: 3,Raghav,rag@gmail.com,1111111111,raghav,English,Nepali,1111111111

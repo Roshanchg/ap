@@ -105,6 +105,7 @@ public class ProfileEditTouristController implements Initializable {
         FileHandling.makeLogs("Edited Tourist: " + currentTourist.getDetails() + " to: " + updatedTourist.getDetails());
         FileHandling.editUser(USERTYPE.Tourist, currentTourist.getId(), updatedTourist);
         showAlert("Success", "Your information has been updated successfully.");
+        Navigator.Navigate(NAVIGATIONS.profileEditTourist,(Stage) nameField.getScene().getWindow());
     }
 
     private boolean isValidPhone(String phone) {
