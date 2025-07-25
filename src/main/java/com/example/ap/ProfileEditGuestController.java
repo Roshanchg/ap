@@ -107,6 +107,7 @@ public class ProfileEditGuestController implements Initializable {
                 languageSpoken,
                 yearsOfExperience
         );
+        updatedGuide.updateAvailability(availabilityField.isSelected());
 
         FileHandling.makeLogs("Edited Guide: " + currentGuide.getDetails() + " to: " + updatedGuide.getDetails());
         FileHandling.editUser(USERTYPE.Guide, currentGuide.getId(), updatedGuide);
