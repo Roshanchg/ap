@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
@@ -42,10 +43,15 @@ public class FileHandling {
     public static String LogFile="Log.txt";
     public static String AlertsFile="Alerts.csv";
 
+    public static final Path exportDir=Paths.get("Exports");
 
+    public static final Path tempDir=Paths.get("temp");
 
 
     public static void init() throws IOException{
+        Files.createDirectories(exportDir);
+        Files.createDirectories(tempDir);
+
         List<File> files = Arrays.asList(
                 new File(TouristFile),
                 new File(GuideFile),
