@@ -20,9 +20,6 @@
 
     <HBox spacing="20" alignment="CENTER_LEFT" styleClass="toolbar">
         <Button text="Add Alert" styleClass="primary-button" onAction="#addAlert"/>
-        <TextField promptText="Search..." styleClass="search-field"/>
-        <Button text="Filter" styleClass="action-button" />
-        <Button text="Clear" styleClass="secondary-button" />
     </HBox>
 
     <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED" prefWidth="800" prefHeight="400">

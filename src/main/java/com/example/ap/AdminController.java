@@ -2,6 +2,7 @@ package com.example.ap;
 
 import com.example.ap.classes.Alerts;
 import com.example.ap.classes.enums.NAVIGATIONS;
+import com.example.ap.handlers.CacheHandler;
 import com.example.ap.handlers.Navigator;
 import com.example.ap.handlers.SessionHandler;
 import javafx.animation.PauseTransition;
@@ -32,6 +33,7 @@ public class AdminController {
 
 
     public void initialize() throws IOException {
+        CacheHandler.ClearCache();
         Node touristControl = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/ap/AdminParts/DashBoard.fxml")));
         mainBorderPane.setCenter(touristControl);
         AdminControllerBorderPaneSingleton.setMainPane(mainBorderPane);

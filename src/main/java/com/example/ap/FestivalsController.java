@@ -30,8 +30,6 @@ public class FestivalsController implements Initializable {
     @FXML
     private FlowPane festivalContainer;
 
-    @FXML
-    private TextField filterField;
 
     private List<Festival> festivals;
 
@@ -45,13 +43,6 @@ public class FestivalsController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        filterField.textProperty().addListener((obs, oldVal, newVal) -> {
-            List<Festival> filtered = festivals.stream()
-                    .filter(f -> f.getName().toLowerCase().contains(newVal.toLowerCase()))
-                    .collect(Collectors.toList());
-            displayFestivals(filtered);
-        });
     }
 
     private void displayFestivals(List<Festival> list) {

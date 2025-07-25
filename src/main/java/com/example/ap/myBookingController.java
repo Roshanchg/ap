@@ -63,6 +63,7 @@ public class myBookingController implements Initializable {
     }
 
     public void setBookings(List<Booking> bookings, Function<Integer, String> guideNameResolver) {
+        ResourceBundle bundle = ResourceBundle.getBundle("languages.language", LocaleStorageSingleton.getLocale());
         this.bookings = bookings;
         this.guideNameResolver = guideNameResolver;
 

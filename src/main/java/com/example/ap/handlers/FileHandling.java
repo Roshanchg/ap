@@ -473,6 +473,7 @@ public class FileHandling {
         }
     }
     public static void editBooking(int bid,Booking newBooking)throws IOException{
+        if(bid==0 || newBooking==null)return;
         File originalFile=new File(BookingsFile);
         File tempFile=new File("temp",BookingsFile);
         tempFile.createNewFile();
@@ -502,6 +503,7 @@ public class FileHandling {
 
     }
     public static void removeBooking(int bid) throws IOException{
+        if(bid==0) return;
         File originalFile=new File(BookingsFile);
         File tempFile=new File("temp",BookingsFile);
         tempFile.createNewFile();

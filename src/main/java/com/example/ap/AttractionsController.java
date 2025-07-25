@@ -26,8 +26,6 @@ public class AttractionsController implements Initializable {
     @FXML
     private FlowPane attractionContainer;
 
-    @FXML
-    private TextField filterField;
 
     private List<Attraction> attractions;
 
@@ -42,12 +40,6 @@ public class AttractionsController implements Initializable {
             e.printStackTrace();
         }
 
-        filterField.textProperty().addListener((obs, oldVal, newVal) -> {
-            List<Attraction> filtered = attractions.stream()
-                    .filter(a -> a.getName().toLowerCase().contains(newVal.toLowerCase()))
-                    .collect(Collectors.toList());
-            displayAttractions(filtered);
-        });
     }
 
     private void displayAttractions(List<Attraction> list) {

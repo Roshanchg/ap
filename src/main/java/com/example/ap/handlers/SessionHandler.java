@@ -30,7 +30,7 @@ public class SessionHandler {
     }
 
     public void endSession() {
-        this.userId = -1;
+        this.userId = 0;
         this.userName = null;
         this.userType = null;
     }
@@ -48,6 +48,6 @@ public class SessionHandler {
     }
 
     public boolean isActive() {
-        return userId >= 0;
+        return userId > 0;
     }
 }

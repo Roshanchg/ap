@@ -44,6 +44,7 @@ public class GuideDashboardController implements Initializable {
     }
 
     private void loadBookings(List<Booking> bookings) {
+        ResourceBundle bundle = ResourceBundle.getBundle("languages.language", LocaleStorageSingleton.getLocale());
         bookingContainer.getChildren().clear();
         if(bookings==null){
             return;
@@ -76,13 +77,13 @@ public class GuideDashboardController implements Initializable {
                 continue;
             }
 
-            Label user = new Label("User: " + touristName);
-            Label attraction = new Label("Attraction: " + attractionName);
-            Label date = new Label("Date: " + booking.getBookingDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            Label description = new Label("Standard tourist package.\nIncludes basic amenities.");
+            Label user = new Label(bundle.getString("guideBookingCardUserName") + touristName);
+            Label attraction = new Label(bundle.getString("guideBookingCardAttractionName") + attractionName);
+            Label date = new Label(bundle.getString("guideBookingCardDate")+ booking.getBookingDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            Label description = new Label(bundle.getString("guideBookingCardDesc"));
             description.setWrapText(true);
 
-            Button cancelBtn = new Button("Cancel");
+            Button cancelBtn = new Button(bundle.getString("guideBookingCardButton"));
             cancelBtn.setStyle("-fx-background-color: #e63946; -fx-text-fill: white; -fx-background-radius: 20;");
             cancelBtn.setOnAction(e -> {
                 try {

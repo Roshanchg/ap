@@ -35,3 +35,10 @@
 2025-07-24T07:16:38.686111300 Edited Guide: 2,Roshan Chg,ch@g.co,0000000000,aaaa,English,0,true to: 2,Roshan Chg,ch@g.co,0000000000,aaaa,English,0,false
 2025-07-24T07:16:59.305792600 Edited Guide: 2,Roshan Chg,ch@g.co,0000000000,aaaa,English,0,false to: 2,Roshan Chg,ch@g.co,0000000000,aaaa,English,0,false
 2025-07-24T07:17:10.402521800 Edited Guide: 2,Roshan Chg,ch@g.co,0000000000,aaaa,English,0,false to: 2,Roshan Chg,ch@g.co,0000000000,aaaa,Nepali,0,false
+2025-07-25T07:20:20.949835800 Assigned Guide: Safal Lohani to booking: 1,1,1,2,2025-07-21,0.0,false,0
+2025-07-25T07:20:24.624575500 Assigned Guide: Safal Lohani to booking: 2,1,1,1,2025-07-20,10.0,false,2
+2025-07-25T07:21:55.811337100 Edited Guide:  2,Roshan Chg,ch@g.co,0000000000,aaaa,Nepali,0,true to: 2,Roshan Chg,ch@g.co,0000000000,aaaa,Nepali,0,true
+2025-07-25T07:22:03.004876600 Assigned Guide: Roshan Chg to booking: 1,1,2,2,2025-07-21,0.0,false,0
+2025-07-25T07:22:05.417919400 Assigned Guide: Roshan Chg to booking: 2,1,2,1,2025-07-20,10.0,false,2
+2025-07-25T07:50:29.504536400 Edited Guide:  2,Roshan,chgroshan6@gmail.com,1111111111,roshan,English,1,true to: 2,Roshan,chgroshan6@gmail.com,1111111111,roshan,English,1,true
+2025-07-25T07:50:46.488347600 Assigned Guide: Roshan to booking: 1,3,2,1,2025-07-31,0.0,false,0

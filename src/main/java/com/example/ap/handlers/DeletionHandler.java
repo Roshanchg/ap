@@ -29,27 +29,27 @@ public class DeletionHandler {
     }
 
     public static void deleteBookingFor(int index, int filter)throws IOException {
+        int bid = 0;
         try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.BookingsFile))){
             String line;
             String[] parts;
 
-            int bid;
             while((line=br.readLine())!=null){
                 parts=line.split(",");
                 if (Integer.parseInt(parts[index])==filter){
                     bid=Integer.parseInt(parts[0]);
-                    FileHandling.removeBooking(bid);
                 }
             }
         }
+        FileHandling.removeBooking(bid);
     }
 
     public static void setNullBookingAtIndex(int index, int filter)throws IOException {
+        int bid=0;
+        Booking booking = null;
         try(BufferedReader br=new BufferedReader(new FileReader(FileHandling.BookingsFile))){
             String line;
             String[] parts;
-
-            int bid;
             int uid;
             int gid;
             int aid;
@@ -69,10 +69,10 @@ public class DeletionHandler {
                     discount=Double.parseDouble(parts[5]);
                     cancelled=Boolean.parseBoolean(parts[6]);
                     fid=Integer.parseInt(parts[7]);
-                    Booking booking=new Booking(bid,uid,gid,aid,date,discount,cancelled,fid);
-                    FileHandling.editBooking(bid,booking);
+                    booking=new Booking(bid,uid,gid,aid,date,discount,cancelled,fid);
                 }
             }
         }
+        FileHandling.editBooking(bid,booking);
     }
 }

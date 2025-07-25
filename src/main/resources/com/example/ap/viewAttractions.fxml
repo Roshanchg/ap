@@ -23,7 +23,6 @@
                 </ImageView>
             </HBox>
 
-            <TextField fx:id="filterField" promptText="Search Attractions..." styleClass="filter-field" />
             <Separator styleClass="separator" />
         </VBox>
     </top>
