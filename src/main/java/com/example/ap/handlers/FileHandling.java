@@ -836,7 +836,7 @@ public class FileHandling {
         int atCount;
         int bkCount;
         Map<LocalDate,Integer> DateCountMap=AdminDashboardHandler.getBookingDateChartMap();
-        Map<Attraction,Integer> AttractionCountMap=AdminDashboardHandler.getAttractionBookingMap();
+        Map<Integer,Integer> AttractionCountMap=AdminDashboardHandler.getAttractionBookingMap();
         File reportBar=new File(ReportBarFile);
         File reportPie=new File(ReportPieFile);
         if(reportBar.exists()){
@@ -857,8 +857,8 @@ public class FileHandling {
             }
         }
         try(BufferedWriter bw=new BufferedWriter(new FileWriter(reportPie))){
-            for(Map.Entry<Attraction,Integer> entry:AttractionCountMap.entrySet()){
-                attraction=entry.getKey();
+            for(Map.Entry<Integer,Integer> entry:AttractionCountMap.entrySet()){
+                attraction=ObjectFinder.getAttraction(entry.getKey());
                 atCount=entry.getValue();
                 bw.write(attraction.getName()+","+atCount);
                 bw.newLine();

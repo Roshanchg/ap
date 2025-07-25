@@ -7,6 +7,7 @@ import com.example.ap.classes.EmergencyLog;
 import com.example.ap.handlers.AdminDashboardHandler;
 
 import com.example.ap.handlers.FileHandling;
+import com.example.ap.handlers.ObjectFinder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -65,10 +66,11 @@ public class AdminDashboard implements Initializable {
     }
 
     private void loadTravelPieChart() throws IOException {
-        Map<Attraction, Integer> attractionMap = AdminDashboardHandler.getAttractionBookingMap();
+        Map<Integer, Integer> attractionMap = AdminDashboardHandler.getAttractionBookingMap();
 
-        for (Map.Entry<Attraction, Integer> entry : attractionMap.entrySet()) {
-            String name = entry.getKey().getName();
+        for (Map.Entry<Integer, Integer> entry : attractionMap.entrySet()) {
+            if(entry.getKey()==0) return;
+            String name = Objects.requireNonNull(ObjectFinder.getAttraction(entry.getKey())).getName();
             int count = entry.getValue();
             travelPieChart.getData().add(new PieChart.Data(name, count));
         }

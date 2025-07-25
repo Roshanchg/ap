@@ -30,15 +30,15 @@ public class AdminDashboardHandler {
         return bookingDateMap;
     }
 
-    public static Map<Attraction,Integer> getAttractionBookingMap() throws IOException{
+    public static Map<Integer,Integer> getAttractionBookingMap() throws IOException{
         List<Booking> allBookings=FileHandling.AllBookings();
-        Map<Attraction,Integer> attractionCountMap=new HashMap<>();
+        Map<Integer,Integer> attractionCountMap=new HashMap<>();
         Attraction attraction;
         for(Booking booking:allBookings){
             if(!booking.getIsCancelled()&&booking.getAid()!=0){
                 attraction=ObjectFinder.getAttraction(booking.getAid());
                 if(attraction==null) continue;
-                attractionCountMap.put(attraction,attractionCountMap.getOrDefault(attraction,0)+1);
+                attractionCountMap.put(attraction.getId(),attractionCountMap.getOrDefault(attraction.getId(),0)+1);
             }
         }
         return attractionCountMap;
