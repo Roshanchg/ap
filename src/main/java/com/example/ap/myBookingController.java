@@ -90,18 +90,18 @@ public class myBookingController implements Initializable {
             } catch (IOException e) {
                 attractionName = "Removed Attraction";
             }
-            Label attraction = new Label("Attraction: " + attractionName);
+            Label attraction = new Label(bundle.getString("myBookingAttractionName")+ attractionName);
 
             Label guide = new Label();
             guide.setUserData("guideLabel_" + booking.getBookingId());
-            guide.setText("Guide: " + guideNameResolver.apply(booking.getGuideId()));
+            guide.setText(bundle.getString("myBookingGuideName") + guideNameResolver.apply(booking.getGuideId()));
 
-            Label date = new Label("Date: " + booking.getBookingDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            Label discount = new Label("Discount: " + booking.getDiscount() + "%");
-            Label description = new Label("Standard tourist package.\nIncludes basic amenities.");
+            Label date = new Label(bundle.getString("myBookingDate")+ booking.getBookingDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            Label discount = new Label(bundle.getString("myBookingDiscount")+ booking.getDiscount() + "%");
+            Label description = new Label(bundle.getString("myBookingDesc"));
             description.setWrapText(true);
 
-            Button cancelBtn = new Button("Cancel");
+            Button cancelBtn = new Button(bundle.getString("myBookingCancel"));
             cancelBtn.setStyle("-fx-background-color: #e63946; -fx-text-fill: white; -fx-background-radius: 20;");
             cancelBtn.setOnAction(e -> {
                 try {
