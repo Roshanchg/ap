@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader registerScreen = new FXMLLoader(getClass().getResource("registerPage.fxml"));
+        FXMLLoader registerScreen = new FXMLLoader(getClass().getResource("loginPage.fxml"));
         Parent root = registerScreen.load();
         Scene registerScene = new Scene(root, 1300, 720);
         stage.setTitle("Mystical Travels - Registration");
