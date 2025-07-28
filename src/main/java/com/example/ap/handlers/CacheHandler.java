@@ -121,6 +121,7 @@ public class CacheHandler {
             double discount;
             boolean isCancelled;
             int fid;
+            double price;
             Booking booking;
             while((line=br.readLine())!=null){
                 if (line.trim().isEmpty()) continue;
@@ -132,9 +133,10 @@ public class CacheHandler {
                 date=LocalDate.parse(parts[4]);
                 discount=Double.parseDouble(parts[5]);
                 isCancelled=Boolean.parseBoolean(parts[6]);
-                if(isCancelled)continue;
                 fid=Integer.parseInt(parts[7]);
-                booking=new Booking(id,uid,gid,aid,date,discount,isCancelled,fid);
+                price=Double.parseDouble(parts[8]);
+                if(isCancelled)continue;
+                booking=new Booking(id,uid,gid,aid,date,discount,isCancelled,fid,price);
                 bookings.add(booking);
             }
         }
@@ -171,6 +173,7 @@ public class CacheHandler {
             int aid;
             LocalDate date;
             double discount;
+            double price;
             boolean isCancelled;
             int fid;
             Booking booking;
@@ -185,7 +188,8 @@ public class CacheHandler {
                 discount=Double.parseDouble(parts[5]);
                 isCancelled=Boolean.parseBoolean(parts[6]);
                 fid=Integer.parseInt(parts[7]);
-                booking=new Booking(id,uid,gid,aid,date,discount,isCancelled,fid);
+                price=Double.parseDouble(parts[8]);
+                booking=new Booking(id,uid,gid,aid,date,discount,isCancelled,fid,price);
                 bookings.add(booking);
                 }
             }

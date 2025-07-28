@@ -61,6 +61,7 @@ public class MakeBookingController implements Initializable {
         Festival festivalBoxValue=festivalComboBox.getValue();
         double festivalDiscountRate=0;
         int fid=0;
+        double price;
         if(festivalBoxValue!=null){
             fid=festivalBoxValue.getId();
             festivalDiscountRate=festivalBoxValue.getDiscountRate();
@@ -75,7 +76,8 @@ public class MakeBookingController implements Initializable {
                 bookingDate,
                 festivalDiscountRate,
                 false,
-                fid
+                fid,
+                selectedAttraction.getPrice()
                 );
         FileHandling.MakeBooking(booking);
         CacheHandler.ClearCache();

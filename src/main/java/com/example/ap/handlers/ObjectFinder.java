@@ -147,6 +147,7 @@ public class ObjectFinder {
             ATTRACTIONDIFFICULTY difficulty;
             String altitude;
             boolean restrictedMonsoon;
+            double price;
             Attraction attraction;
             while((line=br.readLine())!=null){
                 if (line.trim().isEmpty()) continue;
@@ -167,8 +168,9 @@ public class ObjectFinder {
                 };
                 altitude=parts[5];
                 restrictedMonsoon=Boolean.parseBoolean(parts[6]);
+                price=Double.parseDouble(parts[7]);
                 if(id==aid){
-                    attraction=new Attraction(id,name,location,type,difficulty,altitude,restrictedMonsoon);
+                    attraction=new Attraction(id,name,location,type,difficulty,altitude,restrictedMonsoon,price);
                     return attraction;
                 }
             }
@@ -189,6 +191,7 @@ public class ObjectFinder {
             double discount;
             boolean isCancelled;
             int fid;
+            double price;
             Booking booking;
             while((line=br.readLine())!=null){
                 if (line.trim().isEmpty()) continue;
@@ -201,8 +204,9 @@ public class ObjectFinder {
                 discount=Double.parseDouble(parts[5]);
                 isCancelled=Boolean.parseBoolean(parts[6]);
                 fid=Integer.parseInt(parts[7]);
+                price=Double.parseDouble(parts[8]);
                 if(id==bid){
-                    booking=new Booking(id,uid,gid,aid,date,discount,isCancelled,fid);
+                    booking=new Booking(id,uid,gid,aid,date,discount,isCancelled,fid,price);
                     return booking;
                 }
             }

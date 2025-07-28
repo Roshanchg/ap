@@ -46,3 +46,10 @@
 2025-07-25T14:46:11.884971800 Edited Tourist: 4,Roshan chg,chgroshan6@gmail.com,0000000000,roshan,English,Nepali,0000000000 to: 4,Roshan chg,chgroshan6@gmail.com,0000000000,roshan,Nepali,Nepali,0000000000
 2025-07-25T14:46:18.853188300 Edited Tourist: 4,Roshan chg,chgroshan6@gmail.com,0000000000,roshan,Nepali,Nepali,0000000000 to: 4,Roshan chg,chgroshan6@gmail.com,0000000000,roshan,English,Nepali,0000000000
 2025-07-25T14:47:26.388607100 Edited Tourist: 4,Roshan chg,chgroshan6@gmail.com,0000000000,roshan,English,Nepali,0000000000 to: 4,Roshan chg,chgroshan6@gmail.com,0000000000,roshan,Nepali,Nepali,0000000000
+2025-07-28T09:41:29.304324900 Edited Tourist: 4,Roshan chg,chgroshan6@gmail.com,0000000000,roshan,Nepali,Nepali,0000000000 to: 4,Roshan chg,chgroshan6@gmail.com,0000000000,roshan,English,Nepali,0000000000
+2025-07-28T09:43:09.462775100 Added Attraction  1,IIMS 2.0,kathmandu,Camping,LOW,high,false,1000.0
+2025-07-28T09:43:24.410111100 Edited Attraction:  1,IIMS 2.0,kathmandu,Camping,LOW,high,false,1000.0 to: 1,IIMS 2.0,kathmandu,Camping,LOW,high,false,1000.0
+2025-07-28T09:43:45.380152400 Added Attraction  2,Raghav ko Ghar,tokha,Trekking,HIGH,high,true,100.0
+2025-07-28T09:43:50.308320200 Festival Removed: 2,test,2025-07-23,2025-07-25,10.0
+2025-07-28T09:45:36.224556300 Festival Removed: 1,Dashain,2025-09-22,2025-10-07,20.0
+2025-07-28T09:45:56.448588200 Added festival  1,Dashain,2025-07-23,2026-07-15,10.0

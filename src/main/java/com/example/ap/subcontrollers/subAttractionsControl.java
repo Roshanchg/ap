@@ -20,6 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
+import org.w3c.dom.Attr;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,6 +41,7 @@ public class subAttractionsControl implements Initializable {
     @FXML private TableColumn<Attraction,Integer> difficultyColumn;
     @FXML private TableColumn<Attraction,Boolean> altitudeColumn;
     @FXML private TableColumn<Attraction, LANGUAGES> restrictedMonsoonColumn;
+    @FXML private TableColumn<Attraction,Double> priceColumn;
     @FXML private TableColumn<Attraction, Void> actionsColumn;
 
     @FXML private Button addButton;
@@ -53,6 +55,7 @@ public class subAttractionsControl implements Initializable {
         difficultyColumn.setCellValueFactory(new PropertyValueFactory<>("difficulty"));
         altitudeColumn.setCellValueFactory(new PropertyValueFactory<>("altitude"));
         restrictedMonsoonColumn.setCellValueFactory(new PropertyValueFactory<>("restrictedMonsoon"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         try {
             List<Attraction> attractions = FileHandling.AllAttraction();
@@ -78,6 +81,7 @@ public class subAttractionsControl implements Initializable {
         centerColumn(difficultyColumn);
         centerColumn(altitudeColumn);
         centerColumn(restrictedMonsoonColumn);
+        centerColumn(priceColumn);
     }
 
     private void setupActionButtons() {

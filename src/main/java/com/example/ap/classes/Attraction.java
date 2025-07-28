@@ -11,8 +11,9 @@ public class Attraction {
     private ATTRACTIONDIFFICULTY difficulty;
     private String altitude;
     private boolean restrictedMonsoon;
+    private double price;
     public Attraction(int id, String name,String location,ATTRACTIONTYPE type,ATTRACTIONDIFFICULTY difficulty,
-                      String altitude,boolean restrictedMonsoon){
+                      String altitude,boolean restrictedMonsoon,double price){
         this.id=id;
         this.name=name;
         this.location=location;
@@ -20,12 +21,16 @@ public class Attraction {
         this.difficulty=difficulty;
         this.altitude=altitude;
         this.restrictedMonsoon=restrictedMonsoon;
+        this.price=price;
     }
 
     public String getDetails(){
-        return this.id+","+this.name+","+this.location+","+this.type+","+this.difficulty+","+this.altitude+","+this.restrictedMonsoon;
+        return this.id+","+this.name+","+this.location+","+this.type+","+this.difficulty+","+this.altitude+","+this.restrictedMonsoon
+                +","+this.price;
 
     }
+
+    public double getPrice(){return this.price;}
     public int getId(){return this.id;}
     public String getName(){return this.name;}
     public ATTRACTIONDIFFICULTY getDifficulty(){return this.difficulty;}

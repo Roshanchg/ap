@@ -97,10 +97,11 @@ public class myBookingController implements Initializable {
             guide.setText(bundle.getString("myBookingGuideName") + guideNameResolver.apply(booking.getGuideId()));
 
             Label date = new Label(bundle.getString("myBookingDate")+ booking.getBookingDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            Label price=new Label(bundle.getString("priceBookingCard")+": "+booking.getPrice());
             Label discount = new Label(bundle.getString("myBookingDiscount")+ booking.getDiscount() + "%");
             Label description = new Label(bundle.getString("myBookingDesc"));
             description.setWrapText(true);
-
+            Label total=new Label(bundle.getString("totalBookingCard")+": "+booking.getTotal());
             Button cancelBtn = new Button(bundle.getString("myBookingCancel"));
             cancelBtn.setStyle("-fx-background-color: #e63946; -fx-text-fill: white; -fx-background-radius: 20;");
             cancelBtn.setOnAction(e -> {
@@ -111,7 +112,7 @@ public class myBookingController implements Initializable {
                 }
             });
 
-            card.getChildren().addAll(attraction, guide, date, discount, description, cancelBtn);
+            card.getChildren().addAll(attraction, guide, date, price,discount, description,total, cancelBtn);
             bookingContainer.getChildren().add(card);
         }
     }

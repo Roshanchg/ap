@@ -47,6 +47,8 @@ public class subBookingsControl implements Initializable {
     @FXML private TableColumn<Booking, Boolean> cancelledColumn;
     @FXML private TableColumn<Booking, Double> discountColumn;
     @FXML private TableColumn<Booking, Void> actionsColumn;
+    @FXML public TableColumn<Booking,Double> totalColumn;
+    @FXML public TableColumn<Booking,Double> priceColumn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,6 +60,8 @@ public class subBookingsControl implements Initializable {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("bookingDate"));
         cancelledColumn.setCellValueFactory(new PropertyValueFactory<>("isCancelled"));
         discountColumn.setCellValueFactory(new PropertyValueFactory<>("discount"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        totalColumn.setCellValueFactory(new PropertyValueFactory<>("total"));
 
         try {
             List<Booking> bookings = FileHandling.AllBookings();
@@ -83,6 +87,8 @@ public class subBookingsControl implements Initializable {
         centerColumn(dateColumn);
         centerColumn(discountColumn);
         centerColumn(cancelledColumn);
+        centerColumn(priceColumn);
+        centerColumn(totalColumn);
     }
 
     private void setupActionButtons() {

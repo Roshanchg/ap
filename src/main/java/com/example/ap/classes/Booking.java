@@ -15,7 +15,11 @@ public class Booking {
     private LocalDate bookingDate;
     private boolean isCancelled;
     private int fid;
-    public Booking(int bookingId,int userId,int gid,int aid,LocalDate bookingDate,double discount,boolean isCancelled,int fid){
+    private double price;
+    private double total;
+
+
+    public Booking(int bookingId,int userId,int gid,int aid,LocalDate bookingDate,double discount,boolean isCancelled,int fid,double price){
         this.guideId=gid;
         this.aid=aid;
         this.bookingId=bookingId;
@@ -24,12 +28,23 @@ public class Booking {
         this.isCancelled=isCancelled;
         this.fid=fid;
         this.discount=discount;
-    }
-    public String getDetails(){
-        return this.bookingId+","+this.userId+","+this.guideId+","+
-                this.aid+","+this.bookingDate+","+this.discount+","+this.isCancelled+","+this.fid;
+        this.price=price;
+        applyDiscount(this.discount);
     }
 
+    public void applyDiscount(double discount){
+            this.discount=discount;
+            total=price-((price*this.discount)/100);
+    }
+
+    public String getDetails(){
+        return this.bookingId+","+this.userId+","+this.guideId+","+
+                this.aid+","+this.bookingDate+","+this.discount+","+this.isCancelled+","+this.fid+
+                ","+this.price+","+this.total;
+    }
+
+    public double getPrice(){return this.price;}
+    public double getTotal(){return this.total;}
     public int getBookingId(){return this.bookingId;}
     public int getAid(){return this.aid;}
     public double getDiscount(){return this.discount;}

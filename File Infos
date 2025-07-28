@@ -8,13 +8,13 @@ tourists.csv
 id, name ,email, phone number, password, language, nationality, emergency number
 
 Attractions.csv
-id, name, location, type , difficulty, altitude, restrictedMonsoon?
+id, name, location, type , difficulty, altitude, restrictedMonsoon?, price
 
 Festivals.csv
 id,name,start Date, end Date, discount
 
 Bookings.csv
-bid, uid, gid, aid, date, discount = 0 default, cancelled?, fid
+bid, uid, gid, aid, date, discount = 0 default, cancelled?, fid,price, total
 
 Alerts.csv
 id, type, message, months active

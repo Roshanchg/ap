@@ -42,6 +42,10 @@
         <!-- Row 5 -->
         <Label text="Restricted Monsoon?" styleClass="form-label" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
         <ComboBox fx:id="restrictedMonsoonField"  styleClass="form-field" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+        <Label text="Price" styleClass="form-label" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+        <TextField fx:id="priceField"  styleClass="form-field" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
     </GridPane>
 
     <HBox spacing="20" alignment="CENTER_RIGHT">

@@ -57,7 +57,8 @@ public class AttractionsController implements Initializable {
                     new Label(bundle.getString("typeAttractionCard") + ": " + a.getType().toString()),
                     new Label(bundle.getString("difficultyAttractionCard") + ": " + a.getDifficulty().toString()),
                     new Label(bundle.getString("altitudeAttractionCard") + ": " + a.getAltitude()),
-                    new Label(bundle.getString("restrictedAttractionCard") + ": " + (a.getRestrictedMonsoon() ? "⚠ " + bundle.getString("yesOption") : bundle.getString("noOption")))
+                    new Label(bundle.getString("restrictedAttractionCard") + ": " + (a.getRestrictedMonsoon() ? "⚠ " + bundle.getString("yesOption") : bundle.getString("noOption"))),
+                    new Label(bundle.getString("priceAttractionCard")+": "+(a.getPrice()))
             );
 
             Button bookBtn = new Button("Book");

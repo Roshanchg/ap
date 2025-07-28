@@ -26,7 +26,7 @@ public class attractionEditController {
     @FXML private TextField locationField;
     @FXML private ComboBox<ATTRACTIONDIFFICULTY> difficultyField;
     @FXML private ComboBox<Boolean> restrictedMonsoonField;
-
+    @FXML private TextField priceField;
 
 
     @FXML
@@ -51,6 +51,7 @@ public class attractionEditController {
             typeField.setValue(attraction.getType());
             altitudeField.setText(attraction.getAltitude());
             restrictedMonsoonField.setValue(attraction.getRestrictedMonsoon());
+            priceField.setText(String.valueOf(attraction.getPrice()));
         }
     }
 
@@ -71,6 +72,14 @@ public class attractionEditController {
         ATTRACTIONDIFFICULTY difficulty = difficultyField.getValue();
         boolean restrictedMonsoon = restrictedMonsoonField.getValue();
         int id;
+        if(!isParsableDouble(priceField.getText())){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid info");
+            alert.setContentText("Invalid price field value");
+            alert.showAndWait();
+        }
+        double price=Double.parseDouble(priceField.getText());
+
         if(name.isEmpty() || location.isEmpty()||altitude.isEmpty()){
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Empty field/s");
@@ -78,9 +87,8 @@ public class attractionEditController {
             return;
         }
         if(EditVsAddSingleton.isIsAdd()) {
-            System.out.println("HEllo");
              id = FileHandling.getNextId(FileHandling.AttractionsFile);
-            Attraction attraction = new Attraction(id, name, location, type, difficulty, altitude, restrictedMonsoon);
+            Attraction attraction = new Attraction(id, name, location, type, difficulty, altitude, restrictedMonsoon,price);
             FileHandling.AddAttraction(attraction);
 
             FileHandling.makeLogs("Added Attraction  " + attraction.getDetails());
@@ -88,7 +96,7 @@ public class attractionEditController {
         }
         else{
             id = EditVsAddSingleton.getId();
-            Attraction attraction = new Attraction(id, name, location, type, difficulty, altitude, restrictedMonsoon);
+            Attraction attraction = new Attraction(id, name, location, type, difficulty, altitude, restrictedMonsoon,price);
             FileHandling.makeLogs("Edited Attraction:  " +
                     Objects.requireNonNull(ObjectFinder.getAttraction(id)).getDetails()+" to: "+attraction.getDetails());
 
@@ -98,5 +106,15 @@ public class attractionEditController {
         BorderPane borderPane = AdminControllerBorderPaneSingleton.getMainPane();
         Node allAlerts = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(allAttractions)));
         borderPane.setCenter(allAlerts);
+
+
+    }
+    private boolean isParsableDouble(String string){
+        try{
+           Double.parseDouble(string);
+           return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

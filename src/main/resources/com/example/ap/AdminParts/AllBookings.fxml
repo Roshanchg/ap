@@ -25,14 +25,16 @@
         <content>
             <TableView fx:id="bookingsTable" styleClass="data-table" prefWidth="800">
                 <columns>
-                    <TableColumn text="ID" fx:id="idColumn" styleClass="column-header" prefWidth="82"/>
-                    <TableColumn text="Uid" fx:id="uidColumn" styleClass="column-header" prefWidth="100"/>
-                    <TableColumn text="Gid" fx:id="gidColumn" styleClass="column-header" prefWidth="100"/>
-                    <TableColumn text="Aid" fx:id="aidColumn" styleClass="column-header" prefWidth="100"/>
+                    <TableColumn text="ID" fx:id="idColumn" styleClass="column-header" prefWidth="80"/>
+                    <TableColumn text="Uid" fx:id="uidColumn" styleClass="column-header" prefWidth="80"/>
+                    <TableColumn text="Gid" fx:id="gidColumn" styleClass="column-header" prefWidth="80"/>
+                    <TableColumn text="Aid" fx:id="aidColumn" styleClass="column-header" prefWidth="80"/>
                     <TableColumn text="Date" fx:id="dateColumn" styleClass="column-header" prefWidth="180"/>
                     <TableColumn text="Discount" fx:id="discountColumn" styleClass="column-header" prefWidth="100"/>
                     <TableColumn text="Cancelled?" fx:id="cancelledColumn" styleClass="column-header" prefWidth="100"/>
-                    <TableColumn text="fid" fx:id="fidColumn" styleClass="column-header" prefWidth="100"/>
+                    <TableColumn text="fid" fx:id="fidColumn" styleClass="column-header" prefWidth="80"/>
+                    <TableColumn text="Price" fx:id="priceColumn" styleClass="column-header" prefWidth="100"/>
+                    <TableColumn text="Total" fx:id="totalColumn" styleClass="column-header" prefWidth="100"/>
 
                     <TableColumn text="Actions" fx:id="actionsColumn" styleClass="column-header" prefWidth="200"/>
                 </columns>

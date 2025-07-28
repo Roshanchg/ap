@@ -57,6 +57,7 @@ public class DeletionHandler {
             double discount;
             boolean cancelled;
             int fid;
+            double price;
             while((line=br.readLine())!=null){
                 parts=line.split(",");
                 if (Integer.parseInt(parts[index])==filter){
@@ -69,7 +70,8 @@ public class DeletionHandler {
                     discount=Double.parseDouble(parts[5]);
                     cancelled=Boolean.parseBoolean(parts[6]);
                     fid=Integer.parseInt(parts[7]);
-                    booking=new Booking(bid,uid,gid,aid,date,discount,cancelled,fid);
+                    price=Double.parseDouble(parts[8]);
+                    booking=new Booking(bid,uid,gid,aid,date,discount,cancelled,fid,price);
                 }
             }
         }

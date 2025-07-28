@@ -452,6 +452,7 @@ public class FileHandling {
             double discount;
             boolean isCancelled;
             int fid;
+            double price;
             Booking booking;
             while((line=br.readLine())!=null){
                 if (line.trim().isEmpty()) continue;
@@ -464,7 +465,8 @@ public class FileHandling {
                 discount=Double.parseDouble(parts[5]);
                 isCancelled=Boolean.parseBoolean(parts[6]);
                 fid=Integer.parseInt(parts[7]);
-                booking=new Booking(id,uid,gid,aid,date,discount,isCancelled,fid);
+                price=Double.parseDouble(parts[8]);
+                booking=new Booking(id,uid,gid,aid,date,discount,isCancelled,fid,price);
                 bookings.add(booking);
                 }
         }
@@ -553,6 +555,7 @@ public class FileHandling {
             ATTRACTIONDIFFICULTY difficulty;
             String altitude;
             boolean restrictedMonsoon;
+            double price;
             Attraction attraction;
             while((line=br.readLine())!=null){
                 if (line.trim().isEmpty()) continue;
@@ -573,7 +576,8 @@ public class FileHandling {
                 };
                 altitude=parts[5];
                 restrictedMonsoon=Boolean.parseBoolean(parts[6]);
-                attraction=new Attraction(id,name,location,type,difficulty,altitude,restrictedMonsoon);
+                price=Double.parseDouble(parts[7]);
+                attraction=new Attraction(id,name,location,type,difficulty,altitude,restrictedMonsoon,price);
                 attractions.add(attraction);
             }
         }
