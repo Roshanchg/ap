@@ -20,13 +20,16 @@
                 </ImageView>
             </HBox>
             <Label text="%mainBookingTitleMyBooking" styleClass="main-title"/>
+            <Button text="Report Emergency"
+                    onAction="#onReportEmergency"
+                    style="-fx-background-color: red; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 200;" />
             <Separator styleClass="separator"/>
         </VBox>
     </top>
 
     <center>
         <ScrollPane fitToWidth="true" vbarPolicy="ALWAYS" hbarPolicy="NEVER" styleClass="scroll-pane">
-            <VBox>
+            <VBox spacing="10">
                 <FlowPane fx:id="bookingContainer" hgap="20" vgap="20" prefWrapLength="900" alignment="TOP_LEFT" />
             </VBox>
         </ScrollPane>

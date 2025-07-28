@@ -97,6 +97,6 @@ public class AdminController {
         PauseTransition delay = new PauseTransition(Duration.seconds(2));
         delay.setOnFinished(e -> alert.close());
         delay.play();
-        Navigator.Navigate(NAVIGATIONS.REGISTER,(Stage)mainBorderPane.getScene().getWindow());
+        Navigator.Navigate(NAVIGATIONS.LOGIN,(Stage)mainBorderPane.getScene().getWindow());
     }
 }

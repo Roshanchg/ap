@@ -82,9 +82,11 @@ public class AdminDashboard implements Initializable {
         if(logs==null) return;
         String message;
         String username;
+        String[] messagearray;
         for (EmergencyLog log : logs) {
-            username=log.getMessage().split(" ")[1].trim();
-            message=log.getMessage().split(" ")[2].trim();
+            messagearray=log.getMessage().split(" ",2);
+            username=messagearray[0].trim();
+            message=messagearray[1].trim();
             Label label = new Label("From: "+username+", "+message);
             label.getStyleClass().add("info-text");
             emergencyLogsContainer.getChildren().add(label);
