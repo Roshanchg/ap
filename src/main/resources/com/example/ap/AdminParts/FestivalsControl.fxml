@@ -24,10 +24,10 @@
         <TextField fx:id="nameField" styleClass="form-field" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
         <!-- Row 1 -->
-        <Label text="StartDate" styleClass="form-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <Label text="Start Date" styleClass="form-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
         <DatePicker fx:id="startDateField" promptText="Select a date" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
         <!-- Row 2 -->
-        <Label text="Type" styleClass="form-label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <Label text="End Date" styleClass="form-label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
         <DatePicker fx:id="endDateField" promptText="Select a date" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
         <!-- Row 3 -->
