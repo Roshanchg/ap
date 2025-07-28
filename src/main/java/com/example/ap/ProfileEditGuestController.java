@@ -135,7 +135,7 @@ public class ProfileEditGuestController implements Initializable {
     @FXML
     public void onLogout() throws IOException {
         SessionHandler.getInstance().endSession();
-        Navigator.Navigate(NAVIGATIONS.REGISTER,(Stage) nameField.getScene().getWindow());
+        Navigator.Navigate(NAVIGATIONS.LOGIN,(Stage) nameField.getScene().getWindow());
     }
 
     @FXML
@@ -145,6 +145,6 @@ public class ProfileEditGuestController implements Initializable {
         DeletionHandler.onUserDelete(id,USERTYPE.Guide);
         SessionHandler.getInstance().endSession();
         CacheHandler.ClearCache();
-        Navigator.Navigate(NAVIGATIONS.REGISTER,(Stage) nameField.getScene().getWindow());
+        Navigator.Navigate(NAVIGATIONS.LOGIN,(Stage) nameField.getScene().getWindow());
     }
 }

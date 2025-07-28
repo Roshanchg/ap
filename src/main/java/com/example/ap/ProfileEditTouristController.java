@@ -138,7 +138,7 @@ public class ProfileEditTouristController implements Initializable {
     @FXML
     public void onLogout(ActionEvent actionEvent) throws IOException {
         SessionHandler.getInstance().endSession();
-        Navigator.Navigate(NAVIGATIONS.REGISTER,(Stage) nameField.getScene().getWindow());
+        Navigator.Navigate(NAVIGATIONS.LOGIN,(Stage) nameField.getScene().getWindow());
     }
 
     @FXML
@@ -148,7 +148,7 @@ public class ProfileEditTouristController implements Initializable {
         DeletionHandler.onUserDelete(id,USERTYPE.Tourist);
         SessionHandler.getInstance().endSession();
         CacheHandler.ClearCache();
-        Navigator.Navigate(NAVIGATIONS.REGISTER,(Stage) nameField.getScene().getWindow());
+        Navigator.Navigate(NAVIGATIONS.LOGIN,(Stage) nameField.getScene().getWindow());
     }
 
     public void onHomePage()throws IOException {
