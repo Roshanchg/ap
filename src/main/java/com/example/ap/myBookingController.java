@@ -1,5 +1,6 @@
 package com.example.ap;
 
+import com.example.ap.classes.Alerts;
 import com.example.ap.classes.Booking;
 import com.example.ap.classes.User;
 import com.example.ap.classes.enums.NAVIGATIONS;
@@ -122,6 +123,7 @@ public class myBookingController implements Initializable {
         booking.cancel();
         FileHandling.editBooking(booking.getBookingId(),booking);
         CacheHandler.ClearCache();
+        showAlert("Booking Cancelled!!");
         Navigator.Navigate(NAVIGATIONS.booking,(Stage) bookingContainer.getScene().getWindow());
     }
 
@@ -182,6 +184,12 @@ public class myBookingController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    private void showAlert(String message){
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Booking Cancel");
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 }

@@ -83,10 +83,12 @@ public class MakeBookingController implements Initializable {
         CacheHandler.ClearCache();
         ActiveAttractionSingleton.reset();
         ActiveFestivalSingleton.reset();
+        showInfo("Booking Made!!");
         Navigator.Navigate(NAVIGATIONS.booking,(Stage) topBar.getScene().getWindow());
     }
 
     public void onCancel(ActionEvent actionEvent) throws IOException {
+        showAlert("Booking Cancelled");
         Navigator.Navigate(NAVIGATIONS.attraction,(Stage) topBar.getScene().getWindow());
     }
 
@@ -138,6 +140,12 @@ public class MakeBookingController implements Initializable {
     public void showAlert(String message){
         Alert alert=new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Wrong input");
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    public void showInfo(String message){
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
         alert.setContentText(message);
         alert.showAndWait();
     }
