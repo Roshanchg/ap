@@ -94,6 +94,34 @@ public class FileHandling {
         return false;
     }
 
+    public static boolean phoneExistsExcept(String phonenumber,USERTYPE usertype,int id) throws IOException{
+        List<User> users=new ArrayList<>();
+        users=AllUsers(usertype);
+        assert users != null;
+        for(User user: users){
+            if (user.getPhoneNumber().equals(phonenumber)){
+                if(user.getId()!=id) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean emailExistsExcept(String email,USERTYPE usertype, int id) throws IOException{
+        List<User> users=new ArrayList<>();
+        users=AllUsers(usertype);
+        assert users != null;
+        for(User user: users){
+            if (user.getEmail().equals(email)){
+                if(user.getId()!=id) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static List<User> AllUsers(USERTYPE usertype) throws IOException{
         List<User> users= new ArrayList<>();
         assert usertype !=null;

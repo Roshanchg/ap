@@ -91,6 +91,14 @@ public class ProfileEditTouristController implements Initializable {
         }
         LANGUAGES languagePref = languageChoiceBox.getValue();
 
+        if(FileHandling.emailExistsExcept(email,USERTYPE.Tourist,currentTourist.getId())) {
+            showAlert("Invalid Email","This email exists with other user");
+            return;
+        }
+        if(FileHandling.phoneExistsExcept(phone,USERTYPE.Tourist,currentTourist.getId())) {
+            showAlert("Invalid Phone number","This Phone number exists with other user");
+            return;
+        }
         Tourist updatedTourist = new Tourist(
                 currentTourist.getId(),
                 name,

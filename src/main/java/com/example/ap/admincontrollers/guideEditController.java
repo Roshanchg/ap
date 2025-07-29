@@ -98,6 +98,15 @@ public class guideEditController {
         if(EditVsAddSingleton.isIsAdd()) {
             password=passwordField.getText();
             id = FileHandling.getNextId(FileHandling.TouristFile);
+
+            if(FileHandling.emailExists(email,USERTYPE.Guide)){
+                showAlert("Invalid Email","This email already exists");
+                return;
+            }
+            if(FileHandling.phoneExists(email,USERTYPE.Guide)){
+                showAlert("Invalid Phone number","This Phone number already exists");
+                return;
+            }
             Guide guide=new Guide(id,name,email,phoneNumber,password,languageSpoken,yearsOfExperience);
             guide.updateAvailability(availability);
             FileHandling.WriteUser(USERTYPE.Guide,guide);
@@ -107,6 +116,14 @@ public class guideEditController {
         }
         else{
             id = EditVsAddSingleton.getId();
+            if(FileHandling.emailExistsExcept(email,USERTYPE.Guide,id)) {
+                showAlert("Invalid Email","This email exists with other user");
+                return;
+            }
+            if(FileHandling.phoneExistsExcept(phoneNumber,USERTYPE.Guide,id)) {
+                showAlert("Invalid Phone number","This Phone number exists with other user");
+                return;
+            }
             password= Objects.requireNonNull(ObjectFinder.getUser(id, USERTYPE.Guide)).getPassword();
             Guide guide=new Guide(id,name,email,phoneNumber,password,languageSpoken,yearsOfExperience);
             guide.updateAvailability(availability);
@@ -118,5 +135,11 @@ public class guideEditController {
         BorderPane borderPane = AdminControllerBorderPaneSingleton.getMainPane();
         Node allAlerts = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(this.allGuides)));
         borderPane.setCenter(allAlerts);
+    }
+    private void showAlert(String title, String message){
+        Alert alert=new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

@@ -97,6 +97,14 @@ public class touristEditController {
         if(EditVsAddSingleton.isIsAdd()) {
             password=passwordField.getText();
             id = FileHandling.getNextId(FileHandling.TouristFile);
+            if(FileHandling.emailExists(email,USERTYPE.Tourist)){
+                showAlert("Invalid Email","This email already exists");
+                return;
+            }
+            if(FileHandling.phoneExists(email,USERTYPE.Tourist)){
+                showAlert("Invalid Phone number","This Phone number already exists");
+                return;
+            }
             Tourist tourist=new Tourist(id,name,email,phoneNumber,password,languagePref,nationality,emergencyNumber);
             FileHandling.WriteUser(USERTYPE.Tourist,tourist);
 
@@ -104,7 +112,16 @@ public class touristEditController {
             EditVsAddSingleton.resetVariables();
         }
         else{
+
             id = EditVsAddSingleton.getId();
+            if(FileHandling.emailExistsExcept(email,USERTYPE.Tourist,id)) {
+                showAlert("Invalid Email","This email exists with other user");
+                return;
+            }
+            if(FileHandling.phoneExistsExcept(phoneNumber,USERTYPE.Tourist,id)) {
+                showAlert("Invalid Phone number","This Phone number exists with other user");
+                return;
+            }
             password= Objects.requireNonNull(ObjectFinder.getUser(id, USERTYPE.Tourist)).getPassword();
             Tourist tourist=new Tourist(id,name,email,phoneNumber,password,languagePref,nationality,emergencyNumber);
             FileHandling.makeLogs("Edited Tourist:  " +
@@ -116,5 +133,13 @@ public class touristEditController {
         BorderPane borderPane = AdminControllerBorderPaneSingleton.getMainPane();
         Node allAlerts = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(this.allTourists)));
         borderPane.setCenter(allAlerts);
+    }
+
+
+    private void showAlert(String title, String message){
+        Alert alert=new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

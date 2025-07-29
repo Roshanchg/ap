@@ -98,6 +98,15 @@ public class ProfileEditGuestController implements Initializable {
         if(YOEfield.getText().isEmpty()){YOEfield.setText("0");}
         int yearsOfExperience=Integer.parseInt(YOEfield.getText());
 
+        if(FileHandling.emailExistsExcept(email,USERTYPE.Guide,currentGuide.getId())) {
+            showAlert("Invalid Email","This email exists with other user");
+            return;
+        }
+        if(FileHandling.phoneExistsExcept(phone,USERTYPE.Guide,currentGuide.getId())) {
+            showAlert("Invalid Phone number","This Phone number exists with other user");
+            return;
+        }
+
         Guide updatedGuide = new Guide(
                 currentGuide.getId(),
                 name,
